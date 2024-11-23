@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Better Anime - Taboo Tattoo</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+            overflow: hidden;
+            background-color: #2b3e50; /* Set the background color of the whole page */
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            height: 100vh; /* Full viewport height */
+            background-color: #1e2a36; /* Matches the header/sidebar */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #1e2a36; /* Matches the container */
+            color: rgb(28, 137, 233);
+            flex-shrink: 0;
+            z-index: 1;
+            margin-left: 40px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .content {
+            display: flex;
+            flex: 1;
+            min-height: 0;
+            background-color: #1e2a36; /* Matches the sidebar but different from iframe area */
+        }
+
+        iframe {
+            width: 75%;
+            height: 100%;
+            border: none;
+            min-width: 400px; /* Ensure it has a minimum width */
+            background-color: #2b3e50; /* Set background color for iframe area */
+            margin-left: 60px;
+        }
+
+        .sidebar {
+            width: auto; /* Allow the sidebar to expand as needed */
+            flex-grow: 1; /* Make the sidebar take up available width */
+            display: flex;
+            flex-direction: column;
+            background-color: #2b3e50; /* Matches the container */
+            color: white;
+            min-width: 250px;
+            max-width: 350px;
+            max-height: 1000px;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .announcement {
+            background-color: #f39c12;
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .tabs {
+            display: flex;
+            background-color: #1c2833;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+        }
+
+        .tab {
+            flex: 1;
+            text-align: center;
+            padding: 15px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .tab.active {
+            background-color: #3498db;
+            color: white;
+        }
+
+        .tab:hover {
+            background-color: #2980b9;
+        }
+
+        .list-container {
+            flex: 1;
+            overflow-y: auto;
+            padding: 10px;
+            background-color: #2b3e50; /* Matches the container */
+            height: 100%;
+            box-sizing: border-box;
+        }
+
+        .list-item {
+            padding: 15px;
+            cursor: pointer;
+            border-bottom: 1px solid #3b4f63;
+            transition: background-color 0.3s, transform 0.2s;
+            font-size: 14px;
+        }
+
+        .list-item:last-child {
+            border-bottom: none;
+        }
+
+        .list-item:hover {
+            background-color: #1e2e3e;
+            transform: translateX(5px);
+        }
+
+        .footer {
+            background-color: #1e2a36; /* Matches the container */
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">Better Anime - Taboo Tattoo</div>
+        </div>
+
+        <div class="content">
+            <iframe id="embed" src="https://s3embtaku.pro/streaming.php?id=MTE2Mjkz&amp;title=Taboo+Tattoo+(Dub)+Episode+1&amp;typesub=SUB" scrolling="no" frameborder="0" allowfullscreen></iframe>
+            
+            <div class="sidebar">
+                
+                <div class="tabs">
+                    <div class="tab active" onclick="showSeason('season1')">Season 1</div>
+                </div>
+                
+                <div class="list-container" id="season1">
+                    <div class="list-item" onclick="changeEmbed('https://s3embtaku.pro/streaming.php?id=MTE2Mjkz&amp;title=Taboo+Tattoo+(Dub)+Episode+1&amp;typesub=SUB')">Episode 1</div>
+                    <div class="list-item" onclick="changeEmbed('https://s3embtaku.pro/streaming.php?id=MTE2Mjk0&title=Taboo+Tattoo+%28Dub%29+Episode+2&typesub=SUB')">Episode 2</div>
+                    <div class="list-item" onclick="changeEmbed('https://s3embtaku.pro/streaming.php?id=MTE2Mjk1&title=Taboo+Tattoo+%28Dub%29+Episode+3&typesub=SUB')">Episode 3</div>
+                    <div class="list-item" onclick="changeEmbed('https://s3embtaku.pro/streaming.php?id=MTE2Mjk2&title=Taboo+Tattoo+%28Dub%29+Episode+4&typesub=SUB')">Episode 4</div>
+                    <div class="list-item" onclick="changeEmbed('https://s3embtaku.pro/streaming.php?id=MTE2Mjk3&title=Taboo+Tattoo+%28Dub%29+Episode+5&typesub=SUB')">Episode 5</div>
+                    <div class="list-item" onclick="changeEmbed('https://s3embtaku.pro/streaming.php?id=MTE2Mjk4&title=Taboo+Tattoo+%28Dub%29+Episode+6&typesub=SUB')">Episode 6</div>
+                    <div class="list-item" onclick="changeEmbed('https://s3embtaku.pro/streaming.php?id=MTE2Mjk5&title=Taboo+Tattoo+%28Dub%29+Episode+7&typesub=SUB')">Episode 7</div>
+                    <div class="list-item" onclick="changeEmbed('https://s3embtaku.pro/streaming.php?id=MTE2MzAw&title=Taboo+Tattoo+%28Dub%29+Episode+8&typesub=SUB')">Episode 8</div>
+                    <div class="list-item" onclick="changeEmbed('https://s3embtaku.pro/streaming.php?id=MTE2MzAx&title=Taboo+Tattoo+%28Dub%29+Episode+9&typesub=SUB')">Episode 9</div>
+                    <div class="list-item" onclick="changeEmbed('https://s3embtaku.pro/streaming.php?id=MTE2MzAy&title=Taboo+Tattoo+%28Dub%29+Episode+10&typesub=SUB')">Episode 10</div>
+                    <div class="list-item" onclick="changeEmbed('https://s3embtaku.pro/streaming.php?id=MTE2MzAz&title=Taboo+Tattoo+%28Dub%29+Episode+11&typesub=SUB')">Episode 11</div>
+                </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            © 2024 Better Anime. All rights reserved. Please note all Anime come from an external 3rd Party site!
+        </div>
+    </div>
+
+    <script>
+        function changeEmbed(url) {
+            document.getElementById('embed').src = url;
+        }
+
+        function showSeason(season) {
+            document.getElementById('season1').style.display = 'none';
+            document.getElementById(season).style.display = 'block';
+
+            const tabs = document.getElementsByClassName('tab');
+            for (let tab of tabs) {
+                tab.classList.remove('active');
+            }
+            document.querySelector(`[onclick="showSeason('${season}')"]`).classList.add('active');
+        }
+    </script>
+</body>
+</html>
