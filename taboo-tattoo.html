@@ -242,6 +242,25 @@
         function changeEmbed(url) {
             document.getElementById('embed').src = url;
         }
+        
+        function cleanEmbed() {
+          const iframe = document.getElementById('embed');
+        
+          iframe.onload = () => {
+            const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+        
+            // Remove known ad containers by class or ID
+            const adElements = iframeDoc.querySelectorAll('.ad-container, .popup, #ad-banner');
+            adElements.forEach(ad => ad.remove());
+          };
+        }
+        
+        // Call this function after changing the embed source
+        function changeEmbed(url) {
+          const iframe = document.getElementById('embed');
+          iframe.src = url;
+          iframe.onload = cleanEmbed; // Attach the cleaner
+        }
 
         function showSeason(season) {
             document.getElementById('season1').style.display = 'none';
