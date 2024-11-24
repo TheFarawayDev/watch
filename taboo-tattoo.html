@@ -181,7 +181,7 @@
         
             .header {
                 padding: 5px 10px;
-                margin-left: 8px;
+                margin-left: -30px;
             }
         
             .logo {
@@ -204,7 +204,7 @@
         </div>
 
         <div class="content">
-            <iframe id="embed" src="" scrolling="no" frameborder="0" allowfullscreen sandbox="allow-same-origin allow-scripts"></iframe>
+            <iframe id="embed" src="" scrolling="no" frameborder="0" allowfullscreen></iframe>
             
             <div class="sidebar">
                 <div class="sub-dub-buttons">
@@ -249,7 +249,7 @@
     </div>
 
     <script>
-         window.onload = async function() {
+         window.onload = function() {
             const savedVersion = localStorage.getItem('animeVersion') || 'sub';  // Default to 'sub'
             const versionButton = savedVersion === 'dub' ? 'dubButton' : 'subButton';
             
@@ -261,14 +261,6 @@
             document.getElementById('season1Button').onclick = function() {
             showSeason('season1');
             };
-
-            // Initialize ad blocker engine
-            const { FiltersEngine } = await import('@ghostery/adblocker');
-            const engine = await FiltersEngine.fromPrebuiltAdsOnly(fetch);
-
-            // Attach the cleaner after loading
-            const iframe = document.getElementById('embed');
-            iframe.onload = () => cleanEmbed(engine);
         };
         
         function changeEmbed(url) {
@@ -281,37 +273,6 @@
                 changeEmbed(this.getAttribute('data-url'));
             });
         });
-        
-        async function cleanEmbed(engine) {
-            const iframe = document.getElementById('embed');
-            const iframeWindow = iframe.contentWindow;
-
-            try {
-            const iframeDoc = iframe.contentDocument || iframeWindow.document;
-
-            // Observe for dynamically added ads
-            const observer = new MutationObserver(mutations => {
-                mutations.forEach(mutation => {
-                mutation.addedNodes.forEach(async node => {
-                    if (node.nodeType === 1) {
-                    const request = Request.fromRawDetails({
-                        url: node.src || node.href,
-                        type: 'script',
-                    });
-                    const { match } = engine.match(request);
-                    if (match) {
-                        node.remove();  // Remove detected ad node
-                    }
-                    }
-                });
-                });
-            });
-
-            observer.observe(iframeDoc.body, { childList: true, subtree: true });
-            } catch (error) {
-            console.error('Ad removal error:', error);
-            }
-        }
         
         function toggleVersion(version) {
             localStorage.setItem('animeVersion', version);  // Save to local storage
