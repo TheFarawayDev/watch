@@ -20,20 +20,12 @@
             overflow: hidden;
             background-color: #1e2a36;
         }
-
-        .announcement {
-            background-color: #f39c12;
-            padding: 10px;
-            text-align: center;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
         
         .container {
             display: flex;
             flex-direction: column;
             width: 100%;
-            height: auto;
+            height: 100%;
             background-color: #1e2a36;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
             overflow: hidden;
@@ -80,13 +72,17 @@
             box-sizing: border-box;
         }
         
-        .tabs {
+        .tabs, .sub-dub-buttons {
             display: flex;
             background-color: #1c2833;
             margin-bottom: 10px;
         }
-        
-        .tab {
+
+        .sub-dub-buttons {
+            margin-bottom: 5;
+        }
+
+        .tab, .sub-dub-button {
             flex: 1;
             text-align: center;
             padding: 15px;
@@ -96,16 +92,17 @@
             font-size: 16px;
         }
         
-        .tab.active {
+        .tab.active, .sub-dub-button.active {
             background-color: #3498db;
             color: white;
         }
-        
+
         .list-container {
             overflow-y: auto;
             padding: 10px;
             height: 100%;
             background-color: #2b3e50;
+            display: none;
         }
         
         .list-item {
@@ -167,7 +164,7 @@
                 padding: 5px;
             }
         
-            .tab {
+            .tab, .sub-dub-button {
                 padding: 10px;
                 font-size: 14px;
             }
@@ -203,10 +200,24 @@
             <iframe id="embed" src="" scrolling="no" frameborder="0" allowfullscreen sandbox="allow-same-origin allow-scripts"></iframe>
             
             <div class="sidebar">
+                <div class="sub-dub-buttons">
+                    <div class="sub-dub-button active" onclick="toggleVersion('sub')">Sub</div>
+                    <div class="sub-dub-button" onclick="toggleVersion('dub')">Dub</div>
+                </div>
+
                 <div class="tabs">
                     <div class="tab active" onclick="showSeason('season1')">Season 1</div>
                 </div>
-                <div class="list-container" id="season1">
+
+                <div class="list-container" id="season1-sub">
+                    <div class="list-item" onclick="changeEmbed('https://example.com/season1/sub/episode1')">Episode 1</div>
+                    <div class="list-item" onclick="changeEmbed('https://example.com/season1/sub/episode2')">Episode 2</div>
+                    <div class="list-item" onclick="changeEmbed('https://example.com/season1/sub/episode3')">Episode 3</div>
+                    <div class="list-item" onclick="changeEmbed('https://example.com/season1/sub/episode4')">Episode 4</div>
+                    <div class="list-item" onclick="changeEmbed('https://example.com/season1/sub/episode5')">Episode 5</div>
+                </div>
+
+                <div class="list-container" id="season1-dub">
                     <div class="list-item" onclick="changeEmbed('https://s3embtaku.pro/streaming.php?id=MTE2Mjkz&amp;title=Taboo+Tattoo+(Dub)+Episode+1&amp;typesub=SUB')">Episode 1</div>
                     <div class="list-item" onclick="changeEmbed('https://s3embtaku.pro/streaming.php?id=MTE2Mjk0&title=Taboo+Tattoo+%28Dub%29+Episode+2&typesub=SUB')">Episode 2</div>
                     <div class="list-item" onclick="changeEmbed('https://s3embtaku.pro/streaming.php?id=MTE2Mjk1&title=Taboo+Tattoo+%28Dub%29+Episode+3&typesub=SUB')">Episode 3</div>
@@ -241,6 +252,48 @@
                 tab.classList.remove('active');
             }
             document.querySelector(`[onclick="showSeason('${season}')"]`).classList.add('active');
+        }
+
+        window.onload = function() {
+            // Set Season 1 Sub as the default on page load
+            showSeason('season1');
+            toggleVersion('sub');
+        };
+    
+        function changeEmbed(url) {
+            document.getElementById('embed').src = url;
+        }
+    
+        function showSeason(season) {
+            // Hide all season lists
+            document.getElementById('season1-sub').style.display = 'none';
+            document.getElementById('season1-dub').style.display = 'none';
+    
+            // Show the selected season
+            document.getElementById(`${season}-sub`).style.display = 'block';
+            document.getElementById(`${season}-dub`).style.display = 'block';
+    
+            // Activate the corresponding season tab
+            const tabs = document.getElementsByClassName('tab');
+            for (let tab of tabs) {
+                tab.classList.remove('active');
+            }
+            document.querySelector(`[onclick="showSeason('${season}')"]`).classList.add('active');
+        }
+    
+        function toggleVersion(version) {
+            // Hide all season sub/dub lists
+            const subDubButtons = document.getElementsByClassName('sub-dub-button');
+            for (let button of subDubButtons) {
+                button.classList.remove('active');
+            }
+    
+            // Activate the selected version button
+            document.querySelector(`[onclick="toggleVersion('${version}')"]`).classList.add('active');
+    
+            // Show the corresponding sub/dub lists
+            document.getElementById('season1-sub').style.display = version === 'sub' ? 'block' : 'none';
+            document.getElementById('season1-dub').style.display = version === 'dub' ? 'block' : 'none';
         }
     </script>
 </body>
