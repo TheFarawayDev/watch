@@ -146,7 +146,7 @@
 
             .container {
                 height: 80%;
-                overflow: hidden;
+                overflow: scroll;
             }
 
             .content {
@@ -204,38 +204,41 @@
         </div>
 
         <div class="content">
-            <iframe id="embed" src="" scrolling="no" frameborder="0"></iframe>
+            <iframe id="embed" src="" scrolling="no" frameborder="0" allowfullscreen sandbox="allow-same-origin allow-scripts"></iframe>
             
             <div class="sidebar">
                 <div class="sub-dub-buttons">
-                    <div class="sub-dub-button active" onclick="toggleVersion('sub')">Sub</div>
-                    <div class="sub-dub-button" onclick="toggleVersion('dub')">Dub</div>
+                    <div class="sub-dub-button" id="subButton" onclick="toggleVersion('sub')">Sub</div>
+                    <div class="sub-dub-button" id="dubButton" onclick="toggleVersion('dub')">Dub</div>
                 </div>
 
+                <!-- Season Tabs -->
                 <div class="tabs">
-                    <div class="tab active" onclick="showSeason('season1')">Season 1</div>
-                </div>
+                    <div class="tab active" id="season1Button">Season 1</div>
+                </div>                
 
+                <!-- Lists remain unchanged -->
                 <div class="list-container" id="season1-sub">
-                    <div class="list-item" onclick="changeEmbed('https://example.com/season1/sub/episode1')">Episode 1</div>
-                    <div class="list-item" onclick="changeEmbed('https://example.com/season1/sub/episode2')">Episode 2</div>
-                    <div class="list-item" onclick="changeEmbed('https://example.com/season1/sub/episode3')">Episode 3</div>
-                    <div class="list-item" onclick="changeEmbed('https://example.com/season1/sub/episode4')">Episode 4</div>
-                    <div class="list-item" onclick="changeEmbed('https://example.com/season1/sub/episode5')">Episode 5</div>
+                    <div class="list-item" data-url="https://example.com/season1/sub/episode1">Episode 1</div>
+                    <div class="list-item" data-url="https://example.com/season1/sub/episode1">Episode 1</div>
+                    <div class="list-item" data-url="https://example.com/season1/sub/episode2">Episode 2</div>
+                    <div class="list-item" data-url="https://example.com/season1/sub/episode3">Episode 3</div>
+                    <div class="list-item" data-url="https://example.com/season1/sub/episode4">Episode 4</div>
+                    <div class="list-item" data-url="https://example.com/season1/sub/episode5">Episode 5</div>
                 </div>
 
                 <div class="list-container" id="season1-dub">
-                    <div class="list-item" onclick="changeEmbed('https://s3embtaku.pro/streaming.php?id=MTE2Mjkz&amp;title=Taboo+Tattoo+(Dub)+Episode+1&amp;typesub=SUB')">Episode 1</div>
-                    <div class="list-item" onclick="changeEmbed('https://s3embtaku.pro/streaming.php?id=MTE2Mjk0&title=Taboo+Tattoo+%28Dub%29+Episode+2&typesub=SUB')">Episode 2</div>
-                    <div class="list-item" onclick="changeEmbed('https://s3embtaku.pro/streaming.php?id=MTE2Mjk1&title=Taboo+Tattoo+%28Dub%29+Episode+3&typesub=SUB')">Episode 3</div>
-                    <div class="list-item" onclick="changeEmbed('https://s3embtaku.pro/streaming.php?id=MTE2Mjk2&title=Taboo+Tattoo+%28Dub%29+Episode+4&typesub=SUB')">Episode 4</div>
-                    <div class="list-item" onclick="changeEmbed('https://s3embtaku.pro/streaming.php?id=MTE2Mjk3&title=Taboo+Tattoo+%28Dub%29+Episode+5&typesub=SUB')">Episode 5</div>
-                    <div class="list-item" onclick="changeEmbed('https://s3embtaku.pro/streaming.php?id=MTE2Mjk4&title=Taboo+Tattoo+%28Dub%29+Episode+6&typesub=SUB')">Episode 6</div>
-                    <div class="list-item" onclick="changeEmbed('https://s3embtaku.pro/streaming.php?id=MTE2Mjk5&title=Taboo+Tattoo+%28Dub%29+Episode+7&typesub=SUB')">Episode 7</div>
-                    <div class="list-item" onclick="changeEmbed('https://s3embtaku.pro/streaming.php?id=MTE2MzAw&title=Taboo+Tattoo+%28Dub%29+Episode+8&typesub=SUB')">Episode 8</div>
-                    <div class="list-item" onclick="changeEmbed('https://s3embtaku.pro/streaming.php?id=MTE2MzAx&title=Taboo+Tattoo+%28Dub%29+Episode+9&typesub=SUB')">Episode 9</div>
-                    <div class="list-item" onclick="changeEmbed('https://s3embtaku.pro/streaming.php?id=MTE2MzAy&title=Taboo+Tattoo+%28Dub%29+Episode+10&typesub=SUB')">Episode 10</div>
-                    <div class="list-item" onclick="changeEmbed('https://s3embtaku.pro/streaming.php?id=MTE2MzAz&title=Taboo+Tattoo+%28Dub%29+Episode+11&typesub=SUB')">Episode 11</div>
+                    <div class="list-item" data-url="https://s3embtaku.pro/streaming.php?id=MTE2Mjkz&amp;title=Taboo+Tattoo+(Dub)+Episode+1&amp;typesub=SUB">Episode 1</div>
+                    <div class="list-item" data-url="https://s3embtaku.pro/streaming.php?id=MTE2Mjk0&title=Taboo+Tattoo+%28Dub%29+Episode+2&typesub=SUB">Episode 2</div>
+                    <div class="list-item" data-url="https://s3embtaku.pro/streaming.php?id=MTE2Mjk1&title=Taboo+Tattoo+%28Dub%29+Episode+3&typesub=SUB">Episode 3</div>
+                    <div class="list-item" data-url="https://s3embtaku.pro/streaming.php?id=MTE2Mjk2&title=Taboo+Tattoo+%28Dub%29+Episode+4&typesub=SUB">Episode 4</div>
+                    <div class="list-item" data-url="https://s3embtaku.pro/streaming.php?id=MTE2Mjk3&title=Taboo+Tattoo+%28Dub%29+Episode+5&typesub=SUB">Episode 5</div>
+                    <div class="list-item" data-url="https://s3embtaku.pro/streaming.php?id=MTE2Mjk4&title=Taboo+Tattoo+%28Dub%29+Episode+6&typesub=SUB">Episode 6</div>
+                    <div class="list-item" data-url="https://s3embtaku.pro/streaming.php?id=MTE2Mjk5&title=Taboo+Tattoo+%28Dub%29+Episode+7&typesub=SUB">Episode 7</div>
+                    <div class="list-item" data-url="https://s3embtaku.pro/streaming.php?id=MTE2MzAw&title=Taboo+Tattoo+%28Dub%29+Episode+8&typesub=SUB">Episode 8</div>
+                    <div class="list-item" data-url="https://s3embtaku.pro/streaming.php?id=MTE2MzAx&title=Taboo+Tattoo+%28Dub%29+Episode+9&typesub=SUB">Episode 9</div>
+                    <div class="list-item" data-url="https://s3embtaku.pro/streaming.php?id=MTE2MzAy&title=Taboo+Tattoo+%28Dub%29+Episode+10&typesub=SUB">Episode 10</div>
+                    <div class="list-item" data-url="https://s3embtaku.pro/streaming.php?id=MTE2MzAz&title=Taboo+Tattoo+%28Dub%29+Episode+11&typesub=SUB">Episode 11</div>
                 </div>
             </div>
         </div>
@@ -246,77 +249,115 @@
     </div>
 
     <script>
-        function cleanEmbed() {
-          const iframe = document.getElementById('embed');
-        
-          iframe.onload = () => {
-            const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-        
-            // Remove known ad containers by class or ID
-            const adElements = iframeDoc.querySelectorAll('.ad-container, .popup, #ad-banner');
-            adElements.forEach(ad => ad.remove());
-          };
-        }
-        
-        // Call this function after changing the embed source
-        function changeEmbed(url) {
-          const iframe = document.getElementById('embed');
-          iframe.src = url;
-          iframe.onload = cleanEmbed; // Attach the cleaner
-        }
+         window.onload = async function() {
+            const savedVersion = localStorage.getItem('animeVersion') || 'sub';  // Default to 'sub'
+            const versionButton = savedVersion === 'dub' ? 'dubButton' : 'subButton';
+            
+            document.getElementById(versionButton).classList.add('active');
+            toggleVersion(savedVersion);
+            showSeason('season1');  // Default to show season 1 initially
 
-        function showSeason(season) {
-            document.getElementById('season1').style.display = 'none';
-            document.getElementById(season).style.display = 'block';
-
-            const tabs = document.getElementsByClassName('tab');
-            for (let tab of tabs) {
-                tab.classList.remove('active');
-            }
-            document.querySelector(`[onclick="showSeason('${season}')"]`).classList.add('active');
-        }
-
-        window.onload = function() {
-            // Set Season 1 Sub as the default on page load
+            // Attach event listeners to season buttons
+            document.getElementById('season1Button').onclick = function() {
             showSeason('season1');
-            toggleVersion('sub');
+            };
+
+            // Initialize ad blocker engine
+            const { FiltersEngine } = await import('@ghostery/adblocker');
+            const engine = await FiltersEngine.fromPrebuiltAdsOnly(fetch);
+
+            // Attach the cleaner after loading
+            const iframe = document.getElementById('embed');
+            iframe.onload = () => cleanEmbed(engine);
         };
-    
+        
         function changeEmbed(url) {
-            document.getElementById('embed').src = url;
+            const iframe = document.getElementById('embed');
+            iframe.src = url;
         }
-    
-        function showSeason(season) {
-            // Hide all season lists
-            document.getElementById('season1-sub').style.display = 'none';
-            document.getElementById('season1-dub').style.display = 'none';
-    
-            // Show the selected season
-            document.getElementById(`${season}-sub`).style.display = 'block';
-            document.getElementById(`${season}-dub`).style.display = 'block';
-    
-            // Activate the corresponding season tab
-            const tabs = document.getElementsByClassName('tab');
-            for (let tab of tabs) {
-                tab.classList.remove('active');
+
+        document.querySelectorAll('.list-item').forEach(item => {
+            item.addEventListener('click', function() {
+                changeEmbed(this.getAttribute('data-url'));
+            });
+        });
+        
+        async function cleanEmbed(engine) {
+            const iframe = document.getElementById('embed');
+            const iframeWindow = iframe.contentWindow;
+
+            try {
+            const iframeDoc = iframe.contentDocument || iframeWindow.document;
+
+            // Observe for dynamically added ads
+            const observer = new MutationObserver(mutations => {
+                mutations.forEach(mutation => {
+                mutation.addedNodes.forEach(async node => {
+                    if (node.nodeType === 1) {
+                    const request = Request.fromRawDetails({
+                        url: node.src || node.href,
+                        type: 'script',
+                    });
+                    const { match } = engine.match(request);
+                    if (match) {
+                        node.remove();  // Remove detected ad node
+                    }
+                    }
+                });
+                });
+            });
+
+            observer.observe(iframeDoc.body, { childList: true, subtree: true });
+            } catch (error) {
+            console.error('Ad removal error:', error);
             }
-            document.querySelector(`[onclick="showSeason('${season}')"]`).classList.add('active');
         }
-    
+        
         function toggleVersion(version) {
-            // Hide all season sub/dub lists
-            const subDubButtons = document.getElementsByClassName('sub-dub-button');
-            for (let button of subDubButtons) {
-                button.classList.remove('active');
+            localStorage.setItem('animeVersion', version);  // Save to local storage
+        
+            const subButton = document.getElementById('subButton');
+            const dubButton = document.getElementById('dubButton');
+        
+            subButton.classList.remove('active');
+            dubButton.classList.remove('active');
+            document.getElementById(`${version}Button`).classList.add('active');
+        
+            // Show or hide lists for both seasons based on version
+            const firstEpisode = document.querySelector(`#season1-${version} .list-item`);
+            if (firstEpisode) {
+            changeEmbed(firstEpisode.getAttribute('data-url'));
+            } else {
+            toggleVersion('sub');  // Fallback if Dub is not available
             }
-    
-            // Activate the selected version button
-            document.querySelector(`[onclick="toggleVersion('${version}')"]`).classList.add('active');
-    
-            // Show the corresponding sub/dub lists
-            document.getElementById('season1-sub').style.display = version === 'sub' ? 'block' : 'none';
-            document.getElementById('season1-dub').style.display = version === 'dub' ? 'block' : 'none';
+
+            // Switch back to season 1
+            showSeason('season1');
         }
-    </script>
+        
+        function showSeason(season) {
+            // Hide all season lists first
+            const allSeasons = ['season1'];
+            allSeasons.forEach(s => {
+            document.getElementById(`${s}-sub`).style.display = 'none';
+            document.getElementById(`${s}-dub`).style.display = 'none';
+            });
+
+            // Remove active class from all season buttons
+            document.getElementById('season1Button').classList.remove('active');
+        
+            // Show the selected season and the selected version
+            const currentVersion = localStorage.getItem('animeVersion') || 'sub';  // Default to 'sub'
+            document.getElementById(`${season}-${currentVersion}`).style.display = 'block';
+
+            // Add active class to the selected season button
+            document.getElementById(`${season}Button`).classList.add('active');
+        }
+        
+        // Functions for the season buttons
+        document.getElementById('season1Button').onclick = function() {
+            showSeason('season1');
+        };
+    </script>     
 </body>
 </html>
