@@ -320,33 +320,5 @@
             showSeason('season1');
         };
     </script>     
-    
-    <script>
-        // Prevent redirects by overriding `window.location` methods
-        (function() {
-            // Override the assignment of location
-            Object.defineProperty(window, 'location', {
-                set: function() {
-                    console.warn('Redirect attempt blocked.');
-                }
-            });
-        
-            // Override location.replace and location.assign
-            window.location.replace = function() {
-                console.warn('Redirect attempt blocked via replace.');
-            };
-            window.location.assign = function() {
-                console.warn('Redirect attempt blocked via assign.');
-            };
-        })();
-        
-        // Prevent clicking links from redirecting
-        document.addEventListener('click', function(event) {
-            if (event.target.tagName === 'A') {
-                event.preventDefault();
-                console.warn('Link click prevented.');
-            }
-        });
-    </script>
 </body>
 </html>
