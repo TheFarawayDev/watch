@@ -151,17 +151,6 @@
             color: #2b3e50;
         }
 
-        .settings-bar {
-            display: flex;
-            justify-content: left;
-            align-items: left;
-            width: 91%;
-            padding: 4px;
-            margin-top: -12px;
-            background-color: #34495E;
-            border: 2px solid #1d2a36;
-        }
-
         @media screen and (max-width: 768px) {
             .video-js {
                 width: 89%;
@@ -175,10 +164,6 @@
 
             .button-container {
                 width: 90%;
-            }
-
-            .settings-bar {
-                width: 87%;
             }
         }
     </style>
@@ -197,11 +182,6 @@
                    data-setup="{}">
                 <source id="video-source" src="" type="video/mp4" />
             </video>
-            <div class="settings-bar">
-                <label>
-                    <input type="checkbox" id="autoNextCheckbox" onclick="toggleAutoNext()"> Auto Next
-                </label>
-            </div>
 
             <div class="button-container">    
                 <div class="toggle-options">
@@ -324,17 +304,6 @@
 </html>
 
 <script>
-    let autoNextEnabled = false;
-
-    function toggleAutoNext() {
-        autoNextEnabled = !autoNextEnabled;
-    }
-
-    function toggleAutoplay() {
-        const player = videojs('my-video');
-        player.autoplay(!player.autoplay());
-        document.getElementById('autoplayButton').textContent = `Autoplay: ${player.autoplay() ? 'On' : 'Off'}`;
-    }
 
     function changeVideo(videoUrl, button) {
         const player = videojs('my-video');
@@ -346,15 +315,6 @@
         }
         button.classList.add('active');
         currentEpisodeButton = button;
-
-        player.on('ended', function() {
-            if (autoNextEnabled) {
-                const nextButton = currentEpisodeButton.nextElementSibling;
-                if (nextButton) {
-                    nextButton.click();
-                }
-            }
-        });
 
         player.on('error', function() {
             player.src({ type: 'video/mp4', src: videoUrl });
