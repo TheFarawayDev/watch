@@ -179,7 +179,7 @@
             <video id="my-video" class="video-js" controls preload="auto"
                    poster="https://i.artfile.ru/1920x1200_1059397_[www.ArtFile.ru].jpg"
                    data-setup="{}">
-                <source id="video-source" src="" type="video/mp4" />
+                <source id="video-source" src="https://example.mp4" type="video/mp4" />
             </video>
 
             <div class="button-container">    
@@ -239,6 +239,8 @@
             }
         };
 
+        videojs.addLanguage('en', {"The media could not be loaded, either because the server or network failed or because the format is not supported.": "Please select an episode to watch!"});
+        
         let currentLanguage = 'sub';
         let currentSeason = 'season1';
         let currentEpisodeButton = null;

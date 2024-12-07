@@ -187,7 +187,7 @@
             <video id="my-video" class="video-js" controls preload="auto"
                    poster="https://i.artfile.ru/1920x1200_1059397_[www.ArtFile.ru].jpg"
                    data-setup="{}">
-                <source id="video-source" src="https://ggredi.info/download.php?url=aHR0cHM6LyAdrefsdsdfwerFrefdsfrersfdsrfer363435349AawehyfcghysfdsDGDYdgdsfsdfwstdgdsgtert1d3VieHNoMXAzLmFuZjU5OC5jb20vdXNlcjEzNDIvODcwZDBhOTU4MWMzNGIyNDlmNTY5MGRhMzE4ODk5YTAvRVAuMS52MC4xNjM5Mjc1MzAyLjEwODBwLm1wND90b2tlbj1VcFpoRFhxMG9BQ3hLYWd1NW41NUN3JmV4cGlyZXM9MTczMzM3NTAyMyZpZD0xMTYyOTM=" type="video/mp4" />
+                <source id="video-source" src="https://example.mp4" type="video/mp4" />
             </video>
 
             <div class="announcement-banner">
@@ -241,6 +241,8 @@
             }
         };
 
+        videojs.addLanguage('en', {"The media could not be loaded, either because the server or network failed or because the format is not supported.": "Please select an episode to watch!"});
+        
         let currentLanguage = 'sub';
         let currentSeason = 'season1';
         let currentEpisodeButton = null;

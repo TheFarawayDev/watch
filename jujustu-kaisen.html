@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Better Anime - Jujustu Kaisen</title>
+    <link href="https://vjs.zencdn.net/8.16.1/video-js.css" rel="stylesheet" />
+    <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/Better-Anime/Watch/refs/heads/main/BA.png">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: #2b3e50;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 80%;
+            max-width: 1000px;
+            background-color: #2b3e50;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            border-radius: 10px;
+            padding-bottom: 20px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 20px;
+            background: linear-gradient(to bottom, #0a8cc0, #2b3e50); /* Gradient from light sky blue to main page color */
+            color: rgb(28, 137, 233);
+            width: 100%;
+            position: relative;
+            margin-bottom: 7px;
+        }
+
+        .logo {
+            position: absolute;
+            margin-left: 25px;
+        }
+
+        .logo a {
+            text-decoration: none;
+            color: #799ec2;
+            font-size: 24px;
+        }
+
+        .logo a:hover {
+            color: #4A90E2;
+        }
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+        }
+
+        .video-js {
+            width: 93%;
+            height: 490px;
+            background-color: #3c4a5a;
+            margin-bottom: 10px;
+            border: 2px solid #1d2a36;
+        }
+
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            width: 93%;
+            margin: 10px 0;
+            text-align: center;
+        }
+
+        .toggle-options, .season-selector {
+            display: flex;
+            justify-content: center;
+            margin: 2px 0;
+        }
+
+        .toggle-options button, .season-selector button {
+            background-color: #3c6eb3;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            flex: 1;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .toggle-options button:hover, .season-selector button:hover {
+            background-color: #5a9cec;
+            transform: scale(1.05);
+        }
+
+        .toggle-options button.active, .season-selector button.active {
+            background-color: #4A90E2;
+        }
+
+        .episode-container {
+            display: flex;
+            justify-content: center;
+            overflow-y: auto;
+            height: 200px;
+            width: 90%;
+            border: 1px solid #799ec2;
+            background-color: #537196;
+            padding: 10px;
+        }
+
+        .episode-list {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        .episode-list button {
+            background-color: #34495E;
+            color: white;
+            border: none;
+            padding: 10px;
+            margin: 5px;
+            width: 90%;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .episode-list button:hover {
+            background-color: #5a6b7c;
+            transform: scale(1.05);
+        }
+
+        .episode-list button.active {
+            background-color: #5a6b7c;
+            color: #2b3e50;
+        }
+
+        @media screen and (max-width: 768px) {
+            .video-js {
+                width: 89%;
+                height: 260px;
+            }
+
+            .episode-container {
+                width: 83%;
+                height: 150px;
+            }
+
+            .button-container {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <a href="https://better-anime.github.io/home"><strong>Better Anime</strong></a>
+            </div>
+        </div>
+
+        <div class="content"></div>
+            <video id="my-video" class="video-js" controls preload="auto"
+                   poster="https://media.sketchfab.com/models/9ef17e259d13425ba8fe9be2153781ce/thumbnails/18390f4346e94ac6a28854cfb9932cc3/503d5b4fb91c42438238490ad1bb2365.jpeg"
+                   data-setup="{}">
+                <source id="video-source" src="https:/example.mp4" type="video/mp4" />
+            </video>
+
+            <div class="button-container">    
+                <div class="toggle-options">
+                    <button onclick="toggleLanguage('sub')" id="subButton" class="active">Subbed</button>
+                    <button onclick="toggleLanguage('dub')" id="dubButton">Dubbed</button>
+                </div>
+
+                <div class="season-selector">
+                    <button onclick="selectSeason(1)" id="season1Button" class="active">Season 1</button>
+                    <button onclick="selectSeason(2)" id="season2Button">Season 2</button>
+                    <button onclick="selectSeason(3)" id="season3Button">Movies</button>
+                </div>
+            </div>
+
+            <div class="episode-container">
+                <div class="episode-list" id="episode-list">
+                    <!-- Episodes will be dynamically added here -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://vjs.zencdn.net/8.16.1/video.min.js"></script>
+
+    <script>
+        const episodes = {
+            sub: {
+                season1: [
+                    { title: "Episode 1", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAdrefsdsdfwerFrefdsfrersfdsrfer363435349URASDGHUSRFSJGYfdsffsderFStewthsfSFtrftesdfwd3l4aXltZWx1LmFuZjU5OC5jb20vdXNlcjEzNDIvZmFiZTNlMmYzOTRiYmU4YmQ3ODY4NjM0ZTVlMGU5OGQvRVAuMS52MS4xNzIwNjQ0NjAzLjEwODBwLm1wND90b2tlbj16UTdSS1BxdHNCR2l4OGFWa0RBOUFnJmV4cGlyZXM9MTczMzU0NTk4MCZpZD0xNDU2MDQ=" },
+                    { title: "Episode 2", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAdeqwrwedffryretgsdFrsftrsvfsfsr95bGhxaGAdrefsdsdfwerFrefdsfrersfdsrfer363435341zYWhpLmFuZjU5OC5jb20vdXNlcjEzNDIvZmFiZTNlMmYzOTRiYmU4YmQ3ODY4NjM0ZTVlMGU5OGQvRVAuMi52MS4xNzIwNjQ1NTA1LjcyMHAubXA0P3Rva2VuPUg3X2FLdFJId3JrV1hlT01zQVlVdUEmZXhwaXJlcz0xNzMzNTQ4OTQ5JmlkPTE0NjI2Mw==" },
+                    { title: "Episode 3", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAdeqwrwedffryretgsdFrsftrsvfsfsr91amNqZ3AdrefsdsdfwerFrefdsfrersfdsrfer36343534p0d2R4LmFuZjU5OC5jb20vdXNlcjEzNDIvZmFiZTNlMmYzOTRiYmU4YmQ3ODY4NjM0ZTVlMGU5OGQvRVAuMy52MS4xNzIwNjQ1MjI0LjEwODBwLm1wND90b2tlbj1uSEViTVV5alNKRW5oMFk1Y2FNcHd3JmV4cGlyZXM9MTczMzU0NjAyOSZpZD0xNDY0NzA=" },
+                    { title: "Episode 4", url: "https://ggredi.info/download.php?url=aHR0cHM6LyURASDGHUSRFSJGYfdsffsderFStewthsfSFtrfteAdrefsdsdfwerFrefdsfrersfdsrfer36343534sdf9odGd0c2R0cXZsLmFuZjU5OC5jb20vdXNlcjEzNDIvZmFiZTNlMmYzOTRiYmU4YmQ3ODY4NjM0ZTVlMGU5OGQvRVAuNC52MS4xNzIwNjQ1MTk4LjEwODBwLm1wND90b2tlbj1VRF9uNnZKVnE4WmZHaV83ZkZ5Rzh3JmV4cGlyZXM9MTczMzU0NjE1MSZpZD0xNDY2ODc=" },
+                    { title: "Episode 5", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAdrefsdsdfwerFrefdsfrersfdsrfer363435349URASDGHUSRFSJGYfdsffsderFStewthsfSFtrftesdf6YmNhanZyc3ViLmFuZjU5OC5jb20vdXNlcjEzNDIvZmFiZTNlMmYzOTRiYmU4YmQ3ODY4NjM0ZTVlMGU5OGQvRVAuNS52MS4xNzIwNjQ1NTA0LjEwODBwLm1wND90b2tlbj1xdzZVcFY0b0U3ajBGdlRIZzcxRTFRJmV4cGlyZXM9MTczMzU0NjI4NCZpZD0xNDY5Nzg=" },
+                    { title: "Episode 6", url: "https://ggredi.info/download.php?url=aHR0cHM6LyURASDGHUSRFSJGYfdsffsderFStewthsfSFtrfteAdrefsdsdfwerFrefdsfrersfdsrfer36343534sdf9odGd0c2R0cXZsLmFuZjU5OC5jb20vdXNlcjEzNDIvZmFiZTNlMmYzOTRiYmU4YmQ3ODY4NjM0ZTVlMGU5OGQvRVAuNi52MS4xNzIwNjQ0NjA0LjEwODBwLm1wND90b2tlbj1TZ1BQemt4UkRGWTM1UTJ3RzB6NkVnJmV4cGlyZXM9MTczMzU0NjI5OSZpZD0xNDcyNzc=" },
+                    { title: "Episode 7", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAdrefsdsdfwerFrefdsfrersfdsrfer363435349URASDGHUSRFSJGYfdsffsderFStewthsfSFtrftesdf1cGNleWlhc2p1LmFuZjU5OC5jb20vdXNlcjEzNDIvZmFiZTNlMmYzOTRiYmU4YmQ3ODY4NjM0ZTVlMGU5OGQvRVAuNy52MS4xNzIwNjQ1MDI0LjEwODBwLm1wND90b2tlbj1aSzJDYkhuZ0IwY0wwbFU2TWFqc2pRJmV4cGlyZXM9MTczMzU0NjMxNyZpZD0xNDc2ODU=" },
+                    { title: "Episode 8", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAdeqwrwedffryretgsdFrsftrsvfsfsr91amNqZ3AawehyfcghysfdsDGDYdgdsfsdfwstdgdsgtertp0d2R4LmFuZjU5OC5jb20vdXNlcjEzNDIvZmFiZTNlMmYzOTRiYmU4YmQ3ODY4NjM0ZTVlMGU5OGQvRVAuOC52MS4xNzIwNjQ0NjA0LjcyMHAubXA0P3Rva2VuPXd5S21FYk1MOWJUdUNBUmFTbHNHR2cmZXhwaXJlcz0xNzMzNTQ5MDE0JmlkPTE0NzkwMA==" },
+                    { title: "Episode 9", url: "https://ggredi.info/download.php?url=aHR0cHM6LyURASDGHUSRFSJGYfdsffsderFStewthsfSFtrfteAdrefsdsdfwerFrefdsfrersfdsrfer36343534sdf9wd3l4aXltZWx1LmFuZjU5OC5jb20vdXNlcjEzNDIvZmFiZTNlMmYzOTRiYmU4YmQ3ODY4NjM0ZTVlMGU5OGQvRVAuOS52MS4xNzIwNjQ3OTA1LjEwODBwLm1wND90b2tlbj1Ed1JxSC12SGd1UXdEYU5NUmt6RVJnJmV4cGlyZXM9MTczMzU0NjM1OSZpZD0xNDgxNDQ=" },
+                    { title: "Episode 10", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAdeqwrwedffryretgsdFrsftrsvfsfsr9tZHhwZWAdrefsdsdfwerFrefdsfrersfdsrfer36343534hmcW1vLmFuZjU5OC5jb20vdXNlcjEzNDIvZmFiZTNlMmYzOTRiYmU4YmQ3ODY4NjM0ZTVlMGU5OGQvRVAuMTAudjEuMTcyMDY0NDkwNC4xMDgwcC5tcDQ/dG9rZW49VXRsam4tZ0hfcW1MN2ZtYVhaR0xYZyZleHBpcmVzPTE3MzM1NDYzNzgmaWQ9MTQ4NDgx" },
+                    { title: "Episode 11", url: "https://ggredi.info/download.php?url=aHR0cHM6LyURASDGHUSRFSJGYfdsffsderFStewthsfSFtrfteAdrefsdsdfwerFrefdsfrersfdsrfer36343534sdf96YmNhanZyc3ViLmFuZjU5OC5jb20vdXNlcjEzNDIvZmFiZTNlMmYzOTRiYmU4YmQ3ODY4NjM0ZTVlMGU5OGQvRVAuMTEudjEuMTA4MHAubXA0P3Rva2VuPUdWTzF2dGNaZEE3YnpHN0IzYkhONUEmZXhwaXJlcz0xNzMzNTQ2NTYyJmlkPTE0ODk2Ng==" },
+                    { title: "Episode 12", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAawehyfcghysfdsDGDYdgdsfsdfwstdgdsgtert9AdrefsdsdfwerFrefdsfrersfdsrfer363435341cGNleWlhc2p1LmFuZjU5OC5jb20vdXNlcjEzNDIvZmFiZTNlMmYzOTRiYmU4YmQ3ODY4NjM0ZTVlMGU5OGQvRVAuMTIudjEuMTcyMDY0NjQwMS4xMDgwcC5tcDQ/dG9rZW49ckhzMDlNZGdaSTg5aTEyeFlqT29FQSZleHBpcmVzPTE3MzM1NDY2NjImaWQ9MTQ5Mjg1" },
+                    { title: "Episode 13", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAdrefsdsdfwerFrefdsfrersfdsrfer363435349URASDGHUSRFSJGYfdsffsderFStewthsfSFtrftesdftZHhwZWhmcW1vLmFuZjU5OC5jb20vdXNlcjEzNDIvZmFiZTNlMmYzOTRiYmU4YmQ3ODY4NjM0ZTVlMGU5OGQvRVAuMTMudjEuMTcyMDY0NjMzNC4xMDgwcC5tcDQ/dG9rZW49aTRNOURPZFBXUWhhWldQQ1BzUnFNUSZleHBpcmVzPTE3MzM1NDY3NDYmaWQ9MTQ5Njcx"},
+                    { title: "Episode 14", url: "https://ggredi.info/download.php?url=aHR0cHM6LyURASDGHUSRFSJGYfdsffsderFStewthsfSFtrfteAdeqwrwedffryretgsdFrsftrsvfsfsrsdf9wd3l4aXltZWx1LmFuZjU5OC5jb20vdXNlcjEzNDIvZmFiZTNlMmYzOTRiYmU4YmQ3ODY4NjM0ZTVlMGU5OGQvRVAuMTQudjEuMTcyMDY0NTIxMy4xMDgwcC5tcDQ/dG9rZW49eWJkamw2SlRIckRBOGNQTGZFNk9NdyZleHBpcmVzPTE3MzM1NDcyNTUmaWQ9MTUwNTc0"},
+                    { title: "Episode 15", url: "https://ggredi.info/download.php?url=aHR0cHM6LyURASDGHUSRFSJGYfdsffsderFStewthsfSFtrfteAdeqwrwedffryretgsdFrsftrsvfsfsrsdf91cGNleWlhc2p1LmFuZjU5OC5jb20vdXNlcjEzNDIvZmFiZTNlMmYzOTRiYmU4YmQ3ODY4NjM0ZTVlMGU5OGQvRVAuMTUudjEuMTcyMDY0NTc0My4xMDgwcC5tcDQ/dG9rZW49anc4NG1HeVNvSmRQRG54YUx0MlBSQSZleHBpcmVzPTE3MzM1NDc0ODQmaWQ9MTUxMDA1"},
+                    { title: "Episode 16", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAdrefsdsdfwerFrefdsfrersfdsrfer363435349AdeqwrwedffryretgsdFrsftrsvfsfsr1cGNleWlhc2p1LmFuZjU5OC5jb20vdXNlcjEzNDIvZmFiZTNlMmYzOTRiYmU4YmQ3ODY4NjM0ZTVlMGU5OGQvRVAuMTYudjEuMTcyMDY0NDMwNi4xMDgwcC5tcDQ/dG9rZW49bEFKNkN4VWJKTWh6Vk9BUW1YNUpvUSZleHBpcmVzPTE3MzM1NDc1MDAmaWQ9MTUxNjM1"},
+                    { title: "Episode 17", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAdeqwrwedffryretgsdFrsftrsvfsfsr9tZHhwZWURASDGHUSRFSJGYfdsffsderFStewthsfSFtrftesdfhmcW1vLmFuZjU5OC5jb20vdXNlcjEzNDIvZmFiZTNlMmYzOTRiYmU4YmQ3ODY4NjM0ZTVlMGU5OGQvRVAuMTcudjEuMTcyMDY0NTU2My4xMDgwcC5tcDQ/dG9rZW49NF9adFJzbURxY2xHT3h5SDQ0QkdpZyZleHBpcmVzPTE3MzM1NDc1MzMmaWQ9MTUxOTQx"},
+                    { title: "Episode 18", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAdrefsdsdfwerFrefdsfrersfdsrfer363435349AdeqwrwedffryretgsdFrsftrsvfsfsrodGd0c2R0cXZsLmFuZjU5OC5jb20vdXNlcjEzNDIvZmFiZTNlMmYzOTRiYmU4YmQ3ODY4NjM0ZTVlMGU5OGQvRVAuMTgudjEuMTcyMDY0NzMwOS4xMDgwcC5tcDQ/dG9rZW49UmVZTm85MjlBbjNqM054YUhEWWtyZyZleHBpcmVzPTE3MzM1NDc1NjEmaWQ9MTUyMTk3"},
+                    { title: "Episode 19", url: "https://ggredi.info/download.php?url=aHR0cHM6LyURASDGHUSRFSJGYfdsffsderFStewthsfSFtrfteAdrefsdsdfwerFrefdsfrersfdsrfer36343534sdf91cGNleWlhc2p1LmFuZjU5OC5jb20vdXNlcjEzNDIvZmFiZTNlMmYzOTRiYmU4YmQ3ODY4NjM0ZTVlMGU5OGQvRVAuMTkudjEuMTcyMDY0NzEwOS4xMDgwcC5tcDQ/dG9rZW49dHdUelpkQlhHV0hoY05mYWdURUpRUSZleHBpcmVzPTE3MzM1NDc2MDQmaWQ9MTUyNzI1"},
+                    { title: "Episode 20", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAawehyfcghysfdsDGDYdgdsfsdfwstdgdsgtert9AdeqwrwedffryretgsdFrsftrsvfsfsr1amNqZ3p0d2R4LmFuZjU5OC5jb20vdXNlcjEzNDIvZmFiZTNlMmYzOTRiYmU4YmQ3ODY4NjM0ZTVlMGU5OGQvRVAuMjAudjEuMTcyMDY0NzMwOS4xMDgwcC5tcDQ/dG9rZW49RVNTMmxVRGxJSG9iMzJjOHBZVndQUSZleHBpcmVzPTE3MzM1NDc2MjMmaWQ9MTUzMzgw"},
+                    { title: "Episode 21", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAawehyfcghysfdsDGDYdgdsfsdfwstdgdsgtert9AdrefsdsdfwerFrefdsfrersfdsrfer36343534rdmZiaWRiZXpiLmFuZjU5OC5jb20vdXNlcjEzNDIvZmFiZTNlMmYzOTRiYmU4YmQ3ODY4NjM0ZTVlMGU5OGQvRVAuMjEudjEuMTcyMDY0NDkwMy4xMDgwcC5tcDQ/dG9rZW49SVpLY0kzOEdGRzFHQ19YUWQ0dDludyZleHBpcmVzPTE3MzM1NDc2NDUmaWQ9MTU0MDUy"},
+                    { title: "Episode 22", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAdrefsdsdfwerFrefdsfrersfdsrfer363435349AdeqwrwedffryretgsdFrsftrsvfsfsrrdmZiaWRiZXpiLmFuZjU5OC5jb20vdXNlcjEzNDIvZmFiZTNlMmYzOTRiYmU4YmQ3ODY4NjM0ZTVlMGU5OGQvRVAuMjIudjEuMTA4MHAubXA0P3Rva2VuPXpkVXBCb1V3dExtcl81eVdXc3Q2OGcmZXhwaXJlcz0xNzMzNTQ3NjY5JmlkPTE1NDU4Ng=="},
+                    { title: "Episode 23", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAawehyfcghysfdsDGDYdgdsfsdfwstdgdsgtert9AdeqwrwedffryretgsdFrsftrsvfsfsrrdmZiaWRiZXpiLmFuZjU5OC5jb20vdXNlcjEzNDIvZmFiZTNlMmYzOTRiYmU4YmQ3ODY4NjM0ZTVlMGU5OGQvRVAuMjMudjIuMTcyMDY0NTQ3Ni4xMDgwcC5tcDQ/dG9rZW49WGVyak5DbjhUOFhpMzh5dmNabG1LQSZleHBpcmVzPTE3MzM1NDc2ODcmaWQ9MTU1MzQy"},
+                    { title: "Episode 24", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAdeqwrwedffryretgsdFrsftrsvfsfsr9wd3l4aXAdrefsdsdfwerFrefdsfrersfdsrfer36343534ltZWx1LmFuZjU5OC5jb20vdXNlcjEzNDIvZmFiZTNlMmYzOTRiYmU4YmQ3ODY4NjM0ZTVlMGU5OGQvRVAuMjQudjEuMTcyMDY0NjQxMi4xMDgwcC5tcDQ/dG9rZW49d3JoWDdQR2lYVmdrTnRJTXdDVGlIdyZleHBpcmVzPTE3MzM1NDc2OTEmaWQ9MTU2MDQ0"}
+                ],
+                season2: [
+                    { title: "Episode 1", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAdeqwrwedffryretgsdFrsftrsvfsfsr96YmNhanAawehyfcghysfdsDGDYdgdsfsdfwstdgdsgtertZyc3ViLmFuZjU5OC5jb20vdXNlcjEzNDIvYzJhNmYwOGI4OGM2MDc3NzAxNzk4YTI3NmRkODhkZDEvRVAuMS52Mi43MjBwLm1wND90b2tlbj1wTUxpRG9tV0VTa3F6SlhKSmNkaE1BJmV4cGlyZXM9MTczMzU1NjA0NiZpZD0yMDc3MzY=" },
+                    { title: "Episode 2", url: "https://ggredi.info/download.php?url=aHR0cHM6LyURASDGHUSRFSJGYfdsffsderFStewthsfSFtrfteAawehyfcghysfdsDGDYdgdsfsdfwstdgdsgtertsdf95bGhxaG1zYWhpLmFuZjU5OC5jb20vdXNlcjEzNDIvYzJhNmYwOGI4OGM2MDc3NzAxNzk4YTI3NmRkODhkZDEvRVAuMi52MS4xNzIwNzI1MDA2LjcyMHAubXA0P3Rva2VuPWhKTGE1a1QweEJLTFpqNWFmSURnY0EmZXhwaXJlcz0xNzMzNTU2MDUyJmlkPTIwODEzMw==" },
+                    { title: "Episode 3", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAdeqwrwedffryretgsdFrsftrsvfsfsr9tZHhwZWAdrefsdsdfwerFrefdsfrersfdsrfer36343534hmcW1vLmFuZjU5OC5jb20vdXNlcjEzNDIvYzJhNmYwOGI4OGM2MDc3NzAxNzk4YTI3NmRkODhkZDEvRVAuMy52MS4xNzIwNzI2NTA3LjcyMHAubXA0P3Rva2VuPU5DZDM3cTFBMTJEanE5dG5scWdWZHcmZXhwaXJlcz0xNzMzNTU2MDU3JmlkPTIwODUwMQ==" },
+                    { title: "Episode 4", url: "https://ggredi.info/download.php?url=aHR0cHM6LyURASDGHUSRFSJGYfdsffsderFStewthsfSFtrfteAawehyfcghysfdsDGDYdgdsfsdfwstdgdsgtertsdf9ld2FlemRyZGFiLmFuZjU5OC5jb20vdXNlcjEzNDIvYzJhNmYwOGI4OGM2MDc3NzAxNzk4YTI3NmRkODhkZDEvRVAuNC52MS4xNzIwNzI1NjA0LjcyMHAubXA0P3Rva2VuPW8wSHlfM3JOdE52akVkMFpaWlZzVncmZXhwaXJlcz0xNzMzNTU2MDY0JmlkPTIwOTAwOQ==" },
+                    { title: "Episode 5", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAdeqwrwedffryretgsdFrsftrsvfsfsr95bGhxaGAawehyfcghysfdsDGDYdgdsfsdfwstdgdsgtert1zYWhpLmFuZjU5OC5jb20vdXNlcjEzNDIvYzJhNmYwOGI4OGM2MDc3NzAxNzk4YTI3NmRkODhkZDEvRVAuNS52MS4xNzIwNzI1NjM1LjcyMHAubXA0P3Rva2VuPUY4MHhyUlU3TnJjUGFwbUVCOEtieVEmZXhwaXJlcz0xNzMzNTU2MDg2JmlkPTIwOTUwMw==" },
+                    { title: "Episode 6", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAdrefsdsdfwerFrefdsfrersfdsrfer363435349AawehyfcghysfdsDGDYdgdsfsdfwstdgdsgtertodGd0c2R0cXZsLmFuZjU5OC5jb20vdXNlcjEzNDIvYzJhNmYwOGI4OGM2MDc3NzAxNzk4YTI3NmRkODhkZDEvRVAuNi52MS43MjBwLm1wND90b2tlbj1fZldUZHQtSC1jNE9fU2JnZUpNVk9RJmV4cGlyZXM9MTczMzU1NjExOSZpZD0yMTEwNTY=" },
+                    { title: "Episode 7", url: "https://ggredi.info/download.php?url=aHR0cHM6LyURASDGHUSRFSJGYfdsffsderFStewthsfSFtrfteAdrefsdsdfwerFrefdsfrersfdsrfer36343534sdf9odGd0c2R0cXZsLmFuZjU5OC5jb20vdXNlcjEzNDIvYzJhNmYwOGI4OGM2MDc3NzAxNzk4YTI3NmRkODhkZDEvRVAuNy52MS4xNzIwNzI2ODA2LjcyMHAubXA0P3Rva2VuPVAwZXQtZHA1bHpBMlBYVWZuX2F5RmcmZXhwaXJlcz0xNzMzNTU2MTI2JmlkPTIxMTUwNw==" },
+                    { title: "Episode 8", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAdrefsdsdfwerFrefdsfrersfdsrfer363435349AdeqwrwedffryretgsdFrsftrsvfsfsrrdmZiaWRiZXpiLmFuZjU5OC5jb20vdXNlcjEzNDIvYzJhNmYwOGI4OGM2MDc3NzAxNzk4YTI3NmRkODhkZDEvRVAuOC52MS4xNzIwNzI1NjA0LjcyMHAubXA0P3Rva2VuPVBISUI1S2t5bGFTVE9mYVRIUUxacmcmZXhwaXJlcz0xNzMzNTU2MTMxJmlkPTIxMTk0Mg==" },
+                    { title: "Episode 9", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAdrefsdsdfwerFrefdsfrersfdsrfer363435349AdeqwrwedffryretgsdFrsftrsvfsfsr6YmNhanZyc3ViLmFuZjU5OC5jb20vdXNlcjEzNDIvYzJhNmYwOGI4OGM2MDc3NzAxNzk4YTI3NmRkODhkZDEvRVAuOS52Mi4xNzIwNzI3NDA4LjcyMHAubXA0P3Rva2VuPWpEeElnX1JvN2NGUGxZMjU0QnN2RkEmZXhwaXJlcz0xNzMzNTU2MTM3JmlkPTIxMjI1OA==" },
+                    { title: "Episode 10", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAawehyfcghysfdsDGDYdgdsfsdfwstdgdsgtert9AdeqwrwedffryretgsdFrsftrsvfsfsrtZHhwZWhmcW1vLmFuZjU5OC5jb20vdXNlcjEzNDIvYzJhNmYwOGI4OGM2MDc3NzAxNzk4YTI3NmRkODhkZDEvRVAuMTAudjIuMTcyMDcyNzIxMy43MjBwLm1wND90b2tlbj1xNE5DQUtnRHUzRjJBNkF4azNuc2RRJmV4cGlyZXM9MTczMzU1NjE0MyZpZD0yMTI1NzE=" },
+                    { title: "Episode 11", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAdrefsdsdfwerFrefdsfrersfdsrfer363435349AawehyfcghysfdsDGDYdgdsfsdfwstdgdsgtert5bGhxaG1zYWhpLmFuZjU5OC5jb20vdXNlcjEzNDIvYzJhNmYwOGI4OGM2MDc3NzAxNzk4YTI3NmRkODhkZDEvRVAuMTEudjEuMTcyMDcyNjgwNi43MjBwLm1wND90b2tlbj05OVgxM2FNYXVEdWNhQ0J4NkZ1aTJnJmV4cGlyZXM9MTczMzU1NjE0OCZpZD0yMTI5MTM=" },
+                    { title: "Episode 12", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAdeqwrwedffryretgsdFrsftrsvfsfsr91amNqZ3AawehyfcghysfdsDGDYdgdsfsdfwstdgdsgtertp0d2R4LmFuZjU5OC5jb20vdXNlcjEzNDIvYzJhNmYwOGI4OGM2MDc3NzAxNzk4YTI3NmRkODhkZDEvRVAuMTIudjIuMTcyMDcyNjIwNS43MjBwLm1wND90b2tlbj1EbG1KUmMzbEFjaVlHbFFrdUVfUW9RJmV4cGlyZXM9MTczMzU1NjIxMCZpZD0yMTMxODA=" },
+                    { title: "Episode 13", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAdeqwrwedffryretgsdFrsftrsvfsfsr9tZHhwZWAawehyfcghysfdsDGDYdgdsfsdfwstdgdsgterthmcW1vLmFuZjU5OC5jb20vdXNlcjEzNDIvYzJhNmYwOGI4OGM2MDc3NzAxNzk4YTI3NmRkODhkZDEvRVAuMTMudjEuMTcyMDcyODU1NS43MjBwLm1wND90b2tlbj11Y1B4T0M2QU9qeXdwVGh6eWNrcEd3JmV4cGlyZXM9MTczMzU1NjI1NSZpZD0yMTM1OTE=" },
+                    { title: "Episode 14", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAdrefsdsdfwerFrefdsfrersfdsrfer363435349URASDGHUSRFSJGYfdsffsderFStewthsfSFtrftesdfwd3l4aXltZWx1LmFuZjU5OC5jb20vdXNlcjEzNDIvYzJhNmYwOGI4OGM2MDc3NzAxNzk4YTI3NmRkODhkZDEvRVAuMTQudjIuMTcyMDcyNjU2MC43MjBwLm1wND90b2tlbj1mTFkyQUZYUU9IeUU5MjFWZWVVazJBJmV4cGlyZXM9MTczMzU1NjI2MSZpZD0yMTQxNDQ=" },
+                    { title: "Episode 15", url: "https://ggredi.info/download.php?url=aHR0cHM6LyURASDGHUSRFSJGYfdsffsderFStewthsfSFtrfteAdrefsdsdfwerFrefdsfrersfdsrfer36343534sdf9ld2FlemRyZGFiLmFuZjU5OC5jb20vdXNlcjEzNDIvYzJhNmYwOGI4OGM2MDc3NzAxNzk4YTI3NmRkODhkZDEvRVAuMTUudjEuMTcyMDcyNzEwNC43MjBwLm1wND90b2tlbj1GRDE3ZThsRTJWWk9yeW4wRmxBVmpRJmV4cGlyZXM9MTczMzU1NjI3MCZpZD0yMTQ0Njk=" },
+                    { title: "Episode 16", url: "https://ggredi.info/download.php?url=aHR0cHM6LyURASDGHUSRFSJGYfdsffsderFStewthsfSFtrfteAawehyfcghysfdsDGDYdgdsfsdfwstdgdsgtertsdf9tZHhwZWhmcW1vLmFuZjU5OC5jb20vdXNlcjEzNDIvYzJhNmYwOGI4OGM2MDc3NzAxNzk4YTI3NmRkODhkZDEvRVAuMTYudjIuMTcyMDcyNzg3NC43MjBwLm1wND90b2tlbj1LUWp1YTkyUEZZSUhBZ3c5YzgzQkpRJmV4cGlyZXM9MTczMzU1NjI3NiZpZD0yMTQ5NTE=" },
+                    { title: "Episode 17", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAdeqwrwedffryretgsdFrsftrsvfsfsr96YmNhanAdrefsdsdfwerFrefdsfrersfdsrfer36343534Zyc3ViLmFuZjU5OC5jb20vdXNlcjEzNDIvYzJhNmYwOGI4OGM2MDc3NzAxNzk4YTI3NmRkODhkZDEvRVAuMTcudjIuMTcyMDcyODE1Mi43MjBwLm1wND90b2tlbj1KT01ackljWV9LYWZSSGJqZ20wbjJ3JmV4cGlyZXM9MTczMzU1NjI4MiZpZD0yMTU1MDg=" },
+                    { title: "Episode 18", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAdrefsdsdfwerFrefdsfrersfdsrfer363435349AawehyfcghysfdsDGDYdgdsfsdfwstdgdsgtert5bGhxaG1zYWhpLmFuZjU5OC5jb20vdXNlcjEzNDIvYzJhNmYwOGI4OGM2MDc3NzAxNzk4YTI3NmRkODhkZDEvRVAuMTgudjIuMTcyMDcyNzQ4Mi43MjBwLm1wND90b2tlbj0zcWFtR2JvRzVucl9CTnAyX3cyN1l3JmV4cGlyZXM9MTczMzU1NjI5MCZpZD0yMTU5NTM=" },
+                    { title: "Episode 19", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAdeqwrwedffryretgsdFrsftrsvfsfsr95bGhxaGAdrefsdsdfwerFrefdsfrersfdsrfer363435341zYWhpLmFuZjU5OC5jb20vdXNlcjEzNDIvYzJhNmYwOGI4OGM2MDc3NzAxNzk4YTI3NmRkODhkZDEvRVAuMTkudjIuNzIwcC5tcDQ/dG9rZW49T1lUNXZwV3hGYWNLYnRhQzNiYWg3USZleHBpcmVzPTE3MzM1NTYyOTYmaWQ9MjE2MzM2" },
+                    { title: "Episode 20", url: "https://ggredi.info/download.php?url=aHR0cHM6LyURASDGHUSRFSJGYfdsffsderFStewthsfSFtrfteAdrefsdsdfwerFrefdsfrersfdsrfer36343534sdf9wd3l4aXltZWx1LmFuZjU5OC5jb20vdXNlcjEzNDIvYzJhNmYwOGI4OGM2MDc3NzAxNzk4YTI3NmRkODhkZDEvRVAuMjAudjIuMTcyMDcyNTkwNS43MjBwLm1wND90b2tlbj1IaXJBTUxGMUw2VURqWWhlX2lNb1pnJmV4cGlyZXM9MTczMzU1NjI5MiZpZD0yMTY2OTQ=" },
+                    { title: "Episode 21", url: "https://ggredi.info/download.php?url=aHR0cHM6LyURASDGHUSRFSJGYfdsffsderFStewthsfSFtrfteAdeqwrwedffryretgsdFrsftrsvfsfsrsdf9rdmZiaWRiZXpiLmFuZjU5OC5jb20vdXNlcjEzNDIvYzJhNmYwOGI4OGM2MDc3NzAxNzk4YTI3NmRkODhkZDEvRVAuMjEudjIuNzIwcC5tcDQ/dG9rZW49dEJmQWo1c2oxMkhqcUstdXhkcDBmdyZleHBpcmVzPTE3MzM1NTYyNzImaWQ9MjE3MDQ2" },
+                    { title: "Episode 22", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAdeqwrwedffryretgsdFrsftrsvfsfsr9ld2FlemURASDGHUSRFSJGYfdsffsderFStewthsfSFtrftesdfRyZGFiLmFuZjU5OC5jb20vdXNlcjEzNDIvYzJhNmYwOGI4OGM2MDc3NzAxNzk4YTI3NmRkODhkZDEvRVAuMjIudjIuMTcyMDcyNzgwNi43MjBwLm1wND90b2tlbj1ESThWdVhuYXNVT1doLXZESU5vd2RnJmV4cGlyZXM9MTczMzU1NjMyNiZpZD0yMTczNDk=" },
+                    { title: "Episode 23", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAawehyfcghysfdsDGDYdgdsfsdfwstdgdsgtert9AdeqwrwedffryretgsdFrsftrsvfsfsrtZHhwZWhmcW1vLmFuZjU5OC5jb20vdXNlcjEzNDIvYzJhNmYwOGI4OGM2MDc3NzAxNzk4YTI3NmRkODhkZDEvRVAuMjMudjIuMTcyMDcyNTkwNS43MjBwLm1wND90b2tlbj1Tc21aRGR0OWpqb3QxdEZTbXNGRW5BJmV4cGlyZXM9MTczMzU1NjI5MiZpZD0yMTc3MDE=" }
+                ],
+                season3: [
+                    { title: "Jujustu Kaisen 0", url: "https://ggredi.info/download.php?url=aHR0cHM6LyURASDGHUSRFSJGYfdsffsderFStewthsfSFtrfteAdeqwrwedffryretgsdFrsftrsvfsfsrsdf9yMnE1eDk5ZDNhLmFuZjU5OC5jb20vdXNlcjEzNDIvMDQ1NWM0ZmJiNmRkNzExN2QyOTAyMzA2N2U0MTg0ZWIvRVAuMS52MC43MjBwLm1wND90b2tlbj05LW81U2dRWGlVajl1aG0xb184ajlnJmV4cGlyZXM9MTczMzU0Nzg0MSZpZD0xOTI1Nzc=" }
+                ]
+
+            },
+            dub: {
+                season1: [
+                    { title: "Episode 1", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAawehyfcghysfdsDGDYdgdsfsdfwstdgdsgtert9URASDGHUSRFSJGYfdsffsderFStewthsfSFtrftesdfyMnE1eDk5ZDNhLmFuZjU5OC5jb20vdXNlcjEzNDIvOTQ5MDgyZGY1ZDViODVmNDg1MDA4OTE4N2JjZjEzZGYvRVAuMS52MC43MjBwLm1wND90b2tlbj1CYmJDdHEyMWFrV0JpUUduaC11c19BJmV4cGlyZXM9MTczMzU1NTY3NiZpZD0xNDc5MDc=" },
+                    { title: "Episode 2", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAdrefsdsdfwerFrefdsfrersfdsrfer363435349AawehyfcghysfdsDGDYdgdsfsdfwstdgdsgtertscDVhMDU2NWI2LmFuZjU5OC5jb20vdXNlcjEzNDIvOTQ5MDgyZGY1ZDViODVmNDg1MDA4OTE4N2JjZjEzZGYvRVAuMi52MC43MjBwLm1wND90b2tlbj1NRUVMTFdFSVpJdG15VUY1NlJzMFp3JmV4cGlyZXM9MTczMzU1NTUzOCZpZD0xNDgxNTg=" },
+                    { title: "Episode 3", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAawehyfcghysfdsDGDYdgdsfsdfwstdgdsgtert8AdeqwrwedffryretgsdFrsftrsvfsfsr3dXNsZnV3ZzYzLmFuZjU5OC5jb20vdXNlcjEzNDIvOTQ5MDgyZGY1ZDViODVmNDg1MDA4OTE4N2JjZjEzZGYvRVAuMy52MC43MjBwLm1wND90b2tlbj1Vc0NmWXo1dy1lYUN1dEwyb2pNcmhRJmV4cGlyZXM9MTczMzU1NTU3NyZpZD0xNDg0ODk=" },
+                    { title: "Episode 4", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAdeqwrwedffryretgsdFrsftrsvfsfsr9oanhmNWAdrefsdsdfwerFrefdsfrersfdsrfer36343534h1NmR4LmFuZjU5OC5jb20vdXNlcjEzNDIvOTQ5MDgyZGY1ZDViODVmNDg1MDA4OTE4N2JjZjEzZGYvRVAuNC52MC43MjBwLm1wND90b2tlbj1iT0dtX0dXb0dmQ0ZLQmh6M05DYk9RJmV4cGlyZXM9MTczMzU1NTU2OCZpZD0xNDg5NzQ=" },
+                    { title: "Episode 5", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAawehyfcghysfdsDGDYdgdsfsdfwstdgdsgtert9AdeqwrwedffryretgsdFrsftrsvfsfsrmOHp6YmhuN3B1LmFuZjU5OC5jb20vdXNlcjEzNDIvOTQ5MDgyZGY1ZDViODVmNDg1MDA4OTE4N2JjZjEzZGYvRVAuNS52MC43MjBwLm1wND90b2tlbj1kbXUxS3JmanFSNVVsMDVUb0E3ZnJBJmV4cGlyZXM9MTczMzU1NTU4OSZpZD0xNDkyOTA=" },
+                    { title: "Episode 6", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAdrefsdsdfwerFrefdsfrersfdsrfer363435349URASDGHUSRFSJGYfdsffsderFStewthsfSFtrftesdfyMnE1eDk5ZDNhLmFuZjU5OC5jb20vdXNlcjEzNDIvOTQ5MDgyZGY1ZDViODVmNDg1MDA4OTE4N2JjZjEzZGYvRVAuNi52MC43MjBwLm1wND90b2tlbj05V19HRXBMREFjdWx4VUphV3pUdXpBJmV4cGlyZXM9MTczMzU1NTYwMCZpZD0xNDk2Nzc=" },
+                    { title: "Episode 7", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAdrefsdsdfwerFrefdsfrersfdsrfer363435349AdeqwrwedffryretgsdFrsftrsvfsfsrseWVpYnU0bmM3LmFuZjU5OC5jb20vdXNlcjEzNDIvOTQ5MDgyZGY1ZDViODVmNDg1MDA4OTE4N2JjZjEzZGYvRVAuNy52MC43MjBwLm1wND90b2tlbj1OTVdBN0ZRZDA2R1p3T0dRazVaMWpRJmV4cGlyZXM9MTczMzU1NTYwNSZpZD0xNDk5NTE=" },
+                    { title: "Episode 8", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAawehyfcghysfdsDGDYdgdsfsdfwstdgdsgtert9URASDGHUSRFSJGYfdsffsderFStewthsfSFtrftesdfyMnE1eDk5ZDNhLmFuZjU5OC5jb20vdXNlcjEzNDIvOTQ5MDgyZGY1ZDViODVmNDg1MDA4OTE4N2JjZjEzZGYvRVAuOC52MC43MjBwLm1wND90b2tlbj12czBaYmEwQnhGbkJMaWdDeDIxWHF3JmV4cGlyZXM9MTczMzU1NTYxMiZpZD0xNTAyMTc=" },
+                    { title: "Episode 9", url: "https://ggredi.info/download.php?url=aHR0cHM6LyURASDGHUSRFSJGYfdsffsderFStewthsfSFtrfteAdeqwrwedffryretgsdFrsftrsvfsfsrsdf9td3Q4amVrenEyLmFuZjU5OC5jb20vdXNlcjEzNDIvOTQ5MDgyZGY1ZDViODVmNDg1MDA4OTE4N2JjZjEzZGYvRVAuOS52MC43MjBwLm1wND90b2tlbj1JNkVmWWxWZkxZMzBpd2E3LXZES3RnJmV4cGlyZXM9MTczMzU1NTYyMCZpZD0xNTA2Mjc=" },
+                    { title: "Episode 10", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAdrefsdsdfwerFrefdsfrersfdsrfer363435349AawehyfcghysfdsDGDYdgdsfsdfwstdgdsgtertxZXc2eG8zN2JmLmFuZjU5OC5jb20vdXNlcjEzNDIvOTQ5MDgyZGY1ZDViODVmNDg1MDA4OTE4N2JjZjEzZGYvRVAuMTAudjAuNzIwcC5tcDQ/dG9rZW49XzhNckFVOG9MVUFLZ21IVWNHa21FUSZleHBpcmVzPTE3MzM1NTU2MjkmaWQ9MTUxMDQx" },
+                    { title: "Episode 11", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAawehyfcghysfdsDGDYdgdsfsdfwstdgdsgtert9AdrefsdsdfwerFrefdsfrersfdsrfer36343534td3Q4amVrenEyLmFuZjU5OC5jb20vdXNlcjEzNDIvOTQ5MDgyZGY1ZDViODVmNDg1MDA4OTE4N2JjZjEzZGYvRVAuMTEudjAuNzIwcC5tcDQ/dG9rZW49T3JEc2FwdWRNOWtpdkNlZGQwcjJEdyZleHBpcmVzPTE3MzM1NTU2MzUmaWQ9MTUxNjc3" },
+                    { title: "Episode 12", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAdeqwrwedffryretgsdFrsftrsvfsfsr9yMnE1eDURASDGHUSRFSJGYfdsffsderFStewthsfSFtrftesdfk5ZDNhLmFuZjU5OC5jb20vdXNlcjEzNDIvOTQ5MDgyZGY1ZDViODVmNDg1MDA4OTE4N2JjZjEzZGYvRVAuMTIudjAuNzIwcC5tcDQ/dG9rZW49SVdwQmlBeWRpTmo3SGZRQWxpRU9hdyZleHBpcmVzPTE3MzM1NTU2NDImaWQ9MTUxOTU3" },
+                    { title: "Episode 13", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAawehyfcghysfdsDGDYdgdsfsdfwstdgdsgtert9AdeqwrwedffryretgsdFrsftrsvfsfsrjc2lhaTRua3FnLmFuZjU5OC5jb20vdXNlcjEzNDIvOTQ5MDgyZGY1ZDViODVmNDg1MDA4OTE4N2JjZjEzZGYvRVAuMTMudjAuNzIwcC5tcDQ/dG9rZW49MWFlb0RyME41UWU3R2RLclZFV3J1ZyZleHBpcmVzPTE3MzM1NTU4MTEmaWQ9MTUyMjAz" },
+                    { title: "Episode 14", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAdrefsdsdfwerFrefdsfrersfdsrfer363435348URASDGHUSRFSJGYfdsffsderFStewthsfSFtrftesdfydTBzbnppemVzLmFuZjU5OC5jb20vdXNlcjEzNDIvOTQ5MDgyZGY1ZDViODVmNDg1MDA4OTE4N2JjZjEzZGYvRVAuMTQudjAuNzIwcC5tcDQ/dG9rZW49ZktadVkwM29Zakg1OVYzZjF6dHZpUSZleHBpcmVzPTE3MzM1NTU4MTMmaWQ9MTU0MDc2" },
+                    { title: "Episode 15", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAawehyfcghysfdsDGDYdgdsfsdfwstdgdsgtert8URASDGHUSRFSJGYfdsffsderFStewthsfSFtrftesdf1YWY4MDJ3aXYxLmFuZjU5OC5jb20vdXNlcjEzNDIvOTQ5MDgyZGY1ZDViODVmNDg1MDA4OTE4N2JjZjEzZGYvRVAuMTUudjEuNzIwcC5tcDQ/dG9rZW49eG9TWVVKeHFITUozWWhsejZuWEsxQSZleHBpcmVzPTE3MzM1NTU4MTgmaWQ9MTU0NjIy" },
+                    { title: "Episode 16", url: "https://ggredi.info/download.php?url=aHR0cHM6LyURASDGHUSRFSJGYfdsffsderFStewthsfSFtrfteAdeqwrwedffryretgsdFrsftrsvfsfsrsdf9seWVpYnU0bmM3LmFuZjU5OC5jb20vdXNlcjEzNDIvOTQ5MDgyZGY1ZDViODVmNDg1MDA4OTE4N2JjZjEzZGYvRVAuMTYudjAuNzIwcC5tcDQ/dG9rZW49X0pFTXJ3NXUxMnE5eUFnX2JRVlhzZyZleHBpcmVzPTE3MzM1NTU4MjUmaWQ9MTU1MzUx" },
+                    { title: "Episode 17", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAdrefsdsdfwerFrefdsfrersfdsrfer363435349AdeqwrwedffryretgsdFrsftrsvfsfsrmcGFodHVoc2huLmFuZjU5OC5jb20vdXNlcjEzNDIvOTQ5MDgyZGY1ZDViODVmNDg1MDA4OTE4N2JjZjEzZGYvRVAuMTcudjAuNzIwcC5tcDQ/dG9rZW49YkpIaS1JdDAyV09kcUNCcHNiNExTZyZleHBpcmVzPTE3MzM1NTU4MzAmaWQ9MTU2MDYw" },
+                    { title: "Episode 18", url: "https://ggredi.info/download.php?url=aHR0cHM6LyURASDGHUSRFSJGYfdsffsderFStewthsfSFtrfteAdeqwrwedffryretgsdFrsftrsvfsfsrsdf9td3Q4amVrenEyLmFuZjU5OC5jb20vdXNlcjEzNDIvOTQ5MDgyZGY1ZDViODVmNDg1MDA4OTE4N2JjZjEzZGYvRVAuMTgudjAuNzIwcC5tcDQ/dG9rZW49RWY3U1dXR0hVVXVjX1IyTWozQUdNUSZleHBpcmVzPTE3MzM1NTU4MzUmaWQ9MTU3MDE3" },
+                    { title: "Episode 19", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAdrefsdsdfwerFrefdsfrersfdsrfer363435349AawehyfcghysfdsDGDYdgdsfsdfwstdgdsgtertmcGFodHVoc2huLmFuZjU5OC5jb20vdXNlcjEzNDIvOTQ5MDgyZGY1ZDViODVmNDg1MDA4OTE4N2JjZjEzZGYvRVAuMTkudjAuNzIwcC5tcDQ/dG9rZW49c0tVUkpHM1lZeGllMUxwVDZHRHZqZyZleHBpcmVzPTE3MzM1NTU4NDAmaWQ9MTU3NjIw" },
+                    { title: "Episode 20", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAawehyfcghysfdsDGDYdgdsfsdfwstdgdsgtert9URASDGHUSRFSJGYfdsffsderFStewthsfSFtrftesdfyMnE1eDk5ZDNhLmFuZjU5OC5jb20vdXNlcjEzNDIvOTQ5MDgyZGY1ZDViODVmNDg1MDA4OTE4N2JjZjEzZGYvRVAuMjAudjAuNzIwcC5tcDQ/dG9rZW49SzJkek5HeG5LVTBMQ2Z0RzVkNkQ5USZleHBpcmVzPTE3MzM1NTU4MjEmaWQ9MTU4NzM3" },
+                    { title: "Episode 21", url: "https://ggredi.info/download.php?url=aHR0cHM6LyURASDGHUSRFSJGYfdsffsderFStewthsfSFtrfteAawehyfcghysfdsDGDYdgdsfsdfwstdgdsgtertsdf9rdGk4bzh4ODV3LmFuZjU5OC5jb20vdXNlcjEzNDIvOTQ5MDgyZGY1ZDViODVmNDg1MDA4OTE4N2JjZjEzZGYvRVAuMjEudjAuNzIwcC5tcDQ/dG9rZW49TllXTVliZE9YSFJLNmk4VHBqcVZNQSZleHBpcmVzPTE3MzM1NTU4NTEmaWQ9MTU5Mzcy" },
+                    { title: "Episode 22", url: "https://ggredi.info/download.php?url=aHR0cHM6LyURASDGHUSRFSJGYfdsffsderFStewthsfSFtrfteAawehyfcghysfdsDGDYdgdsfsdfwstdgdsgtertsdf9nYTIzdmt2ZDJwLmFuZjU5OC5jb20vdXNlcjEzNDIvOTQ5MDgyZGY1ZDViODVmNDg1MDA4OTE4N2JjZjEzZGYvRVAuMjIudjAuNzIwcC5tcDQ/dG9rZW49dWtMT1R0b1BlUEdDdUlKUF9ZY3h4dyZleHBpcmVzPTE3MzM1NTU4NTkmaWQ9MTYwMDY2" },
+                    { title: "Episode 23", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAdrefsdsdfwerFrefdsfrersfdsrfer363435349AawehyfcghysfdsDGDYdgdsfsdfwstdgdsgtertseWVpYnU0bmM3LmFuZjU5OC5jb20vdXNlcjEzNDIvOTQ5MDgyZGY1ZDViODVmNDg1MDA4OTE4N2JjZjEzZGYvRVAuMjMudjAuNzIwcC5tcDQ/dG9rZW49dE1ZZzBnYWd2WGRhYUtYd2NSR3hUUSZleHBpcmVzPTE3MzM1NTU4NjImaWQ9MTYwNjAx" },
+                    { title: "Episode 24", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAdeqwrwedffryretgsdFrsftrsvfsfsr94dXFtdDAdrefsdsdfwerFrefdsfrersfdsrfer36343534Y4NmdvLmFuZjU5OC5jb20vdXNlcjEzNDIvOTQ5MDgyZGY1ZDViODVmNDg1MDA4OTE4N2JjZjEzZGYvRVAuMjQudjAuNzIwcC5tcDQ/dG9rZW49dXhpVGhCZWtfV3V1dHdpV3l5cTFHZyZleHBpcmVzPTE3MzM1NTU4NjcmaWQ9MTYxMTM0" }
+                ],
+                season2: [
+                    { title: "Episode 1", url: "https://ggredi.info/download.php?url=aHR0cHM6LyURASDGHUSRFSJGYfdsffsderFStewthsfSFtrfteAawehyfcghysfdsDGDYdgdsfsdfwstdgdsgtertsdf9hb3NuNTlvN2t5LmFuZjU5OC5jb20vdXNlcjEzNDIvNjUwMDhlNjc3YzU3MjNiMWZhYjVkNmI3N2JmYzhkMmIvRVAuMS52MC4xNjg5OTAzNjIyLjcyMHAubXA0P3Rva2VuPUZHdklkb25jaEdUdTF0X1BhYXJad0EmZXhwaXJlcz0xNzMzNTU2NDE4JmlkPTIwODUwNg==" },
+                    { title: "Episode 2", url: "https://ggredi.info/download.php?url=aHR0cHM6LyURASDGHUSRFSJGYfdsffsderFStewthsfSFtrfteAdrefsdsdfwerFrefdsfrersfdsrfer36343534sdf9hb3NuNTlvN2t5LmFuZjU5OC5jb20vdXNlcjEzNDIvNjUwMDhlNjc3YzU3MjNiMWZhYjVkNmI3N2JmYzhkMmIvRVAuMi52MC4xNjkwNTA5MzIxLjcyMHAubXA0P3Rva2VuPWZyNWQ0X0FmS3F6S0VjM3NrODdHWGcmZXhwaXJlcz0xNzMzNTU2NDQ5JmlkPTIwOTAxNg==" },
+                    { title: "Episode 3", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAdrefsdsdfwerFrefdsfrersfdsrfer363435348URASDGHUSRFSJGYfdsffsderFStewthsfSFtrftesdf0c28yOHp1eTY3LmFuZjU5OC5jb20vdXNlcjEzNDIvNjUwMDhlNjc3YzU3MjNiMWZhYjVkNmI3N2JmYzhkMmIvRVAuMy52MC4xNjkxMTE0MTIwLjcyMHAubXA0P3Rva2VuPW9lQ2I1M0lwNVM2LXVoX2loek9IZUEmZXhwaXJlcz0xNzMzNTU2NDY5JmlkPTIwOTUxMA==" },
+                    { title: "Episode 4", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAdeqwrwedffryretgsdFrsftrsvfsfsr94dXFtdDURASDGHUSRFSJGYfdsffsderFStewthsfSFtrftesdfY4NmdvLmFuZjU5OC5jb20vdXNlcjEzNDIvNjUwMDhlNjc3YzU3MjNiMWZhYjVkNmI3N2JmYzhkMmIvRVAuNC52MC4xNjkxNzAzMzMyLjcyMHAubXA0P3Rva2VuPS1PMlh4Wmp3SjIwVFBjUGN1Z01BU3cmZXhwaXJlcz0xNzMzNTU2NDc2JmlkPTIwOTg1NA==" },
+                    { title: "Episode 5", url: "https://ggredi.info/download.php?url=aHR0cHM6LyURASDGHUSRFSJGYfdsffsderFStewthsfSFtrfteAawehyfcghysfdsDGDYdgdsfsdfwstdgdsgtertsdf8xN2M3Y2Q0b2xkLmFuZjU5OC5jb20vdXNlcjEzNDIvNjUwMDhlNjc3YzU3MjNiMWZhYjVkNmI3N2JmYzhkMmIvRVAuNS52MC4xNjkyMzIxNjIwLjcyMHAubXA0P3Rva2VuPUhYMktFNGVHckpVcDdIWm1QN1NRMWcmZXhwaXJlcz0xNzMzNTU2NTEzJmlkPTIxMDIzNQ==" },
+                    { title: "Episode 6", url: "https://ggredi.info/download.php?url=aHR0cHM6LyURASDGHUSRFSJGYfdsffsderFStewthsfSFtrfteAdrefsdsdfwerFrefdsfrersfdsrfer36343534sdf9xYnZydjFicXVkLmFuZjU5OC5jb20vdXNlcjEzNDIvNjUwMDhlNjc3YzU3MjNiMWZhYjVkNmI3N2JmYzhkMmIvRVAuNi52MC4xNjk0NzQ0NDA4LjcyMHAubXA0P3Rva2VuPWNlRXJZdmN5WjAyUHI0cU80OUZOWmcmZXhwaXJlcz0xNzMzNTU2NTIxJmlkPTIxMTk1Mw==" },
+                    { title: "Episode 7", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAdeqwrwedffryretgsdFrsftrsvfsfsr80bTE2bGAawehyfcghysfdsDGDYdgdsfsdfwstdgdsgtertVuZjBuLmFuZjU5OC5jb20vdXNlcjEzNDIvNjUwMDhlNjc3YzU3MjNiMWZhYjVkNmI3N2JmYzhkMmIvRVAuNy52MC4xNjk1MzMwNjA3LjcyMHAubXA0P3Rva2VuPXBpMHVXTjU3eUFHLWNjNDhldE9ueXcmZXhwaXJlcz0xNzMzNTU2NTMxJmlkPTIxMjI5MQ==" },
+                    { title: "Episode 8", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAawehyfcghysfdsDGDYdgdsfsdfwstdgdsgtert9AdrefsdsdfwerFrefdsfrersfdsrfer36343534mcGFodHVoc2huLmFuZjU5OC5jb20vdXNlcjEzNDIvNjUwMDhlNjc3YzU3MjNiMWZhYjVkNmI3N2JmYzhkMmIvRVAuOC52MC4xNjk1OTM0NTA3LjcyMHAubXA0P3Rva2VuPTlOZzBRRVJCSi1fX0FlMUJDOUpvMUEmZXhwaXJlcz0xNzMzNTU2NTQwJmlkPTIxMjU3NQ==" },
+                    { title: "Episode 9", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAdrefsdsdfwerFrefdsfrersfdsrfer363435349AawehyfcghysfdsDGDYdgdsfsdfwstdgdsgtertxYnZydjFicXVkLmFuZjU5OC5jb20vdXNlcjEzNDIvNjUwMDhlNjc3YzU3MjNiMWZhYjVkNmI3N2JmYzhkMmIvRVAuOS52MC4xNjk2NTQwNTA5LjcyMHAubXA0P3Rva2VuPVRSWXZMX3M1LTFmbDZMcEFKT3FKZncmZXhwaXJlcz0xNzMzNTU2NTQ4JmlkPTIxMjkxOA==" },
+                    { title: "Episode 10", url: "https://ggredi.info/download.php?url=aHR0cHM6LyURASDGHUSRFSJGYfdsffsderFStewthsfSFtrfteAdeqwrwedffryretgsdFrsftrsvfsfsrsdf80bTE2bGVuZjBuLmFuZjU5OC5jb20vdXNlcjEzNDIvNjUwMDhlNjc3YzU3MjNiMWZhYjVkNmI3N2JmYzhkMmIvRVAuMTAudjAuMTY5NzE0NTAxMS43MjBwLm1wND90b2tlbj0xM1BHZXpreWg4S0xtNTBXQ29tV1ZRJmV4cGlyZXM9MTczMzU1NjU1NiZpZD0yMTMyMDY=" },
+                    { title: "Episode 11", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAdeqwrwedffryretgsdFrsftrsvfsfsr9mcGFodHURASDGHUSRFSJGYfdsffsderFStewthsfSFtrftesdfVoc2huLmFuZjU5OC5jb20vdXNlcjEzNDIvNjUwMDhlNjc3YzU3MjNiMWZhYjVkNmI3N2JmYzhkMmIvRVAuMTEudjAuMTY5Nzc0OTIwOS43MjBwLm1wND90b2tlbj1LY25fbmVsR203cEpndHV3ZnFnbE13JmV4cGlyZXM9MTczMzU1NjU2NSZpZD0yMTM1OTU=" },
+                    { title: "Episode 12", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAdeqwrwedffryretgsdFrsftrsvfsfsr93bTd2c3URASDGHUSRFSJGYfdsffsderFStewthsfSFtrftesdflzZWh5LmFuZjU5OC5jb20vdXNlcjEzNDIvNjUwMDhlNjc3YzU3MjNiMWZhYjVkNmI3N2JmYzhkMmIvRVAuMTIudjEuMTY5ODQyNjEyNy43MjBwLm1wND90b2tlbj1WSkhKbzVCWnBGZWZhRGtmczdZelBBJmV4cGlyZXM9MTczMzU1NjU3MyZpZD0yMTQxNTE=" },
+                    { title: "Episode 13", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAdeqwrwedffryretgsdFrsftrsvfsfsr95MjVzbGAawehyfcghysfdsDGDYdgdsfsdfwstdgdsgterttuZGwwLmFuZjU5OC5jb20vdXNlcjEzNDIvNjUwMDhlNjc3YzU3MjNiMWZhYjVkNmI3N2JmYzhkMmIvRVAuMTMudjAuMTY5ODk1ODgxMS43MjBwLm1wND90b2tlbj1zWTBCUG1EZnViM1UybmFwVlU5akhBJmV4cGlyZXM9MTczMzU1NjY1NyZpZD0yMTQ0OTQ=" },
+                    { title: "Episode 14", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAdrefsdsdfwerFrefdsfrersfdsrfer363435349URASDGHUSRFSJGYfdsffsderFStewthsfSFtrftesdf5MjVzbGtuZGwwLmFuZjU5OC5jb20vdXNlcjEzNDIvNjUwMDhlNjc3YzU3MjNiMWZhYjVkNmI3N2JmYzhkMmIvRVAuMTQudjAuMTY5OTU4MTAwNi43MjBwLm1wND90b2tlbj1jbGhKc29sZXVHUVFlYUlXQ2lkbEt3JmV4cGlyZXM9MTczMzU1NjY2NCZpZD0yMTQ5NjQ=" },
+                    { title: "Episode 15", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAdrefsdsdfwerFrefdsfrersfdsrfer363435349URASDGHUSRFSJGYfdsffsderFStewthsfSFtrftesdfpMms4bWM1eTRrLmFuZjU5OC5jb20vdXNlcjEzNDIvNjUwMDhlNjc3YzU3MjNiMWZhYjVkNmI3N2JmYzhkMmIvRVAuMTUudjAuMTcwMDE4NzMwOC43MjBwLm1wND90b2tlbj1Va08xcnR3NVAtakxzWGt2b1luZGFRJmV4cGlyZXM9MTczMzU1NjY3MCZpZD0yMTU1MTc=" },
+                    { title: "Episode 16", url: "https://ggredi.info/download.php?url=aHR0cHM6LyURASDGHUSRFSJGYfdsffsderFStewthsfSFtrfteAawehyfcghysfdsDGDYdgdsfsdfwstdgdsgtertsdf80bTE2bGVuZjBuLmFuZjU5OC5jb20vdXNlcjEzNDIvNjUwMDhlNjc3YzU3MjNiMWZhYjVkNmI3N2JmYzhkMmIvRVAuMTYudjAuMTcwMDc4OTQxMi43MjBwLm1wND90b2tlbj1SQkw3YWlPaFZ1YUVnN1BvaGg1aHp3JmV4cGlyZXM9MTczMzU1NjY3NyZpZD0yMTU5NjE=" },
+                    { title: "Episode 17", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAdeqwrwedffryretgsdFrsftrsvfsfsr95MjVzbGAdrefsdsdfwerFrefdsfrersfdsrfer36343534tuZGwwLmFuZjU5OC5jb20vdXNlcjEzNDIvNjUwMDhlNjc3YzU3MjNiMWZhYjVkNmI3N2JmYzhkMmIvRVAuMTcudjAuMTcwMTM5NTcwOS43MjBwLm1wND90b2tlbj1IRlZuaFVSaWNuZkszR01fOFIyY0p3JmV4cGlyZXM9MTczMzU1NjY4NCZpZD0yMTYzNTQ=" },
+                    { title: "Episode 18", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAawehyfcghysfdsDGDYdgdsfsdfwstdgdsgtert9AdeqwrwedffryretgsdFrsftrsvfsfsrpMms4bWM1eTRrLmFuZjU5OC5jb20vdXNlcjEzNDIvNjUwMDhlNjc3YzU3MjNiMWZhYjVkNmI3N2JmYzhkMmIvRVAuMTgudjAuMTcwMjAwMDgwOS43MjBwLm1wND90b2tlbj0xaHNhTUNJQktNeGQtalpnVFlQbFZ3JmV4cGlyZXM9MTczMzU1NjY5NCZpZD0yMTY3MDI=" },
+                    { title: "Episode 19", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAawehyfcghysfdsDGDYdgdsfsdfwstdgdsgtert9AdeqwrwedffryretgsdFrsftrsvfsfsrxYnZydjFicXVkLmFuZjU5OC5jb20vdXNlcjEzNDIvNjUwMDhlNjc3YzU3MjNiMWZhYjVkNmI3N2JmYzhkMmIvRVAuMTkudjEuMTcwMjk1NjYwOC43MjBwLm1wND90b2tlbj1heGhpXzlmNTZubXZuM000cUpKamNRJmV4cGlyZXM9MTczMzU1NjcwMiZpZD0yMTcwODM=" },
+                    { title: "Episode 20", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAawehyfcghysfdsDGDYdgdsfsdfwstdgdsgtert9AdrefsdsdfwerFrefdsfrersfdsrfer363435345MjVzbGtuZGwwLmFuZjU5OC5jb20vdXNlcjEzNDIvNjUwMDhlNjc3YzU3MjNiMWZhYjVkNmI3N2JmYzhkMmIvRVAuMjAudjAuMTcwMzIxMTAxMC43MjBwLm1wND90b2tlbj16OFFoRXg0aW04SXRuSHpYMTFidzN3JmV4cGlyZXM9MTczMzU1NjcxMSZpZD0yMTczODQ=" },
+                    { title: "Episode 21", url: "https://ggredi.info/download.php?url=aHR0cHM6LyURASDGHUSRFSJGYfdsffsderFStewthsfSFtrfteAdeqwrwedffryretgsdFrsftrsvfsfsrsdf9wd3l4aXltZWx1LmFuZjU5OC5jb20vdXNlcjEzNDIvNjUwMDhlNjc3YzU3MjNiMWZhYjVkNmI3N2JmYzhkMmIvRVAuMjEudjAuMTcwNDQxOTcwNi43MjBwLm1wND90b2tlbj1yZ0dWVGZDVW1kR2JnQ2xPM0d3VEd3JmV4cGlyZXM9MTczMzU1NjcxNCZpZD0yMTg0MDQ=" },
+                    { title: "Episode 22", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAdrefsdsdfwerFrefdsfrersfdsrfer363435349AdeqwrwedffryretgsdFrsftrsvfsfsr5bGhxaG1zYWhpLmFuZjU5OC5jb20vdXNlcjEzNDIvNjUwMDhlNjc3YzU3MjNiMWZhYjVkNmI3N2JmYzhkMmIvRVAuMjIudjAuMTcwNTAyNTEwOS43MjBwLm1wND90b2tlbj0yUHlsaDdHTUJKb0c0ZjBXLUpKckNnJmV4cGlyZXM9MTczMzU1NjcyNCZpZD0yMTg4OTM=" },
+                    { title: "Episode 23", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAawehyfcghysfdsDGDYdgdsfsdfwstdgdsgtert9AdrefsdsdfwerFrefdsfrersfdsrfer363435345bGhxaG1zYWhpLmFuZjU5OC5jb20vdXNlcjEzNDIvNjUwMDhlNjc3YzU3MjNiMWZhYjVkNmI3N2JmYzhkMmIvRVAuMjMudjAuMTcwNTAzOTIwNS43MjBwLm1wND90b2tlbj0ySFA3S2dQM0NNLXdmX3hJU3pLRzFBJmV4cGlyZXM9MTczMzU1NjczNCZpZD0yMTg5MTM=" }
+                ],
+                season3: [
+                    { title: "Jujustu Kaisen 0", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAawehyfcghysfdsDGDYdgdsfsdfwstdgdsgtert8AdrefsdsdfwerFrefdsfrersfdsrfer363435341YWY4MDJ3aXYxLmFuZjU5OC5jb20vdXNlcjEzNDIvNjBjMDlmMWMzYTczZDM0YmExOWZhNjUwODk4MGVmZmEvRVAuMS52MC43MjBwLm1wND90b2tlbj1LM080SUNlMXpzcmVvMnhyWDdxYkZRJmV4cGlyZXM9MTczMzU0OTE0MiZpZD0xOTI2MDI=" }
+                ]
+            }
+        };
+
+        videojs.addLanguage('en', {"The media could not be loaded, either because the server or network failed or because the format is not supported.": "Please select an episode to watch!"});
+
+        let currentLanguage = 'sub';
+        let currentSeason = 'season1';
+        let currentEpisodeButton = null;
+
+        function toggleLanguage(lang) {
+            currentLanguage = lang;
+            updateButtonStyles('toggle-options', lang);
+            loadEpisodes();
+        }
+
+        function selectSeason(seasonNumber) {
+            currentSeason = 'season' + seasonNumber;
+            updateButtonStyles('season-selector', currentSeason);
+            loadEpisodes();
+        }
+
+        function loadEpisodes() {
+            const episodeContainer = document.getElementById('episode-list');
+            episodeContainer.innerHTML = '';
+            const currentEpisodes = episodes[currentLanguage][currentSeason];
+
+            currentEpisodes.forEach(ep => {
+                const button = document.createElement('button');
+                button.textContent = ep.title;
+                button.onclick = () => changeVideo(ep.url, button);
+                episodeContainer.appendChild(button);
+            });
+        }
+
+        function changeVideo(videoUrl, button) {
+            const player = videojs('my-video');
+            player.src({ type: 'video/mp4', src: videoUrl });
+            player.play();
+
+            if (currentEpisodeButton) {
+                currentEpisodeButton.classList.remove('active');
+            }
+            button.classList.add('active');
+            currentEpisodeButton = button;
+
+            player.on('error', function() {
+                player.src({ type: 'video/mp4', src: videoUrl });
+                player.play();
+            });
+        }
+
+        function updateButtonStyles(containerClass, activeId) {
+            document.querySelectorAll(`.${containerClass} button`).forEach(button => {
+                button.classList.remove('active');
+            });
+            document.getElementById(activeId + 'Button').classList.add('active');
+        }
+
+        // Load episodes initially
+        loadEpisodes();
+    </script>
+</body>
+</html>
+
