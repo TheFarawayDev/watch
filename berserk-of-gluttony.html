@@ -331,6 +331,39 @@
         });
     }
 
+    function saveProgress(videoUrl, currentTime) {
+        const key = `${currentLanguage}_${currentSeason}_${videoUrl}`;
+        localStorage.setItem(key, currentTime);
+    }
+
+    function loadProgress(videoUrl) {
+        const key = `${currentLanguage}_${currentSeason}_${videoUrl}`;
+        return localStorage.getItem(key) || 0;
+    }
+
+    function changeVideo(videoUrl, button) {
+        const player = videojs('my-video');
+        const savedTime = loadProgress(videoUrl);
+        player.src({ type: 'video/mp4', src: videoUrl });
+        player.currentTime(savedTime);
+        player.play();
+
+        if (currentEpisodeButton) {
+            currentEpisodeButton.classList.remove('active');
+        }
+        button.classList.add('active');
+        currentEpisodeButton = button;
+
+        player.on('timeupdate', function() {
+            saveProgress(videoUrl, player.currentTime());
+        });
+
+        player.on('error', function() {
+            player.src({ type: 'video/mp4', src: videoUrl });
+            player.play();
+        });
+    }
+
     // Load episodes initially
     loadEpisodes();
 </script>
