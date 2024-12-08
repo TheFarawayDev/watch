@@ -248,13 +248,19 @@
 
         videojs.addLanguage('en', {"The media could not be loaded, either because the server or network failed or because the format is not supported.": "Please select an episode to watch!"});
         
-        let currentLanguage = 'sub';
+        let currentLanguage = localStorage.getItem('preferredLanguage') || 'sub';
         let currentSeason = 'season1';
         let currentEpisodeButton = null;
 
         function toggleLanguage(lang) {
+            if (episodes[lang] && episodes[lang][currentSeason]) {
             currentLanguage = lang;
-            updateButtonStyles('toggle-options', lang);
+            localStorage.setItem('preferredLanguage', lang);
+            } else {
+            currentLanguage = lang === 'sub' ? 'dub' : 'sub';
+            localStorage.setItem('preferredLanguage', currentLanguage);
+            }
+            updateButtonStyles('toggle-options', currentLanguage);
             loadEpisodes();
         }
 
@@ -270,23 +276,32 @@
             const currentEpisodes = episodes[currentLanguage][currentSeason];
 
             currentEpisodes.forEach(ep => {
-                const button = document.createElement('button');
-                button.textContent = ep.title;
-                button.onclick = () => changeVideo(ep.url, button);
-                episodeContainer.appendChild(button);
+            const button = document.createElement('button');
+            button.textContent = ep.title;
+            button.onclick = () => changeVideo(ep.url, button);
+            episodeContainer.appendChild(button);
             });
         }
 
         function changeVideo(videoUrl, button) {
             const player = videojs('my-video');
+            const savedTime = loadProgress(videoUrl);
             player.src({ type: 'video/mp4', src: videoUrl });
+            player.currentTime(savedTime);
             player.play();
 
             if (currentEpisodeButton) {
-                currentEpisodeButton.classList.remove('active');
+            currentEpisodeButton.classList.remove('active');
             }
             button.classList.add('active');
             currentEpisodeButton = button;
+
+            player.off('timeupdate');
+            player.off('error');
+
+            player.on('timeupdate', function() {
+                saveProgress(videoUrl, player.currentTime());
+            });
 
             player.on('error', function() {
                 player.src({ type: 'video/mp4', src: videoUrl });
@@ -296,82 +311,30 @@
 
         function updateButtonStyles(containerClass, activeId) {
             document.querySelectorAll(`.${containerClass} button`).forEach(button => {
-                button.classList.remove('active');
+            button.classList.remove('active');
             });
             document.getElementById(activeId + 'Button').classList.add('active');
         }
 
+        function saveProgress(videoUrl, currentTime) {
+            let progressData = JSON.parse(localStorage.getItem('progressData')) || {};
+            if (!progressData[currentLanguage]) {
+            progressData[currentLanguage] = {};
+            }
+            if (!progressData[currentLanguage][currentSeason]) {
+            progressData[currentLanguage][currentSeason] = {};
+            }
+            progressData[currentLanguage][currentSeason][videoUrl] = currentTime;
+            localStorage.setItem('progressData', JSON.stringify(progressData));
+        }
+
+        function loadProgress(videoUrl) {
+            let progressData = JSON.parse(localStorage.getItem('progressData')) || {};
+            return progressData[currentLanguage]?.[currentSeason]?.[videoUrl] || 0;
+        }
+
         // Load episodes initially
-        loadEpisodes();
+        toggleLanguage(currentLanguage);
     </script>
 </body>
 </html>
-
-<script>
-
-    function changeVideo(videoUrl, button) {
-        const player = videojs('my-video');
-        player.src({ type: 'video/mp4', src: videoUrl });
-        player.play();
-
-        if (currentEpisodeButton) {
-            currentEpisodeButton.classList.remove('active');
-        }
-        button.classList.add('active');
-        currentEpisodeButton = button;
-
-        player.on('error', function() {
-            player.src({ type: 'video/mp4', src: videoUrl });
-            player.play();
-        });
-    }
-
-    function loadEpisodes() {
-        const episodeContainer = document.getElementById('episode-list');
-        episodeContainer.innerHTML = '';
-        const currentEpisodes = episodes[currentLanguage][currentSeason];
-
-        currentEpisodes.forEach(ep => {
-            const button = document.createElement('button');
-            button.textContent = ep.title;
-            button.onclick = () => changeVideo(ep.url, button || 0);
-            episodeContainer.appendChild(button);
-        });
-    }
-
-    function saveProgress(videoUrl, currentTime) {
-        const key = `${currentLanguage}_${currentSeason}_${videoUrl}`;
-        localStorage.setItem(key, currentTime);
-    }
-
-    function loadProgress(videoUrl) {
-        const key = `${currentLanguage}_${currentSeason}_${videoUrl}`;
-        return localStorage.getItem(key) || 0;
-    }
-
-    function changeVideo(videoUrl, button) {
-        const player = videojs('my-video');
-        const savedTime = loadProgress(videoUrl);
-        player.src({ type: 'video/mp4', src: videoUrl });
-        player.currentTime(savedTime);
-        player.play();
-
-        if (currentEpisodeButton) {
-            currentEpisodeButton.classList.remove('active');
-        }
-        button.classList.add('active');
-        currentEpisodeButton = button;
-
-        player.on('timeupdate', function() {
-            saveProgress(videoUrl, player.currentTime());
-        });
-
-        player.on('error', function() {
-            player.src({ type: 'video/mp4', src: videoUrl });
-            player.play();
-        });
-    }
-
-    // Load episodes initially
-    loadEpisodes();
-</script>
