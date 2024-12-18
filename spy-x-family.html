@@ -83,13 +83,13 @@
             text-align: center;
         }
 
-        .toggle-options, .season-selector {
+        .toggle-options, .season-selector, .setting-options {
             display: flex;
             justify-content: center;
             margin: 2px 0;
         }
 
-        .toggle-options button, .season-selector button {
+        .toggle-options button, .season-selector button, .setting-options button {
             background-color: #3c6eb3;
             color: white;
             border: none;
@@ -101,12 +101,12 @@
             transition: background-color 0.3s, transform 0.2s;
         }
 
-        .toggle-options button:hover, .season-selector button:hover {
+        .toggle-options button:hover, .season-selector button:hover, .setting-options button:hover {
             background-color: #5a9cec;
             transform: scale(1.05);
         }
 
-        .toggle-options button.active, .season-selector button.active {
+        .toggle-options button.active, .season-selector button.active, .setting-options button.active {
             background-color: #4A90E2;
         }
 
@@ -187,6 +187,12 @@
                 <div class="toggle-options">
                     <button onclick="toggleLanguage('sub')" id="subButton" class="active">Subbed</button>
                     <button onclick="toggleLanguage('dub')" id="dubButton">Dubbed</button>
+                </div>
+
+                <div class="setting-options">
+                    <button id="previousButton" onclick="playPreviousEpisode()">Previous</button>
+                    <button id="autonextButton" onclick="toggleAutoNext()">Auto Next</button>
+                    <button id="nextButton" onclick="playNextEpisode()">Next</button>
                 </div>
 
                 <div class="season-selector">
@@ -307,6 +313,7 @@
         let currentLanguage = localStorage.getItem('preferredLanguage') || 'sub';
         let currentSeason = 'season1';
         let currentEpisodeButton = null;
+        let autoNext = false;
 
         function toggleLanguage(lang) {
             if (episodes[lang] && episodes[lang][currentSeason]) {
@@ -334,9 +341,12 @@
             currentEpisodes.forEach(ep => {
             const button = document.createElement('button');
             button.textContent = ep.title;
+            button.dataset.url = ep.url;
             button.onclick = () => changeVideo(ep.url, button);
             episodeContainer.appendChild(button);
             });
+
+            updateNavigationButtons();
         }
 
         function changeVideo(videoUrl, button) {
@@ -354,15 +364,48 @@
 
             player.off('timeupdate');
             player.off('error');
+            player.off('ended');
 
             player.on('timeupdate', function() {
-                saveProgress(videoUrl, player.currentTime());
+            saveProgress(videoUrl, player.currentTime());
             });
 
             player.on('error', function() {
-                player.src({ type: 'video/mp4', src: videoUrl });
-                player.play();
+            player.src({ type: 'video/mp4', src: videoUrl });
+            player.play();
             });
+
+            player.on('ended', function() {
+            if (autoNext) {
+                playNextEpisode();
+            }
+            });
+
+            updateNavigationButtons();
+        }
+
+        function playNextEpisode() {
+            const currentEpisodes = episodes[currentLanguage][currentSeason];
+            const currentIndex = currentEpisodes.findIndex(ep => ep.url === currentEpisodeButton.dataset.url);
+            const nextIndex = currentIndex + 1;
+
+            if (nextIndex < currentEpisodes.length) {
+            const nextEpisode = currentEpisodes[nextIndex];
+            const nextButton = document.querySelector(`button[data-url="${nextEpisode.url}"]`);
+            changeVideo(nextEpisode.url, nextButton);
+            }
+        }
+
+        function playPreviousEpisode() {
+            const currentEpisodes = episodes[currentLanguage][currentSeason];
+            const currentIndex = currentEpisodes.findIndex(ep => ep.url === currentEpisodeButton.dataset.url);
+            const prevIndex = currentIndex - 1;
+
+            if (prevIndex >= 0) {
+            const prevEpisode = currentEpisodes[prevIndex];
+            const prevButton = document.querySelector(`button[data-url="${prevEpisode.url}"]`);
+            changeVideo(prevEpisode.url, prevButton);
+            }
         }
 
         function updateButtonStyles(containerClass, activeId) {
@@ -387,6 +430,19 @@
         function loadProgress(videoUrl) {
             let progressData = JSON.parse(localStorage.getItem('progressData')) || {};
             return progressData[currentLanguage]?.[currentSeason]?.[videoUrl] || 0;
+        }
+
+        function toggleAutoNext() {
+            autoNext = !autoNext;
+            document.getElementById('autonextButton').classList.toggle('active', autoNext);
+        }
+
+        function updateNavigationButtons() {
+            const currentEpisodes = episodes[currentLanguage][currentSeason];
+            const currentIndex = currentEpisodes.findIndex(ep => ep.url === currentEpisodeButton?.dataset.url);
+
+            document.getElementById('previousButton').disabled = currentIndex <= 0;
+            document.getElementById('nextButton').disabled = currentIndex >= currentEpisodes.length - 1;
         }
 
         // Load episodes initially

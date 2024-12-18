@@ -83,13 +83,13 @@
             text-align: center;
         }
 
-        .toggle-options, .season-selector {
+        .toggle-options, .season-selector, .setting-options {
             display: flex;
             justify-content: center;
             margin: 2px 0;
         }
 
-        .toggle-options button, .season-selector button {
+        .toggle-options button, .season-selector button, .setting-options button {
             background-color: #3c6eb3;
             color: white;
             border: none;
@@ -101,12 +101,12 @@
             transition: background-color 0.3s, transform 0.2s;
         }
 
-        .toggle-options button:hover, .season-selector button:hover {
+        .toggle-options button:hover, .season-selector button:hover, .setting-options button:hover {
             background-color: #5a9cec;
             transform: scale(1.05);
         }
 
-        .toggle-options button.active, .season-selector button.active {
+        .toggle-options button.active, .season-selector button.active, .setting-options button.active {
             background-color: #4A90E2;
         }
 
@@ -189,10 +189,16 @@
                     <button onclick="toggleLanguage('dub')" id="dubButton">Dubbed</button>
                 </div>
 
+                <div class="setting-options">
+                    <button id="previousButton" onclick="playPreviousEpisode()">Previous</button>
+                    <button id="autonextButton" onclick="toggleAutoNext()">Auto Next</button>
+                    <button id="nextButton" onclick="playNextEpisode()">Next</button>
+                </div>
+
                 <div class="season-selector">
                     <button onclick="selectSeason(1)" id="season1Button" class="active">1-100</button>
                     <!--<button onclick="selectSeason(2)" id="season2Button">101-170</button> -->
-
+                    <button onclick="selectSeason(3)" id="season3Button">Movies</button>
                 </div>
             </div>
 
@@ -210,11 +216,113 @@
         const episodes = {
             sub: {
                 season1: [
-                    { title: "Episode 1", url: "" }
+                    { title: "Episode 1", url: "" },
+                    { title: "Episode 2", url: "" },
+                    { title: "Episode 3", url: "" },
+                    { title: "Episode 4", url: "" },
+                    { title: "Episode 5", url: "" },
+                    { title: "Episode 6", url: "" },
+                    { title: "Episode 7", url: "" },
+                    { title: "Episode 8", url: "" },
+                    { title: "Episode 9", url: "" },
+                    { title: "Episode 10", url: "" },
+                    { title: "Episode 11", url: "" },
+                    { title: "Episode 12", url: "" },
+                    { title: "Episode 13", url: "" },
+                    { title: "Episode 14", url: "" },
+                    { title: "Episode 15", url: "" },
+                    { title: "Episode 16", url: "" },
+                    { title: "Episode 17", url: "" },
+                    { title: "Episode 18", url: "" },
+                    { title: "Episode 19", url: "" },
+                    { title: "Episode 20", url: "" },
+                    { title: "Episode 21", url: "" },
+                    { title: "Episode 22", url: "" },
+                    { title: "Episode 23", url: "" },
+                    { title: "Episode 24", url: "" },
+                    { title: "Episode 25", url: "" },
+                    { title: "Episode 26", url: "" },
+                    { title: "Episode 27", url: "" },
+                    { title: "Episode 28", url: "" },
+                    { title: "Episode 29", url: "" },
+                    { title: "Episode 30", url: "" },
+                    { title: "Episode 31", url: "" },
+                    { title: "Episode 32", url: "" },
+                    { title: "Episode 33", url: "" },
+                    { title: "Episode 34", url: "" },
+                    { title: "Episode 35", url: "" },
+                    { title: "Episode 36", url: "" },
+                    { title: "Episode 37", url: "" },
+                    { title: "Episode 38", url: "" },
+                    { title: "Episode 39", url: "" },
+                    { title: "Episode 40", url: "" },
+                    { title: "Episode 41", url: "" },
+                    { title: "Episode 42", url: "" },
+                    { title: "Episode 43", url: "" },
+                    { title: "Episode 44", url: "" },
+                    { title: "Episode 45", url: "" },
+                    { title: "Episode 46", url: "" },
+                    { title: "Episode 47", url: "" },
+                    { title: "Episode 48", url: "" },
+                    { title: "Episode 49", url: "" },
+                    { title: "Episode 50", url: "" },
+                    { title: "Episode 51", url: "" },
+                    { title: "Episode 52", url: "" },
+                    { title: "Episode 53", url: "" },
+                    { title: "Episode 54", url: "" },
+                    { title: "Episode 55", url: "" },
+                    { title: "Episode 56", url: "" },
+                    { title: "Episode 57", url: "" },
+                    { title: "Episode 58", url: "" },
+                    { title: "Episode 59", url: "" },
+                    { title: "Episode 60", url: "" },
+                    { title: "Episode 61", url: "" },
+                    { title: "Episode 62", url: "" },
+                    { title: "Episode 63", url: "" },
+                    { title: "Episode 64", url: "" },
+                    { title: "Episode 65", url: "" },
+                    { title: "Episode 66", url: "" },
+                    { title: "Episode 67", url: "" },
+                    { title: "Episode 68", url: "" },
+                    { title: "Episode 69", url: "" },
+                    { title: "Episode 70", url: "" },
+                    { title: "Episode 71", url: "" },
+                    { title: "Episode 72", url: "" },
+                    { title: "Episode 73", url: "" },
+                    { title: "Episode 74", url: "" },
+                    { title: "Episode 75", url: "" },
+                    { title: "Episode 76", url: "" },
+                    { title: "Episode 77", url: "" },
+                    { title: "Episode 78", url: "" },
+                    { title: "Episode 79", url: "" },
+                    { title: "Episode 80", url: "" },
+                    { title: "Episode 81", url: "" },
+                    { title: "Episode 82", url: "" },
+                    { title: "Episode 83", url: "" },
+                    { title: "Episode 84", url: "" },
+                    { title: "Episode 85", url: "" },
+                    { title: "Episode 86", url: "" },
+                    { title: "Episode 87", url: "" },
+                    { title: "Episode 88", url: "" },
+                    { title: "Episode 89", url: "" },
+                    { title: "Episode 90", url: "" },
+                    { title: "Episode 91", url: "" },
+                    { title: "Episode 92", url: "" },
+                    { title: "Episode 93", url: "" },
+                    { title: "Episode 94", url: "" },
+                    { title: "Episode 95", url: "" },
+                    { title: "Episode 96", url: "" },
+                    { title: "Episode 97", url: "" },
+                    { title: "Episode 98", url: "" },
+                    { title: "Episode 99", url: "" },
+                    { title: "Episode 100", url: "" }
                 ],
                 season2: [
                     { title: "Episode 1", url: "" }
-                ]
+                ],
+                season3: [
+                    { title: "Mahou Tei no Ken", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAawehyfcghysfdsDGDYdgdsfsdfwstdgdsgtert9URASDGHUSRFSJGYfdsffsderFStewthsfSFtrftesdfoanhmNWh1NmR4LmFuZjU5OC5jb20vdXNlcjEzNDIvMWE3MjJjZGI2OGE4MzE2YTU4OGUwNjg5MWY0ZTBiYzkvRVAuMS52Mi4xNjk2OTA3NzE3LjcyMHAubXA0P3Rva2VuPVR4ZU9rQ2x3NW1fU2lHNG8tNUxuN2cmZXhwaXJlcz0xNzM0MDU3MjAzJmlkPTIwNjM2NA==" }
+                ],
             },
             dub: {
                 season1: [
@@ -390,6 +498,9 @@
                     { title: "Episode 168", url: "" },
                     { title: "Episode 169", url: "" },
                     { title: "Episode 170", url: "" }
+                ],
+                season3 : [
+                    { title: "Mahou Tei no Ken", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAdrefsdsdfwerFrefdsfrersfdsrfer363435348AawehyfcghysfdsDGDYdgdsfsdfwstdgdsgtertycmo5N3F0ZHFxLmFuZjU5OC5jb20vdXNlcjEzNDIvNTJjMmYwMjJiNGY4ZTdiN2IwOTA5ZGY5MDliNTM4NjAvRVAuMS52MC4xNjg2OTE0NzE3LjcyMHAubXA0P3Rva2VuPWFuOTJHWDFKUUstU2hiOGV5Q3EtUlEmZXhwaXJlcz0xNzM0MDU3Mjc0JmlkPTIwNjM2OA=="}
                 ]
             }
         };
@@ -399,6 +510,7 @@
         let currentLanguage = localStorage.getItem('preferredLanguage') || 'sub';
         let currentSeason = 'season1';
         let currentEpisodeButton = null;
+        let autoNext = false;
 
         function toggleLanguage(lang) {
             if (episodes[lang] && episodes[lang][currentSeason]) {
@@ -426,9 +538,12 @@
             currentEpisodes.forEach(ep => {
             const button = document.createElement('button');
             button.textContent = ep.title;
+            button.dataset.url = ep.url;
             button.onclick = () => changeVideo(ep.url, button);
             episodeContainer.appendChild(button);
             });
+
+            updateNavigationButtons();
         }
 
         function changeVideo(videoUrl, button) {
@@ -446,15 +561,48 @@
 
             player.off('timeupdate');
             player.off('error');
+            player.off('ended');
 
             player.on('timeupdate', function() {
-                saveProgress(videoUrl, player.currentTime());
+            saveProgress(videoUrl, player.currentTime());
             });
 
             player.on('error', function() {
-                player.src({ type: 'video/mp4', src: videoUrl });
-                player.play();
+            player.src({ type: 'video/mp4', src: videoUrl });
+            player.play();
             });
+
+            player.on('ended', function() {
+            if (autoNext) {
+                playNextEpisode();
+            }
+            });
+
+            updateNavigationButtons();
+        }
+
+        function playNextEpisode() {
+            const currentEpisodes = episodes[currentLanguage][currentSeason];
+            const currentIndex = currentEpisodes.findIndex(ep => ep.url === currentEpisodeButton.dataset.url);
+            const nextIndex = currentIndex + 1;
+
+            if (nextIndex < currentEpisodes.length) {
+            const nextEpisode = currentEpisodes[nextIndex];
+            const nextButton = document.querySelector(`button[data-url="${nextEpisode.url}"]`);
+            changeVideo(nextEpisode.url, nextButton);
+            }
+        }
+
+        function playPreviousEpisode() {
+            const currentEpisodes = episodes[currentLanguage][currentSeason];
+            const currentIndex = currentEpisodes.findIndex(ep => ep.url === currentEpisodeButton.dataset.url);
+            const prevIndex = currentIndex - 1;
+
+            if (prevIndex >= 0) {
+            const prevEpisode = currentEpisodes[prevIndex];
+            const prevButton = document.querySelector(`button[data-url="${prevEpisode.url}"]`);
+            changeVideo(prevEpisode.url, prevButton);
+            }
         }
 
         function updateButtonStyles(containerClass, activeId) {
@@ -479,6 +627,19 @@
         function loadProgress(videoUrl) {
             let progressData = JSON.parse(localStorage.getItem('progressData')) || {};
             return progressData[currentLanguage]?.[currentSeason]?.[videoUrl] || 0;
+        }
+
+        function toggleAutoNext() {
+            autoNext = !autoNext;
+            document.getElementById('autonextButton').classList.toggle('active', autoNext);
+        }
+
+        function updateNavigationButtons() {
+            const currentEpisodes = episodes[currentLanguage][currentSeason];
+            const currentIndex = currentEpisodes.findIndex(ep => ep.url === currentEpisodeButton?.dataset.url);
+
+            document.getElementById('previousButton').disabled = currentIndex <= 0;
+            document.getElementById('nextButton').disabled = currentIndex >= currentEpisodes.length - 1;
         }
 
         // Load episodes initially
