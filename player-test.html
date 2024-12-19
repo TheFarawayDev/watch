@@ -204,6 +204,7 @@
                 <div class="setting-options">
                     <button id="previousButton" onclick="playPreviousEpisode()">Previous</button>
                     <button id="autonextButton" onclick="toggleAutoNext()">Auto Next</button>
+                    <!-- <button id="skipintroButton" onclick="skipIntro()">Skip Intro</button> -->
                     <button id="nextButton" onclick="playNextEpisode()">Next</button>
                 </div>
 
@@ -263,7 +264,7 @@
         let currentLanguage = localStorage.getItem('preferredLanguage') || 'sub';
         let currentSeason = 'season1';
         let currentEpisodeButton = null;
-        let autoNext = false;
+        let autoNext = JSON.parse(localStorage.getItem('autoNext')) || false;
 
         function toggleLanguage(lang) {
             if (episodes[lang] && episodes[lang][currentSeason]) {
@@ -384,6 +385,7 @@
 
         function toggleAutoNext() {
             autoNext = !autoNext;
+            localStorage.setItem('autoNext', JSON.stringify(autoNext));
             document.getElementById('autonextButton').classList.toggle('active', autoNext);
         }
 
@@ -397,6 +399,7 @@
 
         // Load episodes initially
         toggleLanguage(currentLanguage);
+        document.getElementById('autonextButton').classList.toggle('active', autoNext);
     </script>
 </body>
 </html>
