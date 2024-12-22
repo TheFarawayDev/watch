@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Higehiro</title>
+    <link href="https://vjs.zencdn.net/8.16.1/video-js.css" rel="stylesheet" />
+    <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/Better-Anime/Watch/refs/heads/main/BA.png">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: #2b3e50;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 80%;
+            max-width: 1000px;
+            background-color: #2b3e50;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            border-radius: 10px;
+            padding-bottom: 20px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 20px;
+            background: linear-gradient(to bottom, #0a8cc0, #2b3e50); /* Gradient from light sky blue to main page color */
+            color: rgb(28, 137, 233);
+            width: 100%;
+            position: relative;
+            margin-bottom: 7px;
+        }
+
+        .logo {
+            position: absolute;
+            margin-left: 25px;
+        }
+
+        .logo a {
+            text-decoration: none;
+            color: #799ec2;
+            font-size: 24px;
+        }
+
+        .logo a:hover {
+            color: #4A90E2;
+        }
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+        }
+
+        .video-js {
+            width: 93%;
+            height: 490px;
+            background-color: #3c4a5a;
+            margin-bottom: 10px;
+            border: 2px solid #1d2a36;
+        }
+
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            width: 93%;
+            margin: 10px 0;
+            text-align: center;
+        }
+
+        .toggle-options, .season-selector, .setting-options {
+            display: flex;
+            justify-content: center;
+            margin: 2px 0;
+        }
+
+        .toggle-options button, .season-selector button, .setting-options button {
+            background-color: #3c6eb3;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            flex: 1;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .toggle-options button:hover, .season-selector button:hover, .setting-options button:hover {
+            background-color: #5a9cec;
+            transform: scale(1.05);
+        }
+
+        .toggle-options button.active, .season-selector button.active, .setting-options button.active {
+            background-color: #4A90E2;
+        }
+
+        .episode-container {
+            display: flex;
+            justify-content: center;
+            overflow-y: auto;
+            height: 200px;
+            width: 90%;
+            border: 1px solid #799ec2;
+            background-color: #537196;
+            padding: 10px;
+            scrollbar-width: none;
+        }
+
+        .episode-list {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        .episode-list button {
+            background-color: #34495E;
+            color: white;
+            border: none;
+            padding: 10px;
+            margin: 5px;
+            width: 90%;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .episode-list button:hover {
+            background-color: #5a6b7c;
+            transform: scale(1.05);
+        }
+
+        .episode-list button.active {
+            background-color: #5a6b7c;
+            color: #2b3e50;
+        }
+
+        @media screen and (max-width: 768px) {
+            .video-js {
+                width: 89%;
+                height: 260px;
+            }
+
+            .episode-container {
+                width: 83%;
+                height: 150px;
+            }
+
+            .button-container {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <a href="https://sites.google.com/view/better-anime-site/home"><strong>Better Anime</strong></a>
+            </div>
+        </div>
+
+        <div class="content"></div>
+            <video id="my-video" class="video-js" controls preload="auto"
+                   poster="https://imgs.search.brave.com/WR4PaY-N9WjTgkMQSFwzNgbeglQ2LDe8O3DlTxXJgtY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL00v/TVY1Qk9EazVNMk16/WldNdE1EWTVOUzAw/TXpNMExUa3lPVGd0/WldReE5XTm1PV1V3/Tm1Zd1hrRXlYa0Zx/Y0djQC5qcGc"
+                   data-setup="{}">
+                <source id="video-source" src="https://example.mp4" type="video/mp4" />
+            </video>
+
+            <div class="button-container">    
+                <div class="toggle-options">
+                    <button onclick="toggleLanguage('sub')" id="subButton" class="active">Subbed</button>
+                    <button onclick="toggleLanguage('dub')" id="dubButton">Dubbed</button>
+                </div>
+
+                <div class="setting-options">
+                    <button id="previousButton" onclick="playPreviousEpisode()">Previous</button>
+                    <button id="autonextButton" onclick="toggleAutoNext()">Auto Next</button>
+                    <button id="nextButton" onclick="playNextEpisode()">Next</button>
+                </div>
+
+                <div class="season-selector">
+                    <button onclick="selectSeason(1)" id="season1Button" class="active">Season 1</button>
+                </div>
+            </div>
+
+            <div class="episode-container">
+                <div class="episode-list" id="episode-list">
+                    <!-- Episodes will be dynamically added here -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://vjs.zencdn.net/8.16.1/video.min.js"></script>
+
+    <script>
+        const episodes = {
+            sub: {
+                season1: [
+                    { title: "Episode 1", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAawehyfcghysfdsDGDYdgdsfsdfwstdgdsgtert8AdeqwrwedffryretgsdFrsftrsvfsfsr0bTE2bGVuZjBuLmFuZjU5OC5jb20vdXNlcjEzNDIvNWZiZGMwYWRiNzhkZTJlMjMyYzYzZTBjMDllYjgzM2MvRVAuMS52MC43MjBwLm1wND90b2tlbj12VFgwbU1jSTYwUW1BY2U1WmgwblNnJmV4cGlyZXM9MTczNDg5NTc5NSZpZD0xNTcxMTY=" },
+                    { title: "Episode 2", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAdeqwrwedffryretgsdFrsftrsvfsfsr80bTE2bGAawehyfcghysfdsDGDYdgdsfsdfwstdgdsgtertVuZjBuLmFuZjU5OC5jb20vdXNlcjEzNDIvNWZiZGMwYWRiNzhkZTJlMjMyYzYzZTBjMDllYjgzM2MvRVAuMi52MC43MjBwLm1wND90b2tlbj13ZndDZzVjZzdfQ01JdFQ2Wkw3Wmp3JmV4cGlyZXM9MTczNDg5NTgxNyZpZD0xNTc5NzY=" },
+                    { title: "Episode 3", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAdrefsdsdfwerFrefdsfrersfdsrfer363435349AawehyfcghysfdsDGDYdgdsfsdfwstdgdsgtertmOHp6YmhuN3B1LmFuZjU5OC5jb20vdXNlcjEzNDIvNWZiZGMwYWRiNzhkZTJlMjMyYzYzZTBjMDllYjgzM2MvRVAuMy52MC4xNjM5MzI3Mjg1LjcyMHAubXA0P3Rva2VuPVFzeF9jS0trVGEtVEFmcU9UQml3QmcmZXhwaXJlcz0xNzM0ODk1ODIyJmlkPTE1ODk1MA==" },
+                    { title: "Episode 4", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAdrefsdsdfwerFrefdsfrersfdsrfer363435349AawehyfcghysfdsDGDYdgdsfsdfwstdgdsgtert1aHd5ZGJ3aXRzLmFuZjU5OC5jb20vdXNlcjEzNDIvNWZiZGMwYWRiNzhkZTJlMjMyYzYzZTBjMDllYjgzM2MvRVAuNC52MS4xNjM5Mjk4NDAyLjcyMHAubXA0P3Rva2VuPWQ1Tk5CNWExSUJWbzFKTjZzM1VwaUEmZXhwaXJlcz0xNzM0ODk1ODI4JmlkPTE1OTYzNQ==" },
+                    { title: "Episode 5", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAawehyfcghysfdsDGDYdgdsfsdfwstdgdsgtert9AdrefsdsdfwerFrefdsfrersfdsrfer363435342cnUxdjVtZ3o5LmFuZjU5OC5jb20vdXNlcjEzNDIvNWZiZGMwYWRiNzhkZTJlMjMyYzYzZTBjMDllYjgzM2MvRVAuNS52MC4xNjM5NDIyMDgzLjcyMHAubXA0P3Rva2VuPVl3Y3R1WkVLRDI4VEVfU21VcUdrRXcmZXhwaXJlcz0xNzM0ODk1ODM1JmlkPTE2MDI1Nw==" },
+                    { title: "Episode 6", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAawehyfcghysfdsDGDYdgdsfsdfwstdgdsgtert8AdeqwrwedffryretgsdFrsftrsvfsfsr0bTE2bGVuZjBuLmFuZjU5OC5jb20vdXNlcjEzNDIvNWZiZGMwYWRiNzhkZTJlMjMyYzYzZTBjMDllYjgzM2MvRVAuNi52MC43MjBwLm1wND90b2tlbj1hMW85eC1fdFNSZGRrOU9jUGxjckFnJmV4cGlyZXM9MTczNDg5NTg0MiZpZD0xNjA3OTY=" },
+                    { title: "Episode 7", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAawehyfcghysfdsDGDYdgdsfsdfwstdgdsgtert9AdrefsdsdfwerFrefdsfrersfdsrfer363435341cGNleWlhc2p1LmFuZjU5OC5jb20vdXNlcjEzNDIvNWZiZGMwYWRiNzhkZTJlMjMyYzYzZTBjMDllYjgzM2MvRVAuNy52MS4xNzEyMjU2MDAzLjcyMHAubXA0P3Rva2VuPXJxQTEyQ2ZBODRCUk5XVFhEb1JDYkEmZXhwaXJlcz0xNzM0ODk1ODUxJmlkPTE2MTM4NQ==" },
+                    { title: "Episode 8", url: "https://ggredi.info/download.php?url=aHR0cHM6LyURASDGHUSRFSJGYfdsffsderFStewthsfSFtrfteAdeqwrwedffryretgsdFrsftrsvfsfsrsdf81YWY4MDJ3aXYxLmFuZjU5OC5jb20vdXNlcjEzNDIvNWZiZGMwYWRiNzhkZTJlMjMyYzYzZTBjMDllYjgzM2MvRVAuOC52MC4xNjM5NDU0NzY5LjcyMHAubXA0P3Rva2VuPWlqU0VKOEUwNnQ4NUdncHliUDlUTEEmZXhwaXJlcz0xNzM0ODk1ODU2JmlkPTE2MTgyMg==" },
+                    { title: "Episode 9", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAdeqwrwedffryretgsdFrsftrsvfsfsr80ZG50eWURASDGHUSRFSJGYfdsffsderFStewthsfSFtrftesdfMybWYwLmFuZjU5OC5jb20vdXNlcjEzNDIvNWZiZGMwYWRiNzhkZTJlMjMyYzYzZTBjMDllYjgzM2MvRVAuOS52Mi4xNjM5NDEzMzI0LjEwODBwLm1wND90b2tlbj1zLVg5QzJxZEpkZnp5TmdCSXM1cDVnJmV4cGlyZXM9MTczNDg5NTg2NiZpZD0xNjIyNjk=" },
+                    { title: "Episode 10", url: "https://ggredi.info/download.php?url=aHR0cHM6LyURASDGHUSRFSJGYfdsffsderFStewthsfSFtrfteAdeqwrwedffryretgsdFrsftrsvfsfsrsdf9hb3NuNTlvN2t5LmFuZjU5OC5jb20vdXNlcjEzNDIvNWZiZGMwYWRiNzhkZTJlMjMyYzYzZTBjMDllYjgzM2MvRVAuMTAudjAuMTYzOTQ1MDA3NC43MjBwLm1wND90b2tlbj1vWjNGTkhhZms3NlVkRDFueDhvQ1ZRJmV4cGlyZXM9MTczNDg5NTg3NiZpZD0xNjI3ODY=" },
+                    { title: "Episode 11", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAdeqwrwedffryretgsdFrsftrsvfsfsr9td3Q4amURASDGHUSRFSJGYfdsffsderFStewthsfSFtrftesdfVrenEyLmFuZjU5OC5jb20vdXNlcjEzNDIvNWZiZGMwYWRiNzhkZTJlMjMyYzYzZTBjMDllYjgzM2MvRVAuMTEudjAuNzIwcC5tcDQ/dG9rZW49WlhHTkMwQ1Z3dFA5MFMwbzdFYjdKUSZleHBpcmVzPTE3MzQ4OTU4ODImaWQ9MTYzNDQx" },
+                    { title: "Episode 12", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAdrefsdsdfwerFrefdsfrersfdsrfer363435349URASDGHUSRFSJGYfdsffsderFStewthsfSFtrftesdfscDVhMDU2NWI2LmFuZjU5OC5jb20vdXNlcjEzNDIvNWZiZGMwYWRiNzhkZTJlMjMyYzYzZTBjMDllYjgzM2MvRVAuMTIudjAuMTYzOTQ3MTc0Mi43MjBwLm1wND90b2tlbj1zZTB2anpjdEdDVDEyNzhuMS04TEhnJmV4cGlyZXM9MTczNDg5NTg4OCZpZD0xNjM4MTg=" },
+                    { title: "Episode 13", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAawehyfcghysfdsDGDYdgdsfsdfwstdgdsgtert9URASDGHUSRFSJGYfdsffsderFStewthsfSFtrftesdf2cnUxdjVtZ3o5LmFuZjU5OC5jb20vdXNlcjEzNDIvNWZiZGMwYWRiNzhkZTJlMjMyYzYzZTBjMDllYjgzM2MvRVAuMTMudjUuNzIwcC5tcDQ/dG9rZW49dHhSa1JaYlN6ZFZjWnpCcDlDYklKQSZleHBpcmVzPTE3MzQ4OTU5MDImaWQ9MTY0MjQz" }
+                ]
+            },
+            dub: {
+                season1: [
+                    { title: "Episode 1", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAawehyfcghysfdsDGDYdgdsfsdfwstdgdsgtert8AdrefsdsdfwerFrefdsfrersfdsrfer363435341YWY4MDJ3aXYxLmFuZjU5OC5jb20vdXNlcjEzNDIvMjcyNThlM2U5MDY2NjEyOTRlMTVkMjZjNWEzMDczNGUvRVAuMS52MC43MjBwLm1wND90b2tlbj1pbEJkWXducTIycWlYYThrR3NnNWZ3JmV4cGlyZXM9MTczNDg5NjEzNCZpZD0xODk3NTI=" },
+                    { title: "Episode 2", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAdeqwrwedffryretgsdFrsftrsvfsfsr93aWd0Z2AawehyfcghysfdsDGDYdgdsfsdfwstdgdsgtertF3Y2Q3LmFuZjU5OC5jb20vdXNlcjEzNDIvMjcyNThlM2U5MDY2NjEyOTRlMTVkMjZjNWEzMDczNGUvRVAuMi52MC43MjBwLm1wND90b2tlbj1SLVN0UTBNOWhfUGFSUFpRNnA2NEh3JmV4cGlyZXM9MTczNDg5NjE0MCZpZD0xOTAxMTE=" },
+                    { title: "Episode 3", url: "https://ggredi.info/download.php?url=aHR0cHM6LyURASDGHUSRFSJGYfdsffsderFStewthsfSFtrfteAdeqwrwedffryretgsdFrsftrsvfsfsrsdf9scDVhMDU2NWI2LmFuZjU5OC5jb20vdXNlcjEzNDIvMjcyNThlM2U5MDY2NjEyOTRlMTVkMjZjNWEzMDczNGUvRVAuMy52MC43MjBwLm1wND90b2tlbj00WmpSakZ1SjNPRjhzVFdrNkJZZlR3JmV4cGlyZXM9MTczNDg5NjE0NiZpZD0xOTA0Mjg=" },
+                    { title: "Episode 4", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAdeqwrwedffryretgsdFrsftrsvfsfsr9yMnE1eDURASDGHUSRFSJGYfdsffsderFStewthsfSFtrftesdfk5ZDNhLmFuZjU5OC5jb20vdXNlcjEzNDIvMjcyNThlM2U5MDY2NjEyOTRlMTVkMjZjNWEzMDczNGUvRVAuNC52MC43MjBwLm1wND90b2tlbj1lYUxMQlgyM3o5WWt2M0xUNVhDbzRnJmV4cGlyZXM9MTczNDg5NjE1MiZpZD0xOTA3MTc=" },
+                    { title: "Episode 5", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAawehyfcghysfdsDGDYdgdsfsdfwstdgdsgtert9AdrefsdsdfwerFrefdsfrersfdsrfer36343534mYm5sbmVrYmN4LmFuZjU5OC5jb20vdXNlcjEzNDIvMjcyNThlM2U5MDY2NjEyOTRlMTVkMjZjNWEzMDczNGUvRVAuNS52MC43MjBwLm1wND90b2tlbj1GOU4yTm1JTzFFVTRna0NYWmx2RFlnJmV4cGlyZXM9MTczNDg5NjE1NyZpZD0xOTEwMzk=" },
+                    { title: "Episode 6", url: "https://ggredi.info/download.php?url=aHR0cHM6LyURASDGHUSRFSJGYfdsffsderFStewthsfSFtrfteAdrefsdsdfwerFrefdsfrersfdsrfer36343534sdf9oanhmNWh1NmR4LmFuZjU5OC5jb20vdXNlcjEzNDIvMjcyNThlM2U5MDY2NjEyOTRlMTVkMjZjNWEzMDczNGUvRVAuNi52MC43MjBwLm1wND90b2tlbj05bmZqNTJ3ODdWODB2SFdQeThpVWFRJmV4cGlyZXM9MTczNDg5NjE2MyZpZD0xOTE0NTQ=" },
+                    { title: "Episode 7", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAdrefsdsdfwerFrefdsfrersfdsrfer363435349URASDGHUSRFSJGYfdsffsderFStewthsfSFtrftesdf1aHd5ZGJ3aXRzLmFuZjU5OC5jb20vdXNlcjEzNDIvMjcyNThlM2U5MDY2NjEyOTRlMTVkMjZjNWEzMDczNGUvRVAuNy52MC43MjBwLm1wND90b2tlbj1pS1J3NVBBYk1PcEdad1dDeFVwbDl3JmV4cGlyZXM9MTczNDg5NjE2OCZpZD0xOTE4NjU=" },
+                    { title: "Episode 8", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAdeqwrwedffryretgsdFrsftrsvfsfsr9mcGFodHURASDGHUSRFSJGYfdsffsderFStewthsfSFtrftesdfVoc2huLmFuZjU5OC5jb20vdXNlcjEzNDIvMjcyNThlM2U5MDY2NjEyOTRlMTVkMjZjNWEzMDczNGUvRVAuOC52MC43MjBwLm1wND90b2tlbj1Wa3FsT0tiRzFVMnA4aG5KZ0hnU2dBJmV4cGlyZXM9MTczNDg5NjE3NiZpZD0xOTIzMDA=" },
+                    { title: "Episode 9", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAdrefsdsdfwerFrefdsfrersfdsrfer363435349URASDGHUSRFSJGYfdsffsderFStewthsfSFtrftesdfnYTIzdmt2ZDJwLmFuZjU5OC5jb20vdXNlcjEzNDIvMjcyNThlM2U5MDY2NjEyOTRlMTVkMjZjNWEzMDczNGUvRVAuOS52MC43MjBwLm1wND90b2tlbj1wZms4RkhES3pZZGhzMF9LM0dsRjN3JmV4cGlyZXM9MTczNDg5NjEzNyZpZD0xOTI2NDY=" },
+                    { title: "Episode 10", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAawehyfcghysfdsDGDYdgdsfsdfwstdgdsgtert9AdrefsdsdfwerFrefdsfrersfdsrfer36343534mcGFodHVoc2huLmFuZjU5OC5jb20vdXNlcjEzNDIvMjcyNThlM2U5MDY2NjEyOTRlMTVkMjZjNWEzMDczNGUvRVAuMTAudjAuNzIwcC5tcDQ/dG9rZW49QUR1X29zTERqcEZUVUtYV21Gc0ZOZyZleHBpcmVzPTE3MzQ4OTYxNTImaWQ9MTkzMDUw" },
+                    { title: "Episode 11", url: "https://ggredi.info/download.php?url=aHR0cHM6LyURASDGHUSRFSJGYfdsffsderFStewthsfSFtrfteAdeqwrwedffryretgsdFrsftrsvfsfsrsdf92a2ViZGoxZjA2LmFuZjU5OC5jb20vdXNlcjEzNDIvMjcyNThlM2U5MDY2NjEyOTRlMTVkMjZjNWEzMDczNGUvRVAuMTEudjAuNzIwcC5tcDQ/dG9rZW49dG43dnI2NWxwR1B4elo1SVZGQ0E2QSZleHBpcmVzPTE3MzQ4OTYxNjYmaWQ9MTkzMzUz" },
+                    { title: "Episode 12", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAawehyfcghysfdsDGDYdgdsfsdfwstdgdsgtert9AdeqwrwedffryretgsdFrsftrsvfsfsrrdGk4bzh4ODV3LmFuZjU5OC5jb20vdXNlcjEzNDIvMjcyNThlM2U5MDY2NjEyOTRlMTVkMjZjNWEzMDczNGUvRVAuMTIudjAuMTA4MHAubXA0P3Rva2VuPTUxa3FPUTlRNjJPTTZiYkNNR1FnekEmZXhwaXJlcz0xNzM0ODk2Mjc5JmlkPTE5MzY2Mg==" },
+                    { title: "Episode 13", url: "https://ggredi.info/download.php?url=aHR0cHM6LyAdeqwrwedffryretgsdFrsftrsvfsfsr9oanhmNWAdrefsdsdfwerFrefdsfrersfdsrfer36343534h1NmR4LmFuZjU5OC5jb20vdXNlcjEzNDIvMjcyNThlM2U5MDY2NjEyOTRlMTVkMjZjNWEzMDczNGUvRVAuMTMudjAuMTA4MHAubXA0P3Rva2VuPUZia2k3OGFOa3NIN3BpSm5FYmFKRFEmZXhwaXJlcz0xNzM0ODk2Mjg1JmlkPTE5MzkxNA==" }
+                ]
+            }
+        };
+    </script>
+
+    <script>
+        videojs.addLanguage('en', {"The media could not be loaded, either because the server or network failed or because the format is not supported.": "Please select an episode to watch!"});
+
+        fetch('https://raw.githubusercontent.com/Better-Anime/Watch/main/main-script.js')
+            .then(response => response.text())
+            .then(scriptContent => {
+                const script = document.createElement('script');
+                script.textContent = scriptContent;
+                document.body.appendChild(script);
+            })
+    </script>
+</body>
+</html>

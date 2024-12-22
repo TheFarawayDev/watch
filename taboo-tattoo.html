@@ -248,6 +248,8 @@
     </script>
     
     <script>
+        videojs.addLanguage('en', {"The media could not be loaded, either because the server or network failed or because the format is not supported.": "Please select an episode to watch!"});
+
         fetch('https://raw.githubusercontent.com/Better-Anime/Watch/main/main-script.js')
             .then(response => response.text())
             .then(scriptContent => {
