@@ -5,11 +5,11 @@
 
         function toggleLanguage(lang) {
             if (episodes[lang] && episodes[lang][currentSeason]) {
-            currentLanguage = lang;
-            localStorage.setItem('preferredLanguage', lang);
+                currentLanguage = lang;
+                localStorage.setItem('preferredLanguage', lang);
             } else {
-            currentLanguage = lang === 'sub' ? 'dub' : 'sub';
-            localStorage.setItem('preferredLanguage', currentLanguage);
+                currentLanguage = lang === 'sub' ? 'dub' : 'sub';
+                localStorage.setItem('preferredLanguage', currentLanguage);
             }
             updateButtonStyles('toggle-options', currentLanguage);
             loadEpisodes();
@@ -27,11 +27,11 @@
             const currentEpisodes = episodes[currentLanguage][currentSeason];
 
             currentEpisodes.forEach(ep => {
-            const button = document.createElement('button');
-            button.textContent = ep.title;
-            button.dataset.url = ep.url;
-            button.onclick = () => changeVideo(ep.url, button);
-            episodeContainer.appendChild(button);
+                const button = document.createElement('button');
+                button.textContent = ep.title;
+                button.dataset.url = ep.url;
+                button.onclick = () => changeVideo(ep.url, button);
+                episodeContainer.appendChild(button);
             });
 
             updateNavigationButtons();
@@ -40,12 +40,12 @@
         function changeVideo(videoUrl, button) {
             const player = videojs('my-video');
             const savedTime = loadProgress(videoUrl);
-            player.src({ type: 'video/mp4', src: videoUrl });
+            player.src({ type: 'application/x-mpegURL', src: videoUrl });
             player.currentTime(savedTime);
             player.play();
 
             if (currentEpisodeButton) {
-            currentEpisodeButton.classList.remove('active');
+                currentEpisodeButton.classList.remove('active');
             }
             button.classList.add('active');
             currentEpisodeButton = button;
@@ -55,18 +55,18 @@
             player.off('ended');
 
             player.on('timeupdate', function() {
-            saveProgress(videoUrl, player.currentTime());
+                saveProgress(videoUrl, player.currentTime());
             });
 
             player.on('error', function() {
-            player.src({ type: 'video/mp4', src: videoUrl });
-            player.play();
+                player.src({ type: 'application/x-mpegURL', src: videoUrl });
+                player.play();
             });
 
             player.on('ended', function() {
-            if (autoNext) {
-                playNextEpisode();
-            }
+                if (autoNext) {
+                    playNextEpisode();
+                }
             });
 
             updateNavigationButtons();
@@ -78,9 +78,9 @@
             const nextIndex = currentIndex + 1;
 
             if (nextIndex < currentEpisodes.length) {
-            const nextEpisode = currentEpisodes[nextIndex];
-            const nextButton = document.querySelector(`button[data-url="${nextEpisode.url}"]`);
-            changeVideo(nextEpisode.url, nextButton);
+                const nextEpisode = currentEpisodes[nextIndex];
+                const nextButton = document.querySelector(`button[data-url="${nextEpisode.url}"]`);
+                changeVideo(nextEpisode.url, nextButton);
             }
         }
 
@@ -90,15 +90,15 @@
             const prevIndex = currentIndex - 1;
 
             if (prevIndex >= 0) {
-            const prevEpisode = currentEpisodes[prevIndex];
-            const prevButton = document.querySelector(`button[data-url="${prevEpisode.url}"]`);
-            changeVideo(prevEpisode.url, prevButton);
+                const prevEpisode = currentEpisodes[prevIndex];
+                const prevButton = document.querySelector(`button[data-url="${prevEpisode.url}"]`);
+                changeVideo(prevEpisode.url, prevButton);
             }
         }
 
         function updateButtonStyles(containerClass, activeId) {
             document.querySelectorAll(`.${containerClass} button`).forEach(button => {
-            button.classList.remove('active');
+                button.classList.remove('active');
             });
             document.getElementById(activeId + 'Button').classList.add('active');
         }
@@ -106,10 +106,10 @@
         function saveProgress(videoUrl, currentTime) {
             let progressData = JSON.parse(localStorage.getItem('progressData')) || {};
             if (!progressData[currentLanguage]) {
-            progressData[currentLanguage] = {};
+                progressData[currentLanguage] = {};
             }
             if (!progressData[currentLanguage][currentSeason]) {
-            progressData[currentLanguage][currentSeason] = {};
+                progressData[currentLanguage][currentSeason] = {};
             }
             progressData[currentLanguage][currentSeason][videoUrl] = currentTime;
             localStorage.setItem('progressData', JSON.stringify(progressData));
