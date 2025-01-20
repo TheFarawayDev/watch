@@ -75,15 +75,6 @@
             margin-bottom: 10px;
         }
 
-        .announcement-banner {
-            width: 93%;
-            background-color: #bdb93d;
-            color: white;
-            text-align: center;
-            padding: 10px 0;
-            font-size: 18px;
-        }
-
         .button-container {
             display: flex;
             flex-direction: column;
@@ -192,10 +183,6 @@
                 <source id="video-source" src="https://example.mp4" type="video/mp4" />
             </video>
 
-            <div class="announcement-banner">
-                Announcement: Enjoy your favorite anime!
-            </div>
-
             <div class="button-container">
                 <div class="toggle-options">
                     <button onclick="toggleLanguage('sub')" id="subButton" class="active">Subbed</button>
@@ -211,6 +198,7 @@
 
                 <div class="season-selector">
                     <button onclick="selectSeason(1)" id="season1Button" class="active">Season 1</button>
+                    <button onclick="selectSeason(2)" id="season2Button">Season 2</button>
                 </div>
             </div>
 
