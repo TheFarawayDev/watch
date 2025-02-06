@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medaka Kuroiwa is Impervious to My Charms</title>
+    <link href="https://vjs.zencdn.net/8.16.1/video-js.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/videojs-http-streaming@2.15.1/dist/videojs-http-streaming.min.js"></script>
+    <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/Better-Anime/Watch/refs/heads/main/BA.png">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: #2b3e50;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 80%;
+            max-width: 1000px;
+            background-color: #2b3e50;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            border-radius: 10px;
+            padding-bottom: 20px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 20px;
+            background: linear-gradient(to bottom, #0a8cc0, #2b3e50); /* Gradient from light sky blue to main page color */
+            color: rgb(28, 137, 233);
+            width: 100%;
+            position: relative;
+            margin-bottom: 7px;
+        }
+
+        .logo {
+            position: absolute;
+            margin-left: 25px;
+        }
+
+        .logo a {
+            text-decoration: none;
+            color: #799ec2;
+            font-size: 24px;
+        }
+
+        .logo a:hover {
+            color: #4A90E2;
+        }
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+        }
+
+        .video-js {
+            width: 93%;
+            height: 490px;
+            background-color: #3c4a5a;
+            margin-bottom: 10px;
+            border: 2px solid #1d2a36;
+        }
+
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            width: 93%;
+            margin: 10px 0;
+            text-align: center;
+        }
+
+        .toggle-options, .season-selector, .setting-options {
+            display: flex;
+            justify-content: center;
+            margin: 2px 0;
+        }
+
+        .toggle-options button, .season-selector button, .setting-options button {
+            background-color: #3c6eb3;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            flex: 1;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .toggle-options button:hover, .season-selector button:hover, .setting-options button:hover {
+            background-color: #5a9cec;
+            transform: scale(1.05);
+        }
+
+        .toggle-options button.active, .season-selector button.active, .setting-options button.active {
+            background-color: #4A90E2;
+        }
+
+        .episode-container {
+            display: flex;
+            justify-content: center;
+            overflow-y: auto;
+            height: 200px;
+            width: 90%;
+            border: 1px solid #799ec2;
+            background-color: #537196;
+            padding: 10px;
+            scrollbar-width: none;
+        }
+
+        .episode-list {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        .episode-list button {
+            background-color: #34495E;
+            color: white;
+            border: none;
+            padding: 10px;
+            margin: 5px;
+            width: 90%;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .episode-list button:hover {
+            background-color: #5a6b7c;
+            transform: scale(1.05);
+        }
+
+        .episode-list button.active {
+            background-color: #5a6b7c;
+            color: #2b3e50;
+        }
+
+        @media screen and (max-width: 768px) {
+            .video-js {
+                width: 89%;
+                height: 260px;
+            }
+
+            .episode-container {
+                width: 83%;
+                height: 150px;
+            }
+
+            .button-container {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <a href="https://better-anime.github.io/home/"><strong>Better Anime</strong></a>
+            </div>
+        </div>
+
+        <div class="content"></div>
+            <video id="my-video" class="video-js" controls preload="auto"
+                   poster="https://m.media-amazon.com/images/M/MV5BNzIxMjFmMDYtYWU4ZC00MTUzLWJhYzUtNjE4YzYyOTAyYzllXkEyXkFqcGc@._V1_.jpg"
+                   data-setup="{}">
+                <source id="video-source" src="https://example.mp4" type="video/mp4" />
+            </video>
+
+            <div class="button-container">    
+                <div class="toggle-options">
+                    <button onclick="toggleLanguage('sub')" id="subButton" class="active">Subbed</button>
+                    <button onclick="toggleLanguage('dub')" id="dubButton">Dubbed</button>
+                </div>
+
+                <div class="setting-options">
+                    <button id="previousButton" onclick="playPreviousEpisode()">Previous</button>
+                    <button id="autonextButton" onclick="toggleAutoNext()">Auto Next</button>
+                    <button id="nextButton" onclick="playNextEpisode()">Next</button>
+                </div>
+
+                <div class="season-selector">
+                    <button onclick="selectSeason(1)" id="season1Button" class="active">Season 1</button>
+                    <button onclick="selectSeason(2)" id="season2Button">Season 2</button>
+                    <button onclick="selectSeason(3)" id="season3Button">Season 3</button>
+                </div>
+            </div>
+
+            <div class="episode-container">
+                <div class="episode-list" id="episode-list">
+                    <!-- Episodes will be dynamically added here -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://vjs.zencdn.net/8.16.1/video.min.js"></script>
+
+    <script>
+        const episodes = {
+            sub: {
+                season1: [
+                    { title: "Episode 1", url: "https://wf1.jonextugundu.net/_v7/5ecd183e97aed4983aceae55d84f5af7c251fbea1eb90f494f3494638183f47a140263a7cfd8f18999a51ae902d308a8f18655402b673c81c361143c4aa31b6357d7e3d598029de5bd06b8eb9a0542a5594dc3b51e7a1a5cbd1dab8e7c23ee88f16be99afb16b924e6c10d5c11dfec0009f73e3849cd7f539582f0d123c08420/master.m3u8?faststream-headers=%7B%22origin%22%3A%22https%3A%2F%2Fmegacloud.tv%22%2C%22referer%22%3A%22https%3A%2F%2Fmegacloud.tv%2F%22%7D&faststream-mode=accelerated_hls" },
+                    { title: "Episode 2", url: "https://fds.jonextugundu.net/_v7/25d60236659b64b40f270f8542097613e86c290877ff3ab4bcff2bc642189bc3fc3db6ba1a6d58b523151a8e06d01f34a92ecfd39569c2ce51cc0a610c839d7d4b7d369ffea194b051518ab6bfbb10a40183c7fa97a007b04f061e22eebf9df7cb7d9a577cb76a2803265bd2247bc467454f5470fbfb454159ae52e0cfe7db16/master.m3u8?faststream-headers=%7B%22origin%22%3A%22https%3A%2F%2Fmegacloud.tv%22%2C%22referer%22%3A%22https%3A%2F%2Fmegacloud.tv%2F%22%7D&faststream-mode=accelerated_hls" },
+                    { title: "Episode 3", url: "https://w2r.jonextugundu.net/_v7/a96a99150ca81340cdec76dbc18be270983ffe2b5ba4cdaa1f29bc238be513c60f937ebe56698fb7f560649e15aa7f9b0fdc379e8107314cac2bde57ea9c3cbbb3813ecd06e060754e983e86819144c5c2e7711755aa5332398e8d6f7e7f044d1fc74e0b4e217364bfdf27fabe1199e51fc03bd48fccea9e0994e82ca38229b0/master.m3u8?faststream-headers=%7B%22origin%22%3A%22https%3A%2F%2Fmegacloud.tv%22%2C%22referer%22%3A%22https%3A%2F%2Fmegacloud.tv%2F%22%7D&faststream-mode=accelerated_hls" },
+                    { title: "Episode 4", url: "https://g4fv.jonextugundu.net/_v7/1751706dc40038d4a9f4fa97670f49ff3709b5b1d27a81a01bbf5d5069a34612238411ba7ce3ac0c72ee9eb247aa3a7ce4a19611a7f4923c9f63d26ddb10659b2deee48d3a261b89eff96252b79017b6ee30b0dc2e881672317fcd168cdec200bf3fa13637817afc026c0b67fd963e015a1da728fa58d03a738cde73bcba5de8/master.m3u8?faststream-headers=%7B%22origin%22%3A%22https%3A%2F%2Fmegacloud.tv%22%2C%22referer%22%3A%22https%3A%2F%2Fmegacloud.tv%2F%22%7D&faststream-mode=accelerated_hls" },
+                    { title: "Episode 5", url: "https://g4fv.jonextugundu.net/_v7/03455f12df9522744e208064a33519ec8cc9befbb2748e5faa49be4cb896540fc20b01277d5c1e70de316d1b803b42803411221142fb0778cb5d51d90f98742f10dac8c679b955f43cb2cbf4dc291196e5d66fcffbab15b6651995cede6496074e3e6dda31e3af56c94ff61a0838d0fc03966c1b0bfa2b09ff288b7d6476c565/master.m3u8?faststream-headers=%7B%22origin%22%3A%22https%3A%2F%2Fmegacloud.tv%22%2C%22referer%22%3A%22https%3A%2F%2Fmegacloud.tv%2F%22%7D&faststream-mode=accelerated_hls" }
+                ]
+            },
+            dub: {
+                season1: [
+                    { title: "Episode 1", url: "https://gg3.jonextugundu.net/_v7/3114e7591ca60e20a3972048abbc2188fe98aac8d61bed88dd5e7080facbce38dca4bcd0c693c6606a843bd3188c920ed9ab67524b37d154e459ce2748ba0da950e4413a01c12fd25c63222070f9f0bf5bcd135c880e2f9299aff17110f6477efb32a7b23dcba69541d55746ca0a9e571e9ce231c6d0f714c4e0d565f8060e21/master.m3u8?faststream-headers=%7B%22origin%22%3A%22https%3A%2F%2Fmegacloud.tv%22%2C%22referer%22%3A%22https%3A%2F%2Fmegacloud.tv%2F%22%7D&faststream-mode=accelerated_hls" },
+                    { title: "Episode 2", url: "https://fds.jonextugundu.net/_v7/ede45debf590b5f6cf1632e5ebb9f98e65f6a6cdc30f682436c4306fc7b2145d09d40ba38f59ac5de926ad27771969fc0bf940068df21223bba50271477b64586b5b094e16f88c4dff391b876f85b079c4b817cbf3e793c3d7060309ae1aba745afc86ba0a0b450aa66147bddc3c447ee02ce49306a069661f75a41484a87d39/master.m3u8?faststream-headers=%7B%22origin%22%3A%22https%3A%2F%2Fmegacloud.tv%22%2C%22referer%22%3A%22https%3A%2F%2Fmegacloud.tv%2F%22%7D&faststream-mode=accelerated_hls" },
+                    { title: "Episode 3", url: "https://mmd.jonextugundu.net/_v7/ef762f4cb08067dc50f162f9a003af5f942e210d11d3aeab6b5964bd737ec7ca3906b202cdf63588c409e4b8abd85a8fa9b85647c8a789d60fe3166e9db7de97d07b40c4f5247b07c1beca2ecc42a354d4f9261ef09a85a4905886990a825d2c87d15d38990416ac25c7cfcdff28e76d8a58b0b2430e66b6d70259ef4be7f272/master.m3u8?faststream-headers=%7B%22origin%22%3A%22https%3A%2F%2Fmegacloud.tv%22%2C%22referer%22%3A%22https%3A%2F%2Fmegacloud.tv%2F%22%7D&faststream-mode=accelerated_hls" }
+                ]
+            }
+        };
+    </script>
+
+    <script>
+        videojs.addLanguage('en', {"The media could not be loaded, either because the server or network failed or because the format is not supported.": "Please select an episode to watch!"});
+
+        fetch('https://raw.githubusercontent.com/Better-Anime/Watch/main/main-script.js')
+            .then(response => response.text())
+            .then(scriptContent => {
+                const script = document.createElement('script');
+                script.textContent = scriptContent;
+                document.body.appendChild(script);
+            })
+    </script>
+
+</body>
+</html>
