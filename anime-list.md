@@ -1,5 +1,6 @@
 A ------------------------------------------------
   Aldermin On The Sky
+  Attack On Titan
 B ------------------------------------------------
   Berserk Of Gluttony
   Black Clover
@@ -23,12 +24,16 @@ I ------------------------------------------------
   Is This A Zombie
 J ------------------------------------------------
   Jujutsu Kaisen
-K ------------------------------------------------
-  Medaka Kuroiwa Is Impervious To My Charms
-L ------------------------------------------------
-  ReLIFE
 M ------------------------------------------------
+  Medaka Kuroiwa Is Impervious To My Charms
+  My Hero Academia
+O ------------------------------------------------
+  Overlord
+R ------------------------------------------------
+  ReLIFE
+S ------------------------------------------------
   Sakamoto Days
+  The Seven Deadly Sins
   Shikimori's Not Just A Cutie
   Solo Leveling
   Spy X Family
