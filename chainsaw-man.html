@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chainsaw Man</title>
+    <link href="https://vjs.zencdn.net/8.16.1/video-js.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/videojs-http-streaming@2.15.1/dist/videojs-http-streaming.min.js"></script>
+    <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/Better-Anime/Watch/refs/heads/main/BA.png">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: #2b3e50;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 80%;
+            max-width: 1000px;
+            background-color: #2b3e50;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            border-radius: 10px;
+            padding-bottom: 20px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 20px;
+            background: linear-gradient(to bottom, #0a8cc0, #2b3e50); /* Gradient from light sky blue to main page color */
+            color: rgb(28, 137, 233);
+            width: 100%;
+            position: relative;
+            margin-bottom: 7px;
+        }
+
+        .logo {
+            position: absolute;
+            margin-left: 25px;
+        }
+
+        .logo a {
+            text-decoration: none;
+            color: #799ec2;
+            font-size: 24px;
+        }
+
+        .logo a:hover {
+            color: #4A90E2;
+        }
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+        }
+
+        .video-js {
+            width: 93%;
+            height: 490px;
+            background-color: #3c4a5a;
+            margin-bottom: 10px;
+        }
+
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            width: 93%;
+            margin: 10px 0;
+            text-align: center;
+        }
+
+        .toggle-options, .season-selector, .setting-options {
+            display: flex;
+            justify-content: center;
+            margin: 2px 0;
+        }
+
+        .toggle-options button, .season-selector button, .setting-options button {
+            background-color: #3c6eb3;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            flex: 1;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .toggle-options button:hover, .season-selector button:hover, .setting-options button:hover {
+            background-color: #5a9cec;
+            transform: scale(1.05);
+        }
+
+        .toggle-options button.active, .season-selector button.active, .setting-options button.active {
+            background-color: #4A90E2;
+        }
+
+        .episode-container {
+            display: flex;
+            justify-content: center;
+            overflow-y: auto;
+            height: 200px;
+            width: 90%;
+            border: 1px solid #799ec2;
+            background-color: #537196;
+            padding: 10px;
+            scrollbar-width: none;
+        }
+
+        .episode-list {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        .episode-list button {
+            background-color: #34495E;
+            color: white;
+            border: none;
+            padding: 10px;
+            margin: 5px;
+            width: 90%;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .episode-list button:hover {
+            background-color: #5a6b7c;
+            transform: scale(1.05);
+        }
+
+        .episode-list button.active {
+            background-color: #5a6b7c;
+            color: #2b3e50;
+        }
+
+        @media screen and (max-width: 768px) {
+            .video-js {
+                width: 89%;
+                height: 260px;
+            }
+
+            .episode-container {
+                width: 83%;
+                height: 150px;
+            }
+
+            .button-container {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <a href="https://better-anime.github.io/home/"><strong>Better Anime</strong></a>
+            </div>
+        </div>
+
+        <div class="content"></div>
+            <video id="my-video" class="video-js" controls preload="auto"
+                   poster="https://m.media-amazon.com/images/M/MV5BZGY2ZTM2MWMtNzA2OS00ZjJlLWIwZTMtMDBhN2EwYjZjZjEyXkEyXkFqcGc@._V1_.jpg"
+                   data-setup="{}">
+                <source id="video-source" src="https://example.mp4" type="video/mp4" />
+            </video>
+
+            <div class="button-container">
+                <div class="toggle-options">
+                    <button onclick="toggleLanguage('sub')" id="subButton" class="active">Subbed</button>
+                    <button onclick="toggleLanguage('dub')" id="dubButton">Dubbed</button>
+                </div>
+
+                <div class="setting-options">
+                    <button id="previousButton" onclick="playPreviousEpisode()">Previous</button>
+                    <button id="autonextButton" onclick="toggleAutoNext()">Auto Next</button>
+                    <!-- <button id="skipintroButton" onclick="skipIntro()">Skip Intro</button> -->
+                    <button id="nextButton" onclick="playNextEpisode()">Next</button>
+                </div>
+
+                <div class="season-selector">
+                    <button onclick="selectSeason(1)" id="season1Button" class="active">Season 1</button>
+                </div>
+            </div>
+
+            <div class="episode-container">
+                <div class="episode-list" id="episode-list">
+                    <!-- Episodes will be dynamically added here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://vjs.zencdn.net/8.16.1/video.min.js"></script>
+    
+    <script>
+        const episodes = {
+            sub: {
+                season1: [
+                    { title: "Episode 1", url: "https://g4fv.jonextugundu.net/_v7/0512d30fea49d3976289b46acc8a38638d55d6564f7f941730c8b0d05dca6453beac1d9cbf43d1d9a89c21a0eab5c2cfd11250239daa17735ab16fbd6500fce32ffdb8049f4a0b39f9025d60a2352704b2ce837477e3e98798af8ffa0903548dccef568904929f8c11035ac96f774ae3642ef5575024dfc3ca8c84fc4a332373/master.m3u8?faststream-headers=%7B%22origin%22%3A%22https%3A%2F%2Fmegacloud.tv%22%2C%22referer%22%3A%22https%3A%2F%2Fmegacloud.tv%2F%22%7D&faststream-mode=accelerated_hls"},
+                    { title: "Episode 2", url: "https://ea.netmagcdn.com:2228/hls-playback/6c8ab57e6cb46be5a68c49d99ec56e1d167907538e4105e9484666010a26dff3d84cb02d06dd5fe6d1d4f3808024504632e11acc2dcc29fc67ba7437cabf03ed288756d48e986887a6915bba65ed749a0e985bf0163bb7870a067eca393e6c2ed86f5b1c074a5e619033dac6637fe4f81e0a5873558e5bd39adbd000c17782d341ec165cf11e8343a03506f51e25a073/master.m3u8?faststream-headers=%7B%22origin%22%3A%22https%3A%2F%2Fmegacloud.tv%22%2C%22referer%22%3A%22https%3A%2F%2Fmegacloud.tv%2F%22%7D&faststream-mode=accelerated_hls"},
+                    { title: "Episode 3", url: "https://ea.netmagcdn.com:2228/hls-playback/cda88d82a88cd20a0978c5c176affe16924765a49fe0ddcdd8f6de14d02584be852b90076b51ba1b79a20b3bfff7427161278803ce313fdf27d8a8ab9930b9f90a547da19bcabc01e6c9146ba05ebe28bd83c477b9ce9a26cb60277bacbdf285ebde4264144f433d217e58af8a5a1549afdaabeb1a93fee27dc64dc7d0646b2fd1095c7bf535af8a3f1105235264e9c8/master.m3u8?faststream-headers=%7B%22origin%22%3A%22https%3A%2F%2Fmegacloud.tv%22%2C%22referer%22%3A%22https%3A%2F%2Fmegacloud.tv%2F%22%7D&faststream-mode=accelerated_hls"},
+                    { title: "Episode 4", url: "https://ef.netmagcdn.com:2228/hls-playback/c65b29200a9a5809ab980056fb711822b9e5f94a96e12abb7d70788a1bfe63c3cf891bb8a63a5cca77201dcb9ea266c23f101147e8c63009618c6cc8b9a83afc6c270f1de15dc95f0fc37dc7c2742fa8d306f9f5de9e0bd0140a7759690bc13e26449b495cae95c1e6f387155fb4470ef640213875f3082bb3b5c859de16b78a920115324d566b7400a62a7b00692592/master.m3u8?faststream-headers=%7B%22origin%22%3A%22https%3A%2F%2Fmegacloud.tv%22%2C%22referer%22%3A%22https%3A%2F%2Fmegacloud.tv%2F%22%7D&faststream-mode=accelerated_hls"},
+                    { title: "Episode 5", url: "https://eb.netmagcdn.com:2228/hls-playback/b59a53c3445eca8fcd8ca395100074aceaf063c2ff515a9b833b2ec9a2be30cf70ec4d530247ce437dd64b8e429eed74fe1e946215fdd8de2b3d882aa6135f829d680683e191330398a4a859fec932d9714780e5e32dc03984dded35b826375b06207287e132670d3a8b220fad1378068c7b583d95ec908cc91255f178921d0c4b0c58432ab5095bbfbca51bfd42b2cc/master.m3u8?faststream-headers=%7B%22origin%22%3A%22https%3A%2F%2Fmegacloud.tv%22%2C%22referer%22%3A%22https%3A%2F%2Fmegacloud.tv%2F%22%7D&faststream-mode=accelerated_hls"},
+                    { title: "Episode 6", url: "https://ed.netmagcdn.com:2228/hls-playback/41116a0fac7016dda871f982458bc3809df01b805002913bd5f27b2e357ce4038dcc6cd48e7a4c1b35102eab0e077ca7a6d3c27e20d0015b60cc2d17827019492bedbda4a7e753dcb2a9a68dfc829eed72d71279459febb6de3143e3f00dc34604ed7778af289321c75988213b4847381d1d967ecf91588e891d35a421103cd7946407d13b1a14449880fe520edea540/master.m3u8?faststream-headers=%7B%22origin%22%3A%22https%3A%2F%2Fmegacloud.tv%22%2C%22referer%22%3A%22https%3A%2F%2Fmegacloud.tv%2F%22%7D&faststream-mode=accelerated_hls"},
+                    { title: "Episode 7", url: "https://eb.netmagcdn.com:2228/hls-playback/e388d24f22dd1b03ec50dddaa66f3e00d061705f313d3c2764636bc7be1e37da0744d423e43f37225634dd42c58ca2d2862a1e8ebc3358fdcb65de71dded7709590d4a22c7c59e7ae5d4b57ab1ad0bf617ee00f3b96ee8e08492444eda0c6ab70aa2b78810cba22dd4bd8c34a432ca9933d57b530079fcff7d3d8d01f0e98269a6e46e8c3d2f1e5ccb56a0d7a8d80963/master.m3u8?faststream-headers=%7B%22origin%22%3A%22https%3A%2F%2Fmegacloud.tv%22%2C%22referer%22%3A%22https%3A%2F%2Fmegacloud.tv%2F%22%7D&faststream-mode=accelerated_hls"},
+                    { title: "Episode 8", url: "https://ef.netmagcdn.com:2228/hls-playback/471d082205fcd1afa522bd17e1bccf839cc0f22734a7a4ca29f178b9a783e007cbaf741f61ece538705cbc0110b4a5dbb566e48af93db8a1aa7144fe256f053d7bd3a9d6d708a58a2d017c5a14b41c13548f902b58099a56dc96bd9e14504a5a3b104b0ee1644c6a5ee96b1d4d3ceb7e091bd233f085cb4e966ba3a68ef3bd9169aa7601f2c89575aea71058420ba7a2/master.m3u8?faststream-headers=%7B%22origin%22%3A%22https%3A%2F%2Fmegacloud.tv%22%2C%22referer%22%3A%22https%3A%2F%2Fmegacloud.tv%2F%22%7D&faststream-mode=accelerated_hls"},
+                    { title: "Episode 9", url: "https://eb.netmagcdn.com:2228/hls-playback/0ea29a9f060c2e34cd61395291ef168e9ca952bedb27701246acc3ba1ed90fb68763f8a8ce2e5645d5e7014df8351fe898fad2388b9a8cef962af055f25f692c55757100126d285b079c099e1ea7119f4420b67ad5d47fcbb8fc82eccb62d2a926fdba9ce556c223385076b099c1b6430f3d2981cdd8db7d3395f2624eaaf9bed6622211426adc262531df094a8fb351/master.m3u8?faststream-headers=%7B%22origin%22%3A%22https%3A%2F%2Fmegacloud.tv%22%2C%22referer%22%3A%22https%3A%2F%2Fmegacloud.tv%2F%22%7D&faststream-mode=accelerated_hls"},
+                    { title: "Episode 10", url: "https://eg.netmagcdn.com:2228/hls-playback/747b67e3df91a4674f80838ab24120971dbe9d9e98c874ada66da4a92dcbb20c5e3b091777904941484ce85b38b98400fb5d33c7726b2ef3047104a362de28b3119234930abeeee7986c53016610ea4f58c63981c48a68d6911dbf4d6bbba427d5a3fd9a701d32fd50672e66b7c3ccd74ebbcb422775d003ae6c942586a97d0afb2f5b0bdb9a43bc470331ce25750dda/master.m3u8?faststream-headers=%7B%22origin%22%3A%22https%3A%2F%2Fmegacloud.tv%22%2C%22referer%22%3A%22https%3A%2F%2Fmegacloud.tv%2F%22%7D&faststream-mode=accelerated_hls"},
+                    { title: "Episode 11", url: "https://ec.netmagcdn.com:2228/hls-playback/ea7b9f35e352037c684414426dfa731f660263d6e3baf8bc36bf9d32b4a4eba0d1475e1839b49e0fdefb75634e0e9f71ac98ab21729d238088ab7fc2f88ba62e0422cf51c8e7490a71ec64bfeb530212c13a10bfebcab90d4201b76111f3152d8dda52a600056165c81a6d1472f1445ee43b0453329df3ac63fa2bbb3ce0ee96c5fed8a726ecbc144a4e47cf497f3f03/master.m3u8?faststream-headers=%7B%22origin%22%3A%22https%3A%2F%2Fmegacloud.tv%22%2C%22referer%22%3A%22https%3A%2F%2Fmegacloud.tv%2F%22%7D&faststream-mode=accelerated_hls"},
+                    { title: "Episode 12", url: "https://ea.netmagcdn.com:2228/hls-playback/bed1e0784d5157f7c19eb6577f269cf8cbec79982e4bd29a73b9d83876684e76430ded914817ea3210b9c0eca9ab56fc7b9280e96486e6368151c0ed2ba43c0c0e2ab9302f42553ab9817909c05c1e88eec7efb651185f1f7eae05d16833a061e89ac7a743867b7b3ecd600315cf9824ed7aa3bad2fe3ac38160b701d31ba57903426e120b0f00558409b3be75b4c9de/master.m3u8?faststream-headers=%7B%22origin%22%3A%22https%3A%2F%2Fmegacloud.tv%22%2C%22referer%22%3A%22https%3A%2F%2Fmegacloud.tv%2F%22%7D&faststream-mode=accelerated_hls"}
+                ]
+            },
+            dub: {
+                season1: [
+                    { title: "Episode 1", url: "https://vd2.jonextugundu.net/_v7/e47e1c5a3c2e90e65610959f47987c3576258b0991727c6fbcac1cacae555582a936dc6a4b9c7e5292c7bd511dcfebcef4ed770dba676ebc3180f222e3557d488c992723694f3dcf0b94da82dd4d8b6cbcb6a9046493c8d94ef01b51f6eefb5da214bdbabb6bbf5cf0542607d0a3e82b65bab4e6350b23be24e61bede1b39e7c/master.m3u8?faststream-headers=%7B%22origin%22%3A%22https%3A%2F%2Fmegacloud.tv%22%2C%22referer%22%3A%22https%3A%2F%2Fmegacloud.tv%2F%22%7D&faststream-mode=accelerated_hls"},
+                    { title: "Episode 2", url: "https://ef.netmagcdn.com:2228/hls-playback/46cfb2f02f597960646b7a4a73d1740861cddc716feb36beb7fbdc274f7441f2992adf25f45add2d63add04661ab91ef318fc222e5a016f2946b8c6e2093d9694659d24a897c93d260cc5b767374958db799b33c42c1591b3d141a360bc516f463b7f8ba4ad8060685a496fef853dc2be5dbbc5572403d176339037f30a3634a3160d39994f664b150fa70ff0c7a8c46/master.m3u8?faststream-headers=%7B%22origin%22%3A%22https%3A%2F%2Fmegacloud.tv%22%2C%22referer%22%3A%22https%3A%2F%2Fmegacloud.tv%2F%22%7D&faststream-mode=accelerated_hls"},
+                    { title: "Episode 3", url: "https://eb.netmagcdn.com:2228/hls-playback/5978b5a7dc716a515c6f065fc27cdc212d37663c88bdc9e9063a1392ebd57ac4a5227f8ee5e2aee90b54f58d74e60a69a42f3970d029abef13b1400be0ff396720a7ec72d5b0fba3f3a9530b66eb9632a8426fa44829f68c177bab724a3e8498032e3d64a728d7ffbb00fb0baf01efba2a0a60fa4e38009eb3bdbc0507c8c458c710bcd906d16efbe4e394ddc3fa806c/master.m3u8?faststream-headers=%7B%22origin%22%3A%22https%3A%2F%2Fmegacloud.tv%22%2C%22referer%22%3A%22https%3A%2F%2Fmegacloud.tv%2F%22%7D&faststream-mode=accelerated_hls"},
+                    { title: "Episode 4", url: "https://eg.netmagcdn.com:2228/hls-playback/acdb6294c56773b27b18c8b30bb29d096af9cb951af7feac147a495c2ff4f23e40e8dee69f8f3638a66920e189e480feb0c92c3729c5972c68e3a33a7154e079d5f29fa51397aa9237d450304be96584a243ef5d2dda9f7c99801ff3231434032692e70369020f2b9593332a866f1a6ee275a93bdb8bdfe895e536fb27992162b60f275bd8cbb25e729f8f23feb155fe/master.m3u8?faststream-headers=%7B%22origin%22%3A%22https%3A%2F%2Fmegacloud.tv%22%2C%22referer%22%3A%22https%3A%2F%2Fmegacloud.tv%2F%22%7D&faststream-mode=accelerated_hls"},
+                    { title: "Episode 5", url: "https://ef.netmagcdn.com:2228/hls-playback/4a445ef700bbc0c002733492b9945c51736529986f7ccbeefbecb669aacce4971db0cdc25340c5dbc8aad5b8d9c2fcbcc76a6ab38b8adcba457056ea82229e7ef58ce946d789d2bb9952145ec2b548a00e44aafdf356a4a5775247ec9a3f807577f5b81d1f12cd1ec6d071849900a512bc7da91a23e085b09760b73180babc50fef031f0f8a33087f07d4c6347af62da/master.m3u8?faststream-headers=%7B%22origin%22%3A%22https%3A%2F%2Fmegacloud.tv%22%2C%22referer%22%3A%22https%3A%2F%2Fmegacloud.tv%2F%22%7D&faststream-mode=accelerated_hls"},
+                    { title: "Episode 6", url: "https://eg.netmagcdn.com:2228/hls-playback/b097a9c6b68c1dbfd5ef4eeb295640571cb7938873f4abf2ff64aa30d562900a4bd9be70d9fed1785779483cf58d39c005df8de2f2ac15f594a39cf3c3d27339432483b84d3c9c759eb1944336b6666d7f08167f4a3f4c398c023b09142a08e8ebaad0a5c0fecfdf35449b08ac0c14b42e42da069b420a6951bc25ab0121ba8e1968d00135c0c292d59d90466eae390a/master.m3u8?faststream-headers=%7B%22origin%22%3A%22https%3A%2F%2Fmegacloud.tv%22%2C%22referer%22%3A%22https%3A%2F%2Fmegacloud.tv%2F%22%7D&faststream-mode=accelerated_hls"},
+                    { title: "Episode 7", url: "https://ea.netmagcdn.com:2228/hls-playback/efbb7bdf581e1d8d0a6a84d46b8a1a6c5ff364ac32d1861599a87edf7bbfa5ba061e0a0e6dea992dad5a6a11f16feab9c82144ae066e307c99b2dc52a6a82d03a9fcc18f21b130cf774c1abbc4b9197c2f7cc755cf962318dc746bb3fc4d1c9db5ca8230677d37ee4c3f45d9eb7ac23ac608bfc775d388cf293c7bd1330259f1b68d1f84a02c40e59097795f093e5e46/master.m3u8?faststream-headers=%7B%22origin%22%3A%22https%3A%2F%2Fmegacloud.tv%22%2C%22referer%22%3A%22https%3A%2F%2Fmegacloud.tv%2F%22%7D&faststream-mode=accelerated_hls"},
+                    { title: "Episode 8", url: "https://eg.netmagcdn.com:2228/hls-playback/6692f3bf8ac82fc95ab996ad0edfd902fa2b4c9dc955c0b652f5f36c416493d4fe5c647859adc0ab3368f1bc486602093238a121a15618d05c264584420b409f0c0c06a329876654165dd1d964d96106204fbc9447a9b14018042330241e35b758220fff0fe3fefe6619ac1d81505371cf738f06d9c7e4c06c557ac7fca0b697a1cfa800a85561a12fc3f22176ce51b4/master.m3u8?faststream-headers=%7B%22origin%22%3A%22https%3A%2F%2Fmegacloud.tv%22%2C%22referer%22%3A%22https%3A%2F%2Fmegacloud.tv%2F%22%7D&faststream-mode=accelerated_hls"},
+                    { title: "Episode 9", url: "https://eg.netmagcdn.com:2228/hls-playback/c6651df667ec16699d03e4e39472553089f21f43a21db2086d9ac67a3af4307f2d8e1826d4da47592506ccece3e7d5417ee8947d83fb07a4d228868e754441fd6e700e0a989d07322b39b904e09393801da7a3e0379beb8ea883306990756acf9669b72498582f73ffff895a93ccd2ac00c33603cec31ff74820cd888f345a15aba627e0ce035ef26028ded4b47d670d/master.m3u8?faststream-headers=%7B%22origin%22%3A%22https%3A%2F%2Fmegacloud.tv%22%2C%22referer%22%3A%22https%3A%2F%2Fmegacloud.tv%2F%22%7D&faststream-mode=accelerated_hls"},
+                    { title: "Episode 10", url: "https://ed.netmagcdn.com:2228/hls-playback/e0ff088c0db868d7dc33e377781198970563305de63e475fea450ec0f0b75d9cb2858f44acf8e1d216c6e5d636a7e2e4dd6e724825010b222ae0fd279413c9c1d03f9e92a9be837845b30e2d0a8fe9090ca0372f875ea08ee539f390b0b42648ee975c96c7c5824cc97e0c20f3b7fe4a012e586dc531ae26f2c2dc09f2669c36fc87f9e30b1cf2bcce2e7dbc4707879d/master.m3u8?faststream-headers=%7B%22origin%22%3A%22https%3A%2F%2Fmegacloud.tv%22%2C%22referer%22%3A%22https%3A%2F%2Fmegacloud.tv%2F%22%7D&faststream-mode=accelerated_hls"},
+                    { title: "Episode 11", url: "https://ee.netmagcdn.com:2228/hls-playback/09a8beba27f2002a6c12d88c41308f2d87f7b8cd06bf6bf866c5f196bb59e2cbf517007d762997c230f0f88b769f0351999d8a5d008d2a9a0fa3d93a029680dc7a30f1cb9e6dc87d81aa086c0e16f7c0cae1803a1cd1f63b048e2228a1758349e35c9ac3c4f5d3d989abcb5b0f26b403d446ce093df4129cd1361b1be68d04927238d52dec4609eb1c8deefda0fba1e2/master.m3u8?faststream-headers=%7B%22origin%22%3A%22https%3A%2F%2Fmegacloud.tv%22%2C%22referer%22%3A%22https%3A%2F%2Fmegacloud.tv%2F%22%7D&faststream-mode=accelerated_hls"},
+                    { title: "Episode 12", url: "https://ea.netmagcdn.com:2228/hls-playback/9c7134faca79342db41cfb966a57d5be90e6f08c0217db3f17b5478aa878a61cd275d0e953f80d174df9703b43551d7f3839cf03eed572a3fa8c9a17995ed3d58dc48e7a9f81b74c30208447f4ad33de57a6c494a94277f44b8f3798dd6d383ad1d117b35269ee009d08cc2c41acadb7171b8e0929d1fbb6a26a97fbacb8166a9924be1bcfb346f480de09f5858e9fa6/master.m3u8?faststream-headers=%7B%22origin%22%3A%22https%3A%2F%2Fmegacloud.tv%22%2C%22referer%22%3A%22https%3A%2F%2Fmegacloud.tv%2F%22%7D&faststream-mode=accelerated_hls"}
+                ]
+            }
+        };
+    </script>
+
+    <script>
+        videojs.addLanguage('en', {"The media could not be loaded, either because the server or network failed or because the format is not supported.": "Please select an episode to watch!"});
+
+        fetch('https://raw.githubusercontent.com/Better-Anime/Watch/main/main-script.js')
+            .then(response => response.text())
+            .then(scriptContent => {
+                const script = document.createElement('script');
+                script.textContent = scriptContent;
+                document.body.appendChild(script);
+            })
+    </script>
+    
+</body>
+</html>
