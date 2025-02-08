@@ -1,4 +1,4 @@
-        let currentLanguage = localStorage.getItem('preferredLanguage') || 'sub';
+let currentLanguage = localStorage.getItem('preferredLanguage') || 'sub';
         let currentSeason = 'season1';
         let currentEpisodeButton = null;
         let autoNext = JSON.parse(localStorage.getItem('autoNext')) || false;
@@ -136,4 +136,3 @@
 
         // Load episodes initially
         toggleLanguage(currentLanguage);
-        document.getElementById('autonextButton').classList.toggle('active', autoNext);
