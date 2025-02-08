@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demon Slayer</title>
+    <link href="https://vjs.zencdn.net/8.16.1/video-js.css" rel="stylesheet" />
+    <link href="https://better-anime.github.io/watch/styles.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/videojs-http-streaming@2.15.1/dist/videojs-http-streaming.min.js"></script>
+    <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/Better-Anime/Watch/refs/heads/main/BA.png">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <a href="https://better-anime.github.io/home/"><strong>Better Anime</strong></a>
+            </div>
+        </div>
+
+        <div class="content"></div>
+            <video id="my-video" class="video-js" controls preload="none"
+                   poster="https://m.media-amazon.com/images/M/MV5BYzZkYjM1MWMtNTY3Mi00MTMzLTlhNmQtN2ExZjFkYzdjZmFjXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"
+                   data-setup="{}">
+                <source id="video-source" src="https://example.mp4" type="video/mp4" />
+            </video>
+
+            <div class="button-container">    
+                <div class="toggle-options">
+                    <button onclick="toggleLanguage('sub')" id="subButton" class="active">Subbed</button>
+                    <button onclick="toggleLanguage('dub')" id="dubButton">Dubbed</button>
+                </div>
+
+                <div class="setting-options">
+                    <button id="previousButton" onclick="playPreviousEpisode()">Previous</button>
+                    <button id="autonextButton" onclick="toggleAutoNext()">Auto Next</button>
+                    <button id="nextButton" onclick="playNextEpisode()">Next</button>
+                </div>
+
+                <div class="season-selector">
+                    <button onclick="selectSeason(1)" id="season1Button" class="active">Season 1</button>
+                    <button onclick="selectSeason(2)" id="season2Button">Season 2</button>
+                    <button onclick="selectSeason(3)" id="season3Button">Season 3</button>
+                </div>
+            </div>
+
+            <div class="episode-container">
+                <div class="episode-list" id="episode-list">
+                    <!-- Episodes will be dynamically added here -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://vjs.zencdn.net/8.16.1/video.min.js"></script>
+
+    <script>
+        const episodes = {
+            sub: {
+                season1: [
+                    { title: "Episode 1", url: "https://tt57.jonextugundu.net/_v7/0a9e6c8b16a6168f1cbd9210a24c2755ba20d315084f06a8eca39fc31e0b9453fe265e3aa7b7b1fd87c10afcd0bd91508fc9ef914192d7494156349aff621a5566ec0a02c286cbaca0e521fa271c58aee295ccbfa992d419e41d6b208818615fb89170b16013356b7475b5d916c907f9328a0f13320a5b9abf7602c339db42d1/master.m3u8?faststream-headers=%7B%22origin%22%3A%22https%3A%2F%2Fmegacloud.tv%22%2C%22referer%22%3A%22https%3A%2F%2Fmegacloud.tv%2F%22%7D&faststream-mode=accelerated_hls"},
+                    { title: "Episode 2", url: ""},
+                    { title: "Episode 3", url: ""},
+                    { title: "Episode 4", url: "" },
+                    { title: "Episode 5", url: "" },
+                    { title: "Episode 6", url: "" },
+                    { title: "Episode 7", url: "" },
+                    { title: "Episode 8", url: "" },
+                    { title: "Episode 9", url: "" },
+                    { title: "Episode 10", url: "" },
+                    { title: "Episode 11", url: "" },
+                    { title: "Episode 12", url: "" },
+                    { title: "Episode 13", url: "" },
+                    { title: "Episode 14", url: "" },
+                    { title: "Episode 15", url: "" },
+                    { title: "Episode 16", url: "" },
+                    { title: "Episode 17", url: "" },
+                    { title: "Episode 18", url: "" },
+                    { title: "Episode 19", url: "" },
+                    { title: "Episode 20", url: "" },
+                    { title: "Episode 21", url: "" },
+                    { title: "Episode 22", url: "" },
+                    { title: "Episode 23", url: "" },
+                    { title: "Episode 24", url: "" }
+                ],
+                season2: [
+                ]
+            },
+            dub: {
+                season1: [
+                    { title: "Episode 1", url: "https://mmd.jonextugundu.net/_v7/d6a83f70e4854bc38b94eb2c2f504daf5fdeb35e4713fcc5c06fc1ee52120480903ca82c450816c2fd3cc4f2e17b477e1c87e4d2a15e358b6c34b57f9b2dd8cc50e9ee7e043c1428ea3479a10cb73b5a3e25c584988c8f2db78ca4693596569226a28d2548ecbe0c0aac85375d14862f71e258563c19f6c6b0bed69f975dcc55/master.m3u8?faststream-headers=%7B%22origin%22%3A%22https%3A%2F%2Fmegacloud.tv%22%2C%22referer%22%3A%22https%3A%2F%2Fmegacloud.tv%2F%22%7D&faststream-mode=accelerated_hls"},
+                    { title: "Episode 2", url: ""},
+                    { title: "Episode 3", url: ""},
+                    { title: "Episode 4", url: "" },
+                    { title: "Episode 5", url: "" },
+                    { title: "Episode 6", url: "" },
+                    { title: "Episode 7", url: "" },
+                    { title: "Episode 8", url: "" },
+                    { title: "Episode 9", url: "" },
+                    { title: "Episode 10", url: "" },
+                    { title: "Episode 11", url: "" },
+                    { title: "Episode 12", url: "" },
+                    { title: "Episode 13", url: "" },
+                    { title: "Episode 14", url: "" },
+                    { title: "Episode 15", url: "" },
+                    { title: "Episode 16", url: "" },
+                    { title: "Episode 17", url: "" },
+                    { title: "Episode 18", url: "" },
+                    { title: "Episode 19", url: "" },
+                    { title: "Episode 20", url: "" },
+                    { title: "Episode 21", url: "" },
+                    { title: "Episode 22", url: "" },
+                    { title: "Episode 23", url: "" },
+                    { title: "Episode 24", url: "" }
+                ],
+                season2: [
+                ]
+            }
+        };
+    </script>
+
+    <script>
+        videojs.addLanguage('en', {"The media could not be loaded, either because the server or network failed or because the format is not supported.": "Please select an episode to watch!"});
+
+        fetch('https://raw.githubusercontent.com/Better-Anime/Watch/main/main-script.js')
+            .then(response => response.text())
+            .then(scriptContent => {
+                const script = document.createElement('script');
+                script.textContent = scriptContent;
+                document.body.appendChild(script);
+            })
+    </script>
+
+</body>
+</html>
