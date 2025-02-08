@@ -2,6 +2,7 @@
         let currentSeason = 'season1';
         let currentEpisodeButton = null;
         let autoNext = JSON.parse(localStorage.getItem('autoNext')) || false;
+        let skipIntroEnabled = JSON.parse(localStorage.getItem('skipIntroEnabled')) || false;
 
         function toggleLanguage(lang) {
             if (episodes[lang] && episodes[lang][currentSeason]) {
@@ -13,6 +14,12 @@
             }
             updateButtonStyles('toggle-options', currentLanguage);
             loadEpisodes();
+        }
+
+        function toggleSkipIntro() {
+            skipIntroEnabled = !skipIntroEnabled;
+            localStorage.setItem('skipIntroEnabled', JSON.stringify(skipIntroEnabled));
+            document.getElementById('skipintroButton').classList.toggle('active', skipIntroEnabled);
         }
 
         function selectSeason(seasonNumber) {
@@ -40,35 +47,52 @@
         function changeVideo(videoUrl, button) {
             const player = videojs('my-video');
             const savedTime = loadProgress(videoUrl);
+        
+            const currentEpisode = episodes[currentLanguage][currentSeason].find(ep => ep.url === videoUrl);
+        
             player.src({ type: 'application/x-mpegURL', src: videoUrl });
             player.currentTime(savedTime);
             player.play();
-
+        
             if (currentEpisodeButton) {
                 currentEpisodeButton.classList.remove('active');
             }
             button.classList.add('active');
             currentEpisodeButton = button;
-
+        
             player.off('timeupdate');
             player.off('error');
             player.off('ended');
-
-            player.on('timeupdate', function() {
+        
+            player.on('timeupdate', function () {
                 saveProgress(videoUrl, player.currentTime());
+        
+                if (skipIntroEnabled && currentEpisode) {
+                    const currentTime = player.currentTime();
+        
+                    // Skip intro
+                    if (currentTime >= currentEpisode.introBeginning && currentTime < currentEpisode.introEnd) {
+                        player.currentTime(currentEpisode.introEnd);
+                    }
+        
+                    // Skip outro
+                    if (currentTime >= currentEpisode.outroBeginning && currentTime < currentEpisode.outroEnd) {
+                        player.currentTime(currentEpisode.outroEnd);
+                    }
+                }
             });
-
-            player.on('error', function() {
+        
+            player.on('error', function () {
                 player.src({ type: 'application/x-mpegURL', src: videoUrl });
                 player.play();
             });
-
-            player.on('ended', function() {
+        
+            player.on('ended', function () {
                 if (autoNext) {
                     playNextEpisode();
                 }
             });
-
+        
             updateNavigationButtons();
         }
 
@@ -137,3 +161,7 @@
         // Load episodes initially
         toggleLanguage(currentLanguage);
         document.getElementById('autonextButton').classList.toggle('active', autoNext);
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('skipintroButton').classList.toggle('active', skipIntroEnabled);
+        });
