@@ -1,5 +1,5 @@
 let currentLanguage = localStorage.getItem('preferredLanguage') || 'sub';
-let currentSeason = 'season1';
+let currentSeason = localStorage.getItem('currentSeason') || 'season1';
 let currentEpisodeButton = null;
 let autoNext = JSON.parse(localStorage.getItem('autoNext')) || false;
 
@@ -17,6 +17,7 @@ function toggleLanguage(lang) {
 
 function selectSeason(seasonNumber) {
     currentSeason = 'season' + seasonNumber;
+    localStorage.setItem('currentSeason', currentSeason);
     updateButtonStyles('season-selector', currentSeason);
     loadEpisodes();
 }
@@ -32,6 +33,12 @@ function loadEpisodes() {
         button.dataset.url = ep.url;
         button.onclick = () => changeVideo(ep.url, button);
         episodeContainer.appendChild(button);
+
+        // Set active button if it matches the saved episode
+        if (ep.url === localStorage.getItem('currentEpisodeUrl')) {
+            button.classList.add('active');
+            currentEpisodeButton = button;
+        }
     });
 
     updateNavigationButtons();
@@ -49,6 +56,10 @@ function changeVideo(videoUrl, button) {
     }
     button.classList.add('active');
     currentEpisodeButton = button;
+
+    // Save current season and episode
+    localStorage.setItem('currentSeason', currentSeason);
+    localStorage.setItem('currentEpisodeUrl', videoUrl);
 
     player.off('timeupdate');
     player.off('error');
@@ -100,7 +111,8 @@ function updateButtonStyles(containerClass, activeId) {
     document.querySelectorAll(`.${containerClass} button`).forEach(button => {
         button.classList.remove('active');
     });
-    document.getElementById(activeId + 'Button').classList.add('active');
+    const activeButton = document.getElementById(activeId + 'Button');
+    if (activeButton) activeButton.classList.add('active');
 }
 
 function saveProgress(videoUrl, currentTime) {
@@ -135,5 +147,10 @@ function updateNavigationButtons() {
 }
 
 // Load episodes initially
-toggleLanguage(currentLanguage);
+selectSeason(currentSeason.replace('season', ''));
+if (localStorage.getItem('currentEpisodeUrl')) {
+    const currentEpisodeUrl = localStorage.getItem('currentEpisodeUrl');
+    const button = document.querySelector(`button[data-url="${currentEpisodeUrl}"]`);
+    if (button) changeVideo(currentEpisodeUrl, button);
+}
 document.getElementById('autonextButton').classList.toggle('active', autoNext);
