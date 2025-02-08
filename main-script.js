@@ -65,8 +65,29 @@ function changeVideo(videoUrl, button) {
     player.off('error');
     player.off('ended');
 
-    player.on('timeupdate', function() {
+    player.on('timeupdate', function () {
         saveProgress(videoUrl, player.currentTime());
+    
+        if (skipIntroEnabled && currentEpisode) {
+            const currentTime = player.currentTime();
+    
+            // Ensure the intro/outro properties exist and have valid values
+            const { introBeginning, introEnd, outroBeginning, outroEnd } = currentEpisode;
+    
+            if (typeof introBeginning === 'number' && typeof introEnd === 'number') {
+                // Skip intro
+                if (currentTime >= introBeginning && currentTime < introEnd) {
+                    player.currentTime(introEnd);
+                }
+            }
+    
+            if (typeof outroBeginning === 'number' && typeof outroEnd === 'number') {
+                // Skip outro
+                if (currentTime >= outroBeginning && currentTime < outroEnd) {
+                    player.currentTime(outroEnd);
+                }
+            }
+        }
     });
 
     player.on('error', function() {
