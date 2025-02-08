@@ -2,6 +2,7 @@ let currentLanguage = localStorage.getItem('preferredLanguage') || 'sub';
 let currentSeason = localStorage.getItem('currentSeason') || 'season1';
 let currentEpisodeButton = null;
 let autoNext = JSON.parse(localStorage.getItem('autoNext')) || false;
+let skipIntroEnabled = JSON.parse(localStorage.getItem('skipIntroEnabled')) || false;
 
 function toggleLanguage(lang) {
     if (episodes[lang] && episodes[lang][currentSeason]) {
@@ -169,9 +170,11 @@ function updateNavigationButtons() {
 
 // Load episodes initially
 selectSeason(currentSeason.replace('season', ''));
+toggleLanguage(currentLanguage); // Ensure the preferred language is set and buttons are updated
 if (localStorage.getItem('currentEpisodeUrl')) {
     const currentEpisodeUrl = localStorage.getItem('currentEpisodeUrl');
     const button = document.querySelector(`button[data-url="${currentEpisodeUrl}"]`);
     if (button) changeVideo(currentEpisodeUrl, button);
 }
 document.getElementById('autonextButton').classList.toggle('active', autoNext);
+document.getElementById('skipintroButton').classList.toggle('active', skipIntroEnabled);
