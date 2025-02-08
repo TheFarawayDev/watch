@@ -40,7 +40,7 @@
         function changeVideo(videoUrl, button) {
             const player = videojs('my-video');
             const savedTime = loadProgress(videoUrl);
-            player.src({ type: 'application/x-mp4', src: videoUrl });
+            player.src({ type: 'video/mp4', src: videoUrl });
             player.currentTime(savedTime);
             player.play();
 
@@ -59,7 +59,7 @@
             });
 
             player.on('error', function() {
-            player.src({ type: 'application/x-mp4', src: videoUrl });
+            player.src({ type: 'video/mp4', src: videoUrl });
             player.play();
             });
 
