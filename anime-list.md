@@ -33,10 +33,10 @@ O ---------------------------------------------
 R ---------------------------------------------
   ReLIFE
 S ---------------------------------------------
-  Sakamoto Days [PLANNED]
+  Sakamoto Days [INCOMPLETE]
   The Seven Deadly Sins [INCOMPLETE]
   Shikimori's Not Just A Cutie
-  Solo Leveling
+  Solo Leveling [INCOMPLETE]
   Spy X Family
 T ---------------------------------------------
   Taboo Tattoo
