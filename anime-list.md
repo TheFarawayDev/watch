@@ -1,6 +1,6 @@
 A ---------------------------------------------
   Aldermin On The Sky
-  Attack On Titan
+  Attack On Titan [PLANNED]
 B ---------------------------------------------
   Berserk Of Gluttony
   Black Clover
@@ -12,7 +12,7 @@ D ---------------------------------------------
   D-Frag
   Dandadan
   Death Note
-  Demon Slayer
+  Demon Slayer [PLANNED]
   Dr. Stone
 E ---------------------------------------------
   Erased
@@ -26,15 +26,15 @@ J ---------------------------------------------
   Jujutsu Kaisen
 M ---------------------------------------------
   Medaka Kuroiwa Is Impervious To My Charms
-  My Hero Academia
+  My Hero Academia [PLANNED]
   My Star
 O ---------------------------------------------
-  Overlord
+  Overlord [PLANNED]
 R ---------------------------------------------
   ReLIFE
 S ---------------------------------------------
-  Sakamoto Days
-  The Seven Deadly Sins
+  Sakamoto Days [PLANNED]
+  The Seven Deadly Sins [INCOMPLETE]
   Shikimori's Not Just A Cutie
   Solo Leveling
   Spy X Family
