@@ -4,35 +4,27 @@ let currentEpisodeButton = null;
 let autoNext = JSON.parse(localStorage.getItem('autoNext')) || false;
 let skipIntroEnabled = JSON.parse(localStorage.getItem('skipIntroEnabled')) || false;
 
-// Use the current URL (or a part of it) to uniquely identify the series.
-const currentPageUrl = window.location.pathname; // This ensures the progress is unique for each series.
-
 function getVideoType(url) {
     return url.endsWith('.m3u8') ? 'application/x-mpegURL' : 'video/mp4';
 }
 
 function toggleLanguage(lang) {
-    currentLanguage = lang;
-    localStorage.setItem('preferredLanguage', lang);
+    if (episodes[lang] && episodes[lang][currentSeason]) {
+        currentLanguage = lang;
+        localStorage.setItem('preferredLanguage', lang);
+    } else {
+        currentLanguage = lang === 'sub' ? 'dub' : 'sub';
+        localStorage.setItem('preferredLanguage', currentLanguage);
+    }
     updateButtonStyles('toggle-options', currentLanguage);
     loadEpisodes();
 }
 
 function selectSeason(seasonNumber) {
-    const seasonKey = 'season' + seasonNumber;
-
-    // Check if the selected season exists for the current language and series
-    if (episodes[currentLanguage] && episodes[currentLanguage][seasonKey]) {
-        currentSeason = seasonKey;
-        localStorage.setItem('currentSeason', currentSeason);
-        loadEpisodes();
-    } else {
-        // If the season doesn't exist, reset the season to the first one
-        currentSeason = 'season1';
-        localStorage.setItem('currentSeason', currentSeason);
-        loadEpisodes();
-        console.warn(`Season ${seasonNumber} doesn't exist for the current series. Resetting to Season 1.`);
-    }
+    currentSeason = 'season' + seasonNumber;
+    localStorage.setItem('currentSeason', currentSeason);
+    updateButtonStyles('season-selector', currentSeason);
+    loadEpisodes();
 }
 
 function loadEpisodes() {
@@ -40,7 +32,6 @@ function loadEpisodes() {
     episodeContainer.innerHTML = '';
     const currentEpisodes = episodes[currentLanguage][currentSeason];
 
-    // Add the episodes buttons
     currentEpisodes.forEach(ep => {
         const button = document.createElement('button');
         button.textContent = ep.title;
@@ -49,7 +40,7 @@ function loadEpisodes() {
         episodeContainer.appendChild(button);
 
         // Set active button if it matches the saved episode
-        if (ep.url === loadProgress(ep.url)) {
+        if (ep.url === localStorage.getItem('currentEpisodeUrl')) {
             button.classList.add('active');
             currentEpisodeButton = button;
         }
@@ -151,30 +142,21 @@ function updateButtonStyles(containerClass, activeId) {
     if (activeButton) activeButton.classList.add('active');
 }
 
-// Save progress based on the current page's URL and series
 function saveProgress(videoUrl, currentTime) {
     let progressData = JSON.parse(localStorage.getItem('progressData')) || {};
-
-    // Ensure progress data is separated by the page's URL, season, and episode
-    if (!progressData[currentPageUrl]) {
-        progressData[currentPageUrl] = {};
+    if (!progressData[currentLanguage]) {
+        progressData[currentLanguage] = {};
     }
-
-    if (!progressData[currentPageUrl][currentSeason]) {
-        progressData[currentPageUrl][currentSeason] = {};
+    if (!progressData[currentLanguage][currentSeason]) {
+        progressData[currentLanguage][currentSeason] = {};
     }
-
-    // Save progress for the specific episode URL
-    progressData[currentPageUrl][currentSeason][videoUrl] = currentTime;
+    progressData[currentLanguage][currentSeason][videoUrl] = currentTime;
     localStorage.setItem('progressData', JSON.stringify(progressData));
 }
 
-// Load progress based on the current page's URL
 function loadProgress(videoUrl) {
     let progressData = JSON.parse(localStorage.getItem('progressData')) || {};
-
-    // Load the specific progress for the current page's URL and season
-    return progressData[currentPageUrl]?.[currentSeason]?.[videoUrl] || 0;
+    return progressData[currentLanguage]?.[currentSeason]?.[videoUrl] || 0;
 }
 
 function toggleAutoNext() {
