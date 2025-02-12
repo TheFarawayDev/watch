@@ -5,29 +5,34 @@ let autoNext = JSON.parse(localStorage.getItem('autoNext')) || false;
 let skipIntroEnabled = JSON.parse(localStorage.getItem('skipIntroEnabled')) || false;
 
 // Use the current URL (or a part of it) to uniquely identify the series.
-const currentPageUrl = window.location.href; // This ensures the progress is unique for each series.
+const currentPageUrl = window.location.pathname; // This ensures the progress is unique for each series.
 
 function getVideoType(url) {
     return url.endsWith('.m3u8') ? 'application/x-mpegURL' : 'video/mp4';
 }
 
 function toggleLanguage(lang) {
-    if (episodes[lang] && episodes[lang][currentSeason]) {
-        currentLanguage = lang;
-        localStorage.setItem('preferredLanguage', lang);
-    } else {
-        currentLanguage = lang === 'sub' ? 'dub' : 'sub';
-        localStorage.setItem('preferredLanguage', currentLanguage);
-    }
+    currentLanguage = lang;
+    localStorage.setItem('preferredLanguage', lang);
     updateButtonStyles('toggle-options', currentLanguage);
     loadEpisodes();
 }
 
 function selectSeason(seasonNumber) {
-    currentSeason = 'season' + seasonNumber;
-    localStorage.setItem('currentSeason', currentSeason);
-    updateButtonStyles('season-selector', currentSeason);
-    loadEpisodes();
+    const seasonKey = 'season' + seasonNumber;
+
+    // Check if the selected season exists for the current language and series
+    if (episodes[currentLanguage] && episodes[currentLanguage][seasonKey]) {
+        currentSeason = seasonKey;
+        localStorage.setItem('currentSeason', currentSeason);
+        loadEpisodes();
+    } else {
+        // If the season doesn't exist, reset the season to the first one
+        currentSeason = 'season1';
+        localStorage.setItem('currentSeason', currentSeason);
+        loadEpisodes();
+        console.warn(`Season ${seasonNumber} doesn't exist for the current series. Resetting to Season 1.`);
+    }
 }
 
 function loadEpisodes() {
@@ -35,6 +40,7 @@ function loadEpisodes() {
     episodeContainer.innerHTML = '';
     const currentEpisodes = episodes[currentLanguage][currentSeason];
 
+    // Add the episodes buttons
     currentEpisodes.forEach(ep => {
         const button = document.createElement('button');
         button.textContent = ep.title;
@@ -43,7 +49,7 @@ function loadEpisodes() {
         episodeContainer.appendChild(button);
 
         // Set active button if it matches the saved episode
-        if (ep.url === localStorage.getItem('currentEpisodeUrl')) {
+        if (ep.url === loadProgress(ep.url)) {
             button.classList.add('active');
             currentEpisodeButton = button;
         }
@@ -145,25 +151,21 @@ function updateButtonStyles(containerClass, activeId) {
     if (activeButton) activeButton.classList.add('active');
 }
 
-// Save progress based on the current page's URL
+// Save progress based on the current page's URL and series
 function saveProgress(videoUrl, currentTime) {
     let progressData = JSON.parse(localStorage.getItem('progressData')) || {};
 
-    // Ensure progress data is separated by the page's URL, language, season, and episode
+    // Ensure progress data is separated by the page's URL, season, and episode
     if (!progressData[currentPageUrl]) {
         progressData[currentPageUrl] = {};
     }
 
-    if (!progressData[currentPageUrl][currentLanguage]) {
-        progressData[currentPageUrl][currentLanguage] = {};
-    }
-
-    if (!progressData[currentPageUrl][currentLanguage][currentSeason]) {
-        progressData[currentPageUrl][currentLanguage][currentSeason] = {};
+    if (!progressData[currentPageUrl][currentSeason]) {
+        progressData[currentPageUrl][currentSeason] = {};
     }
 
     // Save progress for the specific episode URL
-    progressData[currentPageUrl][currentLanguage][currentSeason][videoUrl] = currentTime;
+    progressData[currentPageUrl][currentSeason][videoUrl] = currentTime;
     localStorage.setItem('progressData', JSON.stringify(progressData));
 }
 
@@ -171,8 +173,8 @@ function saveProgress(videoUrl, currentTime) {
 function loadProgress(videoUrl) {
     let progressData = JSON.parse(localStorage.getItem('progressData')) || {};
 
-    // Load the specific progress for the current page's URL, language, season, and episode
-    return progressData[currentPageUrl]?.[currentLanguage]?.[currentSeason]?.[videoUrl] || 0;
+    // Load the specific progress for the current page's URL and season
+    return progressData[currentPageUrl]?.[currentSeason]?.[videoUrl] || 0;
 }
 
 function toggleAutoNext() {
