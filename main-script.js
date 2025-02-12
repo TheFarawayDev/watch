@@ -4,6 +4,10 @@ let currentEpisodeButton = null;
 let autoNext = JSON.parse(localStorage.getItem('autoNext')) || false;
 let skipIntroEnabled = JSON.parse(localStorage.getItem('skipIntroEnabled')) || false;
 
+function getVideoType(url) {
+    return url.endsWith('.m3u8') ? 'application/x-mpegURL' : 'video/mp4';
+}
+
 function toggleLanguage(lang) {
     if (episodes[lang] && episodes[lang][currentSeason]) {
         currentLanguage = lang;
@@ -66,8 +70,7 @@ function changeVideo(videoUrl, button) {
     
     player.off('ended');
     player.on('ended', function () {
-        // After the intro, play the actual episode
-        player.src({ type: 'application/x-mpegURL', src: videoUrl });
+        player.src({ type: getVideoType(videoUrl), src: videoUrl });
         player.currentTime(savedTime);
         player.play();
         setupVideoListeners(player, videoUrl);

@@ -1,6 +1,6 @@
 A ---------------------------------------------
   Aldermin On The Sky
-  Attack On Titan [PLANNED][Mar][Q1]
+  Attack On Titan [HOLD]
 B ---------------------------------------------
   Berserk Of Gluttony
   Black Clover
@@ -26,11 +26,11 @@ J ---------------------------------------------
   Jujutsu Kaisen
 M ---------------------------------------------
   Medaka Kuroiwa Is Impervious To My Charms
-  Misfits Of Demon [PLANNED][Mar][Q2]
+  Misfits Of Demon [HOLD]
   My Hero Academia [PLANNED][Feb][Q3]
   My Star
 O ---------------------------------------------
-  Overlord [PLANNED][Mar][Q3]
+  Overlord [HOLD]
 R ---------------------------------------------
   ReLIFE
 S ---------------------------------------------
