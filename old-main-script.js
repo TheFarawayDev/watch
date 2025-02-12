@@ -171,7 +171,8 @@ function updateNavigationButtons() {
 }
 
 // Load episodes initially
-selectSeason(currentSeason.replace('season', ''));
+selectSeason(currentSeason.replace('season', '') || '1');
+toggleLanguage(currentLanguage); // Ensure the preferred language is set and buttons are updated
 if (localStorage.getItem('currentEpisodeUrl')) {
     const currentEpisodeUrl = localStorage.getItem('currentEpisodeUrl');
     const button = document.querySelector(`button[data-url="${currentEpisodeUrl}"]`);
