@@ -174,7 +174,13 @@ function updateNavigationButtons() {
 }
 
 // Load episodes initially
-selectSeason(currentSeason.replace('season', '') || '1');
+let seasonNumber = currentSeason.replace('season', '') || '1';
+if (!episodes[currentLanguage]['season' + seasonNumber]) {
+    seasonNumber = '1';
+    currentSeason = 'season1';
+    localStorage.setItem('currentSeason', currentSeason);
+}
+selectSeason(seasonNumber);
 toggleLanguage(currentLanguage); // Ensure the preferred language is set and buttons are updated
 if (localStorage.getItem('currentEpisodeUrl')) {
     const currentEpisodeUrl = localStorage.getItem('currentEpisodeUrl');
