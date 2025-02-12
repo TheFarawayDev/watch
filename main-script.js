@@ -48,54 +48,56 @@ function loadEpisodes() {
 function changeVideo(videoUrl, button) {
     const player = videojs('my-video');
     const savedTime = loadProgress(videoUrl);
-    player.src({ type: 'application/x-mpegURL', src: videoUrl });
-    player.currentTime(savedTime);
-    player.play();
-
+    
     if (currentEpisodeButton) {
         currentEpisodeButton.classList.remove('active');
     }
     button.classList.add('active');
     currentEpisodeButton = button;
-
+    
     // Save current season and episode
     localStorage.setItem('currentSeason', currentSeason);
     localStorage.setItem('currentEpisodeUrl', videoUrl);
+    
+    // Play the site intro first
+    player.src({ type: 'video/mp4', src: 'https://better-anime.github.io/watch/BA.mp4' });
+    player.currentTime(0);
+    player.play();
+    
+    player.off('ended');
+    player.on('ended', function () {
+        // After the intro, play the actual episode
+        player.src({ type: 'application/x-mpegURL', src: videoUrl });
+        player.currentTime(savedTime);
+        player.play();
+        setupVideoListeners(player, videoUrl);
+    });
+}
 
+function setupVideoListeners(player, videoUrl) {
     player.off('timeupdate');
     player.off('error');
     player.off('ended');
-
+    
     player.on('timeupdate', function () {
         saveProgress(videoUrl, player.currentTime());
-    
         if (skipIntroEnabled && currentEpisode) {
             const currentTime = player.currentTime();
-    
-            // Ensure the intro/outro properties exist and have valid values
             const { introBeginning, introEnd, outroBeginning, outroEnd } = currentEpisode;
-    
-            if (typeof introBeginning === 'number' && typeof introEnd === 'number') {
-                // Skip intro
-                if (currentTime >= introBeginning && currentTime < introEnd) {
-                    player.currentTime(introEnd);
-                }
+            if (typeof introBeginning === 'number' && typeof introEnd === 'number' && currentTime >= introBeginning && currentTime < introEnd) {
+                player.currentTime(introEnd);
             }
-    
-            if (typeof outroBeginning === 'number' && typeof outroEnd === 'number') {
-                // Skip outro
-                if (currentTime >= outroBeginning && currentTime < outroEnd) {
-                    player.currentTime(outroEnd);
-                }
+            if (typeof outroBeginning === 'number' && typeof outroEnd === 'number' && currentTime >= outroBeginning && currentTime < outroEnd) {
+                player.currentTime(outroEnd);
             }
         }
     });
-
+    
     player.on('error', function() {
         player.src({ type: 'application/x-mpegURL', src: videoUrl });
         player.play();
     });
-
+    
     player.on('ended', function() {
         if (autoNext) {
             playNextEpisode();
