@@ -4,6 +4,9 @@ let currentEpisodeButton = null;
 let autoNext = JSON.parse(localStorage.getItem('autoNext')) || false;
 let skipIntroEnabled = JSON.parse(localStorage.getItem('skipIntroEnabled')) || false;
 
+// Use the current URL (or a part of it) to uniquely identify the series.
+const currentPageUrl = window.location.href; // This ensures the progress is unique for each series.
+
 function getVideoType(url) {
     return url.endsWith('.m3u8') ? 'application/x-mpegURL' : 'video/mp4';
 }
@@ -142,21 +145,34 @@ function updateButtonStyles(containerClass, activeId) {
     if (activeButton) activeButton.classList.add('active');
 }
 
+// Save progress based on the current page's URL
 function saveProgress(videoUrl, currentTime) {
     let progressData = JSON.parse(localStorage.getItem('progressData')) || {};
-    if (!progressData[currentLanguage]) {
-        progressData[currentLanguage] = {};
+
+    // Ensure progress data is separated by the page's URL, language, season, and episode
+    if (!progressData[currentPageUrl]) {
+        progressData[currentPageUrl] = {};
     }
-    if (!progressData[currentLanguage][currentSeason]) {
-        progressData[currentLanguage][currentSeason] = {};
+
+    if (!progressData[currentPageUrl][currentLanguage]) {
+        progressData[currentPageUrl][currentLanguage] = {};
     }
-    progressData[currentLanguage][currentSeason][videoUrl] = currentTime;
+
+    if (!progressData[currentPageUrl][currentLanguage][currentSeason]) {
+        progressData[currentPageUrl][currentLanguage][currentSeason] = {};
+    }
+
+    // Save progress for the specific episode URL
+    progressData[currentPageUrl][currentLanguage][currentSeason][videoUrl] = currentTime;
     localStorage.setItem('progressData', JSON.stringify(progressData));
 }
 
+// Load progress based on the current page's URL
 function loadProgress(videoUrl) {
     let progressData = JSON.parse(localStorage.getItem('progressData')) || {};
-    return progressData[currentLanguage]?.[currentSeason]?.[videoUrl] || 0;
+
+    // Load the specific progress for the current page's URL, language, season, and episode
+    return progressData[currentPageUrl]?.[currentLanguage]?.[currentSeason]?.[videoUrl] || 0;
 }
 
 function toggleAutoNext() {
