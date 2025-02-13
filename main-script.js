@@ -51,27 +51,36 @@ function loadEpisodes() {
 
 function changeVideo(videoUrl, button) {
     const player = videojs('my-video');
-    const savedTime = loadProgress(videoUrl);
-    
+
+    // Save progress of the current episode before switching
+    if (currentEpisodeButton) {
+        const prevUrl = currentEpisodeButton.dataset.url;
+        const prevTime = player.currentTime();
+
+        if (prevUrl !== 'https://better-anime.github.io/watch/BA.mp4') { 
+            saveProgress(prevUrl, prevTime);
+        }
+    }
+
     if (currentEpisodeButton) {
         currentEpisodeButton.classList.remove('active');
     }
     button.classList.add('active');
     currentEpisodeButton = button;
-    
-    // Save current season and episode
+
+    // Save the selected episode in localStorage
     localStorage.setItem('currentSeason', currentSeason);
     localStorage.setItem('currentEpisodeUrl', videoUrl);
-    
-    // Play the site intro first
+
+    // Play the intro first
     player.src({ type: 'video/mp4', src: 'https://better-anime.github.io/watch/BA.mp4' });
     player.currentTime(0);
     player.play();
-    
+
     player.off('ended');
     player.on('ended', function () {
         player.src({ type: getVideoType(videoUrl), src: videoUrl });
-        player.currentTime(savedTime);
+        player.currentTime(loadProgress(videoUrl)); // Load progress for the actual episode
         player.play();
         setupVideoListeners(player, videoUrl);
     });
@@ -143,6 +152,7 @@ function updateButtonStyles(containerClass, activeId) {
 }
 
 function saveProgress(videoUrl, currentTime) {
+    if (videoUrl === 'https://better-anime.github.io/watch/BA.mp4') return; // Don't save intro progress
     let progressData = JSON.parse(localStorage.getItem('progressData')) || {};
     if (!progressData[currentLanguage]) {
         progressData[currentLanguage] = {};
@@ -150,7 +160,7 @@ function saveProgress(videoUrl, currentTime) {
     if (!progressData[currentLanguage][currentSeason]) {
         progressData[currentLanguage][currentSeason] = {};
     }
-    progressData[currentLanguage][currentSeason][videoUrl] = currentTime; 
+    progressData[currentLanguage][currentSeason][videoUrl] = currentTime;
     localStorage.setItem('progressData', JSON.stringify(progressData));
 }
 
