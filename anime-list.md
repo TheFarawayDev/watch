@@ -1,5 +1,6 @@
 A ---------------------------------------------
   Aldermin On The Sky
+  Amagi Brilliant Park
   Attack On Titan [HOLD]
 B ---------------------------------------------
   Berserk Of Gluttony
