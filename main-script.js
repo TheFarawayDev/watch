@@ -73,24 +73,31 @@ function changeVideo(videoUrl, button) {
     localStorage.setItem('currentSeason', currentSeason);
     localStorage.setItem('currentEpisodeUrl', videoUrl);
 
-    // Play the intro, but don't overwrite progress for the main episode
+    // Play the intro first, but ensure progress isn't saved for it
     player.src({ type: 'video/mp4', src: 'https://better-anime.github.io/watch/BA.mp4' });
     player.currentTime(0);
     player.play();
 
     player.off('ended');
     player.on('ended', function () {
-        // Switch to the actual episode
-        player.src({ type: getVideoType(videoUrl), src: videoUrl });
-        
-        const savedTime = loadProgress(videoUrl); // Load only the episode's progress
-        player.currentTime(savedTime > 0 ? savedTime : 0);
-        
-        player.play();
-        setupVideoListeners(player, videoUrl);
+        // Ensure the player resets before switching
+        player.pause();
+        player.src('');
+        player.load(); // This forces the player to fully reload before switching videos
+
+        setTimeout(() => {
+            // Now load the actual episode
+            player.src({ type: getVideoType(videoUrl), src: videoUrl });
+
+            setTimeout(() => {
+                const savedTime = loadProgress(videoUrl); // Load progress after confirming the new source
+                player.currentTime(savedTime > 0 ? savedTime : 0);
+                player.play();
+                setupVideoListeners(player, videoUrl);
+            }, 500); // Small delay to ensure proper loading
+        }, 200); // Ensure player clears out the intro first
     });
 }
-
 
 function setupVideoListeners(player, videoUrl) {
     player.off('timeupdate');
