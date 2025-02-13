@@ -3,6 +3,7 @@ let currentSeason = localStorage.getItem('currentSeason') || 'season1';
 let currentEpisodeButton = null;
 let autoNext = JSON.parse(localStorage.getItem('autoNext')) || false;
 let skipIntroEnabled = JSON.parse(localStorage.getItem('skipIntroEnabled')) || false;
+let isIntroPlaying = false;
 
 function getVideoType(url) {
     return url.endsWith('.m3u8') ? 'application/x-mpegURL' : 'video/mp4';
@@ -51,51 +52,30 @@ function loadEpisodes() {
 
 function changeVideo(videoUrl, button) {
     const player = videojs('my-video');
-
-    // Save progress of the current episode before switching
-    if (currentEpisodeButton) {
-        const prevUrl = currentEpisodeButton.dataset.url;
-        const prevTime = player.currentTime();
-
-        // Ensure progress isn't saved for the intro
-        if (prevUrl !== 'https://better-anime.github.io/watch/BA.mp4') {
-            saveProgress(prevUrl, prevTime);
-        }
-    }
-
+    const savedTime = loadProgress(videoUrl);
+    
     if (currentEpisodeButton) {
         currentEpisodeButton.classList.remove('active');
     }
     button.classList.add('active');
     currentEpisodeButton = button;
-
-    // Save episode info in localStorage
+    
+    // Save current season and episode
     localStorage.setItem('currentSeason', currentSeason);
     localStorage.setItem('currentEpisodeUrl', videoUrl);
-
-    // Play the intro first, but ensure progress isn't saved for it
+    
+    // Play the site intro first
+    isIntroPlaying = true;
     player.src({ type: 'video/mp4', src: 'https://better-anime.github.io/watch/BA.mp4' });
     player.currentTime(0);
     player.play();
-
     player.off('ended');
     player.on('ended', function () {
-        // Ensure the player resets before switching
-        player.pause();
-        player.src('');
-        player.load(); // This forces the player to fully reload before switching videos
-
-        setTimeout(() => {
-            // Now load the actual episode
-            player.src({ type: getVideoType(videoUrl), src: videoUrl });
-
-            setTimeout(() => {
-                const savedTime = loadProgress(videoUrl); // Load progress after confirming the new source
-                player.currentTime(savedTime > 0 ? savedTime : 0);
-                player.play();
-                setupVideoListeners(player, videoUrl);
-            }, 500); // Small delay to ensure proper loading
-        }, 200); // Ensure player clears out the intro first
+        isIntroPlaying = false;
+        player.src({ type: getVideoType(videoUrl), src: videoUrl });
+        player.currentTime(savedTime); // Set the saved time here
+        player.play();
+        setupVideoListeners(player, videoUrl);
     });
 }
 
@@ -105,7 +85,11 @@ function setupVideoListeners(player, videoUrl) {
     player.off('ended');
     
     player.on('timeupdate', function () {
-        saveProgress(videoUrl, player.currentTime());
+        if (!isIntroPlaying) {
+            saveProgress(videoUrl, player.currentTime());
+        }
+        const currentEpisodes = episodes[currentLanguage][currentSeason];
+        const currentEpisode = currentEpisodes.find(ep => ep.url === videoUrl);
         if (skipIntroEnabled && currentEpisode) {
             const currentTime = player.currentTime();
             const { introBeginning, introEnd, outroBeginning, outroEnd } = currentEpisode;
@@ -165,24 +149,18 @@ function updateButtonStyles(containerClass, activeId) {
 }
 
 function saveProgress(videoUrl, currentTime) {
-    if (videoUrl === 'https://better-anime.github.io/watch/BA.mp4') return; // Ignore intro
-
     let progressData = JSON.parse(localStorage.getItem('progressData')) || {};
-
     if (!progressData[currentLanguage]) {
         progressData[currentLanguage] = {};
     }
     if (!progressData[currentLanguage][currentSeason]) {
         progressData[currentLanguage][currentSeason] = {};
     }
-
     progressData[currentLanguage][currentSeason][videoUrl] = currentTime;
     localStorage.setItem('progressData', JSON.stringify(progressData));
 }
 
 function loadProgress(videoUrl) {
-    if (videoUrl === 'https://better-anime.github.io/watch/BA.mp4') return 0; // Never load progress for the intro
-
     let progressData = JSON.parse(localStorage.getItem('progressData')) || {};
     return progressData[currentLanguage]?.[currentSeason]?.[videoUrl] || 0;
 }
