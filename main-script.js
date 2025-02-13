@@ -150,7 +150,7 @@ function saveProgress(videoUrl, currentTime) {
     if (!progressData[currentLanguage][currentSeason]) {
         progressData[currentLanguage][currentSeason] = {};
     }
-    progressData[currentLanguage][currentSeason][videoUrl] = currentTime;
+    progressData[currentLanguage][currentSeason][videoUrl] = currentTime; 
     localStorage.setItem('progressData', JSON.stringify(progressData));
 }
 
