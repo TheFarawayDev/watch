@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magi: Adventure Of Sinbad</title>
+    <link href="https://vjs.zencdn.net/8.16.1/video-js.css" rel="stylesheet" />
+    <link href="https://better-anime.github.io/watch/styles.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/videojs-http-streaming@2.15.1/dist/videojs-http-streaming.min.js"></script>
+    <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/Better-Anime/Watch/refs/heads/main/BA.png">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <a href="https://better-anime.github.io/home/"><strong>Better Anime</strong></a>
+            </div>
+        </div>
+
+        <div class="content"></div>
+            <video id="my-video" class="video-js" controls preload="none"
+                   poster="https://img.bunnyccdn.co/_r/300x400/100/1e/3b/1e3bea9fd5cdfa14a502d837739a4a58/1e3bea9fd5cdfa14a502d837739a4a58.jpg"
+                   data-setup="{}">
+                <source id="video-source" src="https://example.mp4" type="video/mp4" />
+            </video>
+
+            <div class="button-container">
+                <div class="toggle-options">
+                    <button onclick="toggleLanguage('sub')" id="subButton" class="active">Subbed</button>
+                    <button onclick="toggleLanguage('dub')" id="dubButton">Dubbed</button>
+                </div>
+
+                <div class="setting-options">
+                    <button id="previousButton" onclick="playPreviousEpisode()">Previous</button>
+                    <button id="autonextButton" onclick="toggleAutoNext()">Auto Next</button>
+                    <!-- <button id="skipintroButton" onclick="skipIntro()">Skip Intro</button> -->
+                    <button id="nextButton" onclick="playNextEpisode()">Next</button>
+                </div>
+
+                <div class="season-selector">
+                    <button onclick="selectSeason(1)" id="season1Button" class="active">Season 1</button>
+                </div>
+            </div>
+
+            <div class="episode-container">
+                <div class="episode-list" id="episode-list">
+                    <!-- Episodes will be dynamically added here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://vjs.zencdn.net/8.16.1/video.min.js"></script>
+    
+    <script>
+        const episodes = {
+            sub: {
+                season1: [
+                    { title: "Episode 1", url: "https://fgh5.jonextugundu.net/_v7/77d7d4383a149851b0dff50e65e1458532d3951896b408089780e8cae11567472aac4385b58a669432db27821e7309756408097db30c3e8552356a70e717777d3a3fc2bc379b33cad4d9453935bed1c1d4b1484dea9d1e3de63a782f24a03719c725f6f0b4b636755529db388b0dfb0eb7a17da429089d879ae9ef60d88b94f6/master.m3u8?faststream-headers=%7B%22sec-gpc%22%3A%221%22%2C%22origin%22%3A%22https%3A%2F%2Frapid-cloud.co%22%2C%22referer%22%3A%22https%3A%2F%2Frapid-cloud.co%2F%22%7D&faststream-mode=accelerated_hls"},
+                    { title: "Episode 2", url: "https://vd2.jonextugundu.net/_v7/bef4a1e955f2f2cdab1b53d35d7a1c7e505927e272d256941630080b99ec084745b6402a69a8c67838e13c3688a55376d982829001cc436bbbade09dafe8731ee9aeb75e7b7839248d9d3e51ece7fecd4c329c5ec8fb5f97353a067cd10a9ee6e052def9d131df6c3b19d902c254df3670b2e7c948a393b4d413072f2ef2f10f/master.m3u8?faststream-headers=%7B%22sec-gpc%22%3A%221%22%2C%22origin%22%3A%22https%3A%2F%2Frapid-cloud.co%22%2C%22referer%22%3A%22https%3A%2F%2Frapid-cloud.co%2F%22%7D&faststream-mode=accelerated_hls"},
+                    { title: "Episode 3", url: "https://g4fv.jonextugundu.net/_v7/2ef696916ad276404f06b9bfb54c75dc9c8c3a4d5e5d355cc43d80ddf5f88c35f1c8c49cb1bd830c0dfc06c620390527e058e451895f80c2667d941606c79af56c381b6276b9e2c450834e25bcecb943b79e17b454ca9316919770b1a105b78a27977ba4e952a883dc15eaa509e0cef0a10c98bdbcb0f3d79cba045f8730b489/master.m3u8?faststream-headers=%7B%22sec-gpc%22%3A%221%22%2C%22origin%22%3A%22https%3A%2F%2Frapid-cloud.co%22%2C%22referer%22%3A%22https%3A%2F%2Frapid-cloud.co%2F%22%7D&faststream-mode=accelerated_hls"},
+                    { title: "Episode 4", url: "https://g4fv.jonextugundu.net/_v7/24131ce1a25afe2bc37810d65d2bbf93b10700d3c2ecc94d5ac8fd73fda771c73b7f4a0f6750ef58c204b72c1ecaa6ac0e3bc2635649e55eb6502c0b124d135d9a32e97d4b4a835552399b99c041884e4f26e9298b5cf7b255258f15aad3afe502e319e5ba02b769afcec181519fb61aeb627dc51b382042bd20cb4a1ef2f661/master.m3u8?faststream-headers=%7B%22sec-gpc%22%3A%221%22%2C%22origin%22%3A%22https%3A%2F%2Frapid-cloud.co%22%2C%22referer%22%3A%22https%3A%2F%2Frapid-cloud.co%2F%22%7D&faststream-mode=accelerated_hls"},
+                    { title: "Episode 5", url: "https://mmd.jonextugundu.net/_v7/a50fe3af0e9d1454aa70132c28d9f2c4b4df4c0526c09b41982b4d37288b4b2013842284278f5f6d4d0d4f359ba8230b6fb886bd105574f885017e6dc4af71813ad99b175e9c6443b99dc0eaada1e313dfb8be68e35a96a755a7e4c4f53ec104d61b4555512200f3ae7b32740d8a8eda0813d39b2c0aa7004d58a56105ca2b28/master.m3u8?faststream-headers=%7B%22sec-gpc%22%3A%221%22%2C%22origin%22%3A%22https%3A%2F%2Frapid-cloud.co%22%2C%22referer%22%3A%22https%3A%2F%2Frapid-cloud.co%2F%22%7D&faststream-mode=accelerated_hls"},
+                    { title: "Episode 6", url: "https://c-an-ca2.betterstream.cc:2223/hls-playback/fdcd73f94c7e685eb27f3f17a3817f1e7264b461b181ef60c74757f3cbaffd3a8396c46abe5a12bc12591bc6790cba439f5cc0d9f221ec19b81f87da7aa4f0763781fa64d39f0eca8fe04e1a6808a1eff42b302de79057626d51abbb37d0f51aef474e02f1dd7e6114ba84d1d3fd8bc032d1ffd3c7819acb26575f5242f20eff58b6e98f147ebd073d258f86309994c3/master.m3u8?faststream-headers=%7B%22sec-gpc%22%3A%221%22%2C%22origin%22%3A%22https%3A%2F%2Frapid-cloud.co%22%2C%22referer%22%3A%22https%3A%2F%2Frapid-cloud.co%2F%22%7D&faststream-mode=accelerated_hls"},
+                    { title: "Episode 7", url: "https://mmd.jonextugundu.net/_v7/c44e380c516923834713b9e98bade451156b064bb540548aa230fa257d5a9290fa10fe03d86dcb2dbf33d9ce7fdc5c03c66c602b54d900248230fcbdae0d47e1ac183afd1c021c0e76c0574310815c0b04a8df598ef407a8eb7e3584a851f2974aad66e80f4c6005c8f87d8e4bd203e13d4d63b1b18759471c5537480f8af1ae/master.m3u8?faststream-headers=%7B%22sec-gpc%22%3A%221%22%2C%22origin%22%3A%22https%3A%2F%2Frapid-cloud.co%22%2C%22referer%22%3A%22https%3A%2F%2Frapid-cloud.co%2F%22%7D&faststream-mode=accelerated_hls"},
+                    { title: "Episode 8", url: "https://fgh5.jonextugundu.net/_v7/b4c57de1e7a9fba583aee6fc2101b82f9bc89e34470810eb0436b198ca8d1dc235909c0efb9ea938f1ff2de074673fa286162f4cca39b527b43e3b3d78b8d8d550fbb833e53702fffb47557182bcb04c3689abc197639f7a8490b7840f5bdd715b1616f93939ad5a13c04c7de6a570f0f2bc7a65066816bffc1974bd4b8f34a3/master.m3u8?faststream-headers=%7B%22sec-gpc%22%3A%221%22%2C%22origin%22%3A%22https%3A%2F%2Frapid-cloud.co%22%2C%22referer%22%3A%22https%3A%2F%2Frapid-cloud.co%2F%22%7D&faststream-mode=accelerated_hls"},
+                    { title: "Episode 9", url: "https://c-an-ca4.betterstream.cc:2223/hls-playback/76781ceb8ca0970c09410aea43b7958256c9c213bca7f7d79c3a5f07553ce1986ab18257c31ac9c65ad31960e121f603e1db13abd05c2bb496066da0368ffd65bca6c132b801db4003c7d57ee78c63bb37f40f6ddc325421340d7e5339003ae1fb80a9256be277bfb95d4c983c09f0887ec7d4f669f904d19e76c61317645695d2e014a292e27b44bc7916eb593fa292/master.m3u8?faststream-headers=%7B%22sec-gpc%22%3A%221%22%2C%22origin%22%3A%22https%3A%2F%2Frapid-cloud.co%22%2C%22referer%22%3A%22https%3A%2F%2Frapid-cloud.co%2F%22%7D&faststream-mode=accelerated_hls"},
+                    { title: "Episode 10", url: "https://fds.jonextugundu.net/_v7/df917f6a5aacc0e040fe59c230ab76861b493cdcf59dff37858b6095fc2ec346ddde155d6a880c61b01012a1d95dc137a282d7b11c20dc6c83e8262242fdf69e6f530b713a4ee10fd4d82142baa2ed5b23ca559cd8bde6315bbfa3d7e37421aa8d915cf210889ce7e99cb15ce5e733ceb48d6d7663f1f907bd3fd69a455755f2/master.m3u8?faststream-headers=%7B%22sec-gpc%22%3A%221%22%2C%22origin%22%3A%22https%3A%2F%2Frapid-cloud.co%22%2C%22referer%22%3A%22https%3A%2F%2Frapid-cloud.co%2F%22%7D&faststream-mode=accelerated_hls"},
+                    { title: "Episode 11", url: "https://wf1.jonextugundu.net/_v7/b26a6b11fced90d94aeaddbefa6a7370a8eefd706f4f0b05085b86503e2cc77e4326ca8e16dee9a5af74c119717ae3847633d86c20c08c881bfd5fd354a7c9bc67a5d2e7ea1806a230452c44f9c5f2419e0d0bdf1d35ca5d2801b85869dc0d4c3feb7ad277566c0d039f574e0b6ef5c6f16dbc06a774fb29754e55237035a5da/master.m3u8?faststream-headers=%7B%22sec-gpc%22%3A%221%22%2C%22origin%22%3A%22https%3A%2F%2Frapid-cloud.co%22%2C%22referer%22%3A%22https%3A%2F%2Frapid-cloud.co%2F%22%7D&faststream-mode=accelerated_hls"},
+                    { title: "Episode 12", url: "https://c-an-ca2.betterstream.cc:2223/hls-playback/d3fd0bbcef423e791f4a7cb4518cd92c9b286802667d2265f453c92059f1d480975c6b14fda01daf409cbe9560c3ee22b52670c5fba79cb2c2fb4b7a752dd42742dcda576dd22c4d4b9b73c75a79b7ff8482ed96a37e315280b27794829f755f6a0777215389d5b2ba647631b4f917e5f68b25503d5c759f9ed6b628dc0319afbec267b9dc67749cf513ceb47f4d67f1/master.m3u8?faststream-headers=%7B%22sec-gpc%22%3A%221%22%2C%22origin%22%3A%22https%3A%2F%2Frapid-cloud.co%22%2C%22referer%22%3A%22https%3A%2F%2Frapid-cloud.co%2F%22%7D&faststream-mode=accelerated_hls"},
+                    { title: "Episode 13", url: "https://g4fv.jonextugundu.net/_v7/f7b5c91cbc498673c233362f0e69b525d8d291bfc70c412435921d209ba6263bfa480836f5fb779f29406fce31d43806d7eacb903434a643a63c3e24d8dc69976df3d871d16c2db83e035fe6c43de7693d0b37a8f47e625927b4a6f7f1ed6c7a9d1d029257da971c883fcdcc4c2a01073976d8aef389b9ad85c70e2a375e56a1/master.m3u8?faststream-headers=%7B%22sec-gpc%22%3A%221%22%2C%22origin%22%3A%22https%3A%2F%2Frapid-cloud.co%22%2C%22referer%22%3A%22https%3A%2F%2Frapid-cloud.co%2F%22%7D&faststream-mode=accelerated_hls"}
+                ]
+            },
+            dub: {
+                season1: [
+                    { title: "Episode 1", url: "https://mmd.jonextugundu.net/_v7/e233f44820e34394dc9484e5f9cda7d5d38669b3f97aa8cba391f2fd7a2039dcb0f5c9f1070bdb0c6538c2c0a8f285ab45ee1d469c9ec523d3337024d974a6c0960ed5fb7dd1e373c50e2a2e82fa38257f8cbad9c6abf007f7ec48c4d3b1188e25724ba9f1c14e2a09902a57464ebbd999e39d050588cc6d8bb4eafd60ec720c/master.m3u8?faststream-headers=%7B%22sec-gpc%22%3A%221%22%2C%22origin%22%3A%22https%3A%2F%2Frapid-cloud.co%22%2C%22referer%22%3A%22https%3A%2F%2Frapid-cloud.co%2F%22%7D&faststream-mode=accelerated_hls"},
+                    { title: "Episode 2", url: "https://gg3.jonextugundu.net/_v7/eaffa1174e2f28b27494ec7e50a97cd7ac99500d51bd93a4a3698a7602513b0f88580c1b6bf1eca26c7623c3d16cc24b55912f8696e4c1b3eb871949c8d6fd332b19d13305d1195ab10c75d41437cb970e41b680bd500e9d0c530c5158e05219aa71d4a0b0be12613b933effc7d41b5a3ff18f7b662741cedcd353fa91fbdb49/master.m3u8?faststream-headers=%7B%22sec-gpc%22%3A%221%22%2C%22origin%22%3A%22https%3A%2F%2Frapid-cloud.co%22%2C%22referer%22%3A%22https%3A%2F%2Frapid-cloud.co%2F%22%7D&faststream-mode=accelerated_hls"},
+                    { title: "Episode 3", url: "https://g4fv.jonextugundu.net/_v7/2ef696916ad276404f06b9bfb54c75dc9c8c3a4d5e5d355cc43d80ddf5f88c35f1c8c49cb1bd830c0dfc06c620390527e058e451895f80c2667d941606c79af56c381b6276b9e2c450834e25bcecb943b79e17b454ca9316919770b1a105b78a27977ba4e952a883dc15eaa509e0cef0a10c98bdbcb0f3d79cba045f8730b489/master.m3u8?faststream-headers=%7B%22sec-gpc%22%3A%221%22%2C%22origin%22%3A%22https%3A%2F%2Frapid-cloud.co%22%2C%22referer%22%3A%22https%3A%2F%2Frapid-cloud.co%2F%22%7D&faststream-mode=accelerated_hls"},
+                    { title: "Episode 4", url: "https://c-an-ca4.betterstream.cc:2223/hls-playback/b1941dfaaec1eec31aee7b425954bf1a946a415de3ee1f883403ff49473136ba3d3ec7a1d2e7e32f36bfe1319a8f072115d734fa08f4cf9ae0f5c204d710504e707eea39431138f4222ab296e78be4e33790f28383495b94eb3b16d2a0704f40cc10c34a6c4dd3c95a3b6758998c2e4a07d9b5fed3115520a2cc3306a79d65cbe1cd9ddf0792b411dbe48c9560e6b0ad/master.m3u8?faststream-headers=%7B%22sec-gpc%22%3A%221%22%2C%22origin%22%3A%22https%3A%2F%2Frapid-cloud.co%22%2C%22referer%22%3A%22https%3A%2F%2Frapid-cloud.co%2F%22%7D&faststream-mode=accelerated_hls"},
+                    { title: "Episode 5", url: "https://vd2.jonextugundu.net/_v7/ea1f79e6a389ddb294772cb3764ddc95d3576a26d0a314338b043f1701bab48a4188743cd9fae6d94d12e41c35a41ce50dedb9d82885b67ab8d99ce479da509725181873f43b9d54277ad71978aca775e7a9fea6d022d036f4bdaf4675c164419f65600855d4d9afa2599678d532b8e9e84e972c9fb5133351abfd300e8615c9/master.m3u8?faststream-headers=%7B%22sec-gpc%22%3A%221%22%2C%22origin%22%3A%22https%3A%2F%2Frapid-cloud.co%22%2C%22referer%22%3A%22https%3A%2F%2Frapid-cloud.co%2F%22%7D&faststream-mode=accelerated_hls"},
+                    { title: "Episode 6", url: "https://c-an-ca8.betterstream.cc:2223/hls-playback/28f502c53cdb2758a646adcee1eb6901ce2fe1fa3b92c3c28859e818080d27b9a1192d4eabb42051fe84f27f30131b4c59fca4ca378f2d250723b99db2a14bd0a19ae2b94f604d76bf382aaed534b68394ba845dec223a2f0fbe9853510fec075ec311a0fe8abe18fd79dfd324fa243d9aeb355f33663af20badd941115342440977e435bb95f8132c8c427508d8d35e/master.m3u8?faststream-headers=%7B%22sec-gpc%22%3A%221%22%2C%22origin%22%3A%22https%3A%2F%2Frapid-cloud.co%22%2C%22referer%22%3A%22https%3A%2F%2Frapid-cloud.co%2F%22%7D&faststream-mode=accelerated_hls"},
+                    { title: "Episode 7", url: "https://fds.jonextugundu.net/_v7/09e4af7432785e657954d72776a8798e4edd23488a569b33332694b0ae46bd50dfd7d6a5dc508cfae64562943dea3ac99bebcecd8fce76ea458326eea3290ff9c4be793b11acbb1ab0233d0803668daa69b0bcd4bb04a3c5d12ffc6c2932742820967a90c036238f9235abc761701bae5b2c9d74559b1778b76b6f8884e58c77/master.m3u8?faststream-headers=%7B%22sec-gpc%22%3A%221%22%2C%22origin%22%3A%22https%3A%2F%2Frapid-cloud.co%22%2C%22referer%22%3A%22https%3A%2F%2Frapid-cloud.co%2F%22%7D&faststream-mode=accelerated_hls"},
+                    { title: "Episode 8", url: "https://c-an-ca4.betterstream.cc:2223/hls-playback/42ca04e6270160b711dcd717999c8e99ee87081f9049d279d06eb08cbcbc39eb22e42ee5cf08533b607a59d7c11368bd1c6f75cacd60d0ae18c56d3417a3f9d66e460a63e1080e1abae52ab7284c4b2cd3ac53c94ff98a47b3fd3c1f7053bb5f418f063895e773f269c9c8147bcf8cd1baa395beb9ee7d2505a282e695454ae5bf3246984be36aba2af38e9b5a1efb8b/master.m3u8?faststream-headers=%7B%22sec-gpc%22%3A%221%22%2C%22origin%22%3A%22https%3A%2F%2Frapid-cloud.co%22%2C%22referer%22%3A%22https%3A%2F%2Frapid-cloud.co%2F%22%7D&faststream-mode=accelerated_hls"},
+                    { title: "Episode 9", url: "https://c-an-ca8.betterstream.cc:2223/hls-playback/e63c94cb217aee5a8a0a013ce54819028b321d5644ecceb35a77088cd042d0ca6b4619a64bf9a340b9697e5dc69ac011378234d26297407e56eff37cafb915cf902edce14433579e5b35d59d3851ab95dac9b1aa5b4630f899ce3d4bc343770ab3dfe9fb7c888e8f390b84b8c29c28af9e4267d41ffb8f359d069bae2707c247edf317fcef64158abf5f5bcaac5d6fb0/master.m3u8?faststream-headers=%7B%22sec-gpc%22%3A%221%22%2C%22origin%22%3A%22https%3A%2F%2Frapid-cloud.co%22%2C%22referer%22%3A%22https%3A%2F%2Frapid-cloud.co%2F%22%7D&faststream-mode=accelerated_hls"},
+                    { title: "Episode 10", url: "https://vd2.jonextugundu.net/_v7/04f2610ac821ebf8626078abc21c3854d4b63ddc6fa54d6a41553681540efedde4e628e278e6222d1ea7ca13a0aebd51793c99cdc5f725d6b75931c6caff3057ad7a515aa8e28dbcbbdfaa51de3e30d399a6cc61d1b6381d9c79041e07d36e0fc894c979bbc2a443390ea42393ccaee78aab6314601a165cbb35605efbcddd72/master.m3u8?faststream-headers=%7B%22sec-gpc%22%3A%221%22%2C%22origin%22%3A%22https%3A%2F%2Frapid-cloud.co%22%2C%22referer%22%3A%22https%3A%2F%2Frapid-cloud.co%2F%22%7D&faststream-mode=accelerated_hls"},
+                    { title: "Episode 11", url: "https://wf1.jonextugundu.net/_v7/2a4872c6dc4c339b9128e2df2e8e214bd098c16634fb6f1d5f6e0a4cfd056d51bde25b232a1d55b80a5302c4adbb81554cb6deb0d1420b2ceed2d7d205cc2f51b77ea5a8ddb3ca3ad0a01bf7ca8397c645ec352050dd80ead53026980e056c9b1d0aad62d4c39cc07ab00aaef461b3aba669fe33ec7c6b4dd8be9f302115f24b/master.m3u8?faststream-headers=%7B%22sec-gpc%22%3A%221%22%2C%22origin%22%3A%22https%3A%2F%2Frapid-cloud.co%22%2C%22referer%22%3A%22https%3A%2F%2Frapid-cloud.co%2F%22%7D&faststream-mode=accelerated_hls"},
+                    { title: "Episode 12", url: "https://c-an-ca6.betterstream.cc:2223/hls-playback/ce5d93f910ad7b5bab8e5a9af474fdad4e95d7f82dc26448759692ea16f260bcc98ead31f43fd36083dadd1ecb4d7e46b67f478c509027b7d47f4544f0015462a2ed98214b0290310ede8ad7bafeff20059e2a29a669ad92429256fa9ed56b1d30198f69bf36f28e3d48a31d464672583106c39483afee1e97c02b05968cdef77640d98573bdc4a9d4286dd9593dbf1c/master.m3u8?faststream-headers=%7B%22sec-gpc%22%3A%221%22%2C%22origin%22%3A%22https%3A%2F%2Frapid-cloud.co%22%2C%22referer%22%3A%22https%3A%2F%2Frapid-cloud.co%2F%22%7D&faststream-mode=accelerated_hls"},
+                    { title: "Episode 13", url: "https://g4fv.jonextugundu.net/_v7/3f44c64aed7da3f2ec3e4e817acd2ab80084f0a2232c054b75b0c15ee1f83495c4942b6e07d4b1b17622f12206bea8f72f65c60dae76607fc14dbef428c29d39370cf290c9083142cd4efb4acf31694e2a7dfaaecda0dae23e5a3ade84e7cdba5879176fb683cfaae9724d3a385baca1f05d7ac67de826d9088c6cc0b894af1d/master.m3u8?faststream-headers=%7B%22sec-gpc%22%3A%221%22%2C%22origin%22%3A%22https%3A%2F%2Frapid-cloud.co%22%2C%22referer%22%3A%22https%3A%2F%2Frapid-cloud.co%2F%22%7D&faststream-mode=accelerated_hls"}
+                ]
+            }
+        };
+    </script>
+
+    <script>
+        videojs.addLanguage('en', {"The media could not be loaded, either because the server or network failed or because the format is not supported.": "Please select an episode to watch!"});
+
+        fetch('https://raw.githubusercontent.com/Better-Anime/Watch/main/main-script.js')
+            .then(response => response.text())
+            .then(scriptContent => {
+                const script = document.createElement('script');
+                script.textContent = scriptContent;
+                document.body.appendChild(script);
+            })
+    </script>
+    
+</body>
+</html>
