@@ -13,7 +13,7 @@ D ---------------------------------------------
   D-Frag
   Dandadan
   Death Note
-  Demon Slayer [PLANNED][Feb][Q4]
+  Demon Slayer [HOLD]
   Dr. Stone
 E ---------------------------------------------
   Erased
@@ -28,7 +28,7 @@ J ---------------------------------------------
 M ---------------------------------------------
   Medaka Kuroiwa Is Impervious To My Charms
   Misfits Of Demon [HOLD]
-  My Hero Academia [PLANNED][Feb][Q3]
+  My Hero Academia [HOLD]
   My Star
 O ---------------------------------------------
   Overlord [HOLD]
@@ -36,7 +36,7 @@ R ---------------------------------------------
   ReLIFE
 S ---------------------------------------------
   Sakamoto Days [INCOMPLETE]
-  The Seven Deadly Sins [INCOMPLETE][Feb][Q2]
+  The Seven Deadly Sins [ERROR]
   Shikimori's Not Just A Cutie
   Solo Leveling [INCOMPLETE]
   Spy X Family
