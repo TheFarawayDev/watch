@@ -5,7 +5,7 @@ A ---------------------------------------------
 B ---------------------------------------------
   Berserk Of Gluttony
   Black Clover
-  Bleach
+  Bleach [ERROR]
 C ---------------------------------------------
   Chainsaw Man
   Cyberpunk 2077: Edgerunners
@@ -30,6 +30,8 @@ M ---------------------------------------------
   Misfits Of Demon [HOLD]
   My Hero Academia [HOLD]
   My Star
+N ---------------------------------------------
+  No Longer Allowed In Another World
 O ---------------------------------------------
   Overlord [HOLD]
 R ---------------------------------------------
@@ -43,10 +45,12 @@ S ---------------------------------------------
 T ---------------------------------------------
   Taboo Tattoo
   Terror In Resonance
+  The Apothecary Diaries
+  The Elusive Samurai
   The Faraway Paladin
   The Irregular At Magic High School
-  Toradora
   The Reincarnation Of The Strongest Exorcist
+  Toradora
 V ---------------------------------------------
   Vermeil In Gold
 Y ---------------------------------------------
