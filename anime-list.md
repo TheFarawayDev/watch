@@ -13,6 +13,7 @@ D ---------------------------------------------
   D-Frag
   Dandadan
   Death Note
+  Demon King Daimon
   Demon Slayer [HOLD]
   Dr. Stone
 E ---------------------------------------------
@@ -28,7 +29,7 @@ J ---------------------------------------------
   Jujutsu Kaisen
 M ---------------------------------------------
   Medaka Kuroiwa Is Impervious To My Charms
-  Misfits Of Demon [HOLD]
+  Misfits Of Demon Academy [HOLD]
   My Hero Academia [HOLD]
   My Star
 N ---------------------------------------------
