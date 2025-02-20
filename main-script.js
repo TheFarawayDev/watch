@@ -66,7 +66,7 @@ function changeVideo(videoUrl, button) {
     
     // Play the site intro first
     isIntroPlaying = true;
-    player.src({ type: 'video/mp4', src: 'https://better-anime.github.io/watch/BA.mp4' });
+    player.src({ type: 'video/mp4', src: 'https://thefarawaydev.github.io/watch/BA.mp4' });
     player.currentTime(0);
     player.play();
     player.off('ended');
