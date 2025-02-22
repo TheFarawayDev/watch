@@ -5,7 +5,7 @@ A ---------------------------------------------
 B ---------------------------------------------
   Berserk Of Gluttony
   Black Clover
-  Bleach [ERROR]
+  Bleach [HOLD]
 C ---------------------------------------------
   Chainsaw Man
   Cyberpunk 2077: Edgerunners
@@ -19,6 +19,7 @@ D ---------------------------------------------
 E ---------------------------------------------
   Erased
 F ---------------------------------------------
+  Fire Force
   Friends Game
   Fruits Basket
 H ---------------------------------------------
@@ -29,7 +30,7 @@ J ---------------------------------------------
   Jujutsu Kaisen
 M ---------------------------------------------
   Medaka Kuroiwa Is Impervious To My Charms
-  Misfits Of Demon Academy [HOLD]
+  Misfits Of Demon Academy
   My Hero Academia [HOLD]
   My Star
 N ---------------------------------------------
@@ -40,12 +41,14 @@ R ---------------------------------------------
   ReLIFE
 S ---------------------------------------------
   Sakamoto Days [INCOMPLETE]
-  The Seven Deadly Sins [ERROR]
+  The Seven Deadly Sins [HOLD]
   Shikimori's Not Just A Cutie
   Solo Leveling [INCOMPLETE]
   Spy X Family
+  Sword Art Online [HOLD]
 T ---------------------------------------------
   Taboo Tattoo
+  Talentless Nana
   Terror In Resonance
   The Apothecary Diaries
   The Elusive Samurai
