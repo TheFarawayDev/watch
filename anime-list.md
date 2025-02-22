@@ -29,7 +29,7 @@ I ---------------------------------------------
 J ---------------------------------------------
   Jujutsu Kaisen
 M ---------------------------------------------
-  Medaka Kuroiwa Is Impervious To My Charms
+  Medaka Kuroiwa Is Impervious... [INC]
   Misfits Of Demon Academy
   My Hero Academia [HOLD]
   My Star
@@ -38,12 +38,13 @@ N ---------------------------------------------
 O ---------------------------------------------
   Overlord [HOLD]
 R ---------------------------------------------
+  Reincarnated As The Seventh Prince
   ReLIFE
 S ---------------------------------------------
-  Sakamoto Days [INCOMPLETE]
+  Sakamoto Days [INC]
   The Seven Deadly Sins [HOLD]
   Shikimori's Not Just A Cutie
-  Solo Leveling [INCOMPLETE]
+  Solo Leveling [INC]
   Spy X Family
   Sword Art Online [HOLD]
 T ---------------------------------------------
