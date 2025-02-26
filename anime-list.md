@@ -1,10 +1,10 @@
 A ---------------------------------------------
   Aldermin On The Sky
   Amagi Brilliant Park
-  Attack On Titan [HOLD]
+  Attack On Titan
 B ---------------------------------------------
   Berserk Of Gluttony
-  Black Clover
+  Black Clover [INC]
   Bleach [HOLD]
 C ---------------------------------------------
   Chainsaw Man
@@ -14,7 +14,7 @@ D ---------------------------------------------
   Dandadan
   Death Note
   Demon King Daimon
-  Demon Slayer [HOLD]
+  Demon Slayer
   Dr. Stone
 E ---------------------------------------------
   Erased
@@ -44,7 +44,7 @@ R ---------------------------------------------
   ReLIFE
 S ---------------------------------------------
   Sakamoto Days [INC]
-  The Seven Deadly Sins [HOLD]
+  The Seven Deadly Sins
   Shikimori's Not Just A Cutie
   Solo Leveling [INC]
   Spy X Family
@@ -64,4 +64,4 @@ V ---------------------------------------------
 Y ---------------------------------------------
   Yamada-kun And The Seven Witches
 ! ---------------------------------------------  
-  Site Wide Series Total [SWST]: 41
+  Site Wide Series Total [SWST]: 44
