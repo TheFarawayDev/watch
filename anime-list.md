@@ -19,6 +19,7 @@ D ---------------------------------------------
 E ---------------------------------------------
   Erased
 F ---------------------------------------------
+  Farming Life In Another World
   Fire Force
   Friends Game
   Fruits Basket
@@ -63,4 +64,4 @@ V ---------------------------------------------
 Y ---------------------------------------------
   Yamada-kun And The Seven Witches
 ! ---------------------------------------------  
-  Site Wide Series Total [SWST]: 40
+  Site Wide Series Total [SWST]: 41
