@@ -38,7 +38,8 @@ M ---------------------------------------------
 N ---------------------------------------------
   No Longer Allowed In Another World
 O ---------------------------------------------
-  Overlord [HOLD]
+  One Punch Man
+  Overlord [INC]
 R ---------------------------------------------
   Ragna Crimson
   Reincarnated As The Seventh Prince
@@ -65,4 +66,4 @@ V ---------------------------------------------
 Y ---------------------------------------------
   Yamada-kun And The Seven Witches
 ! ---------------------------------------------  
-  Site Wide Series Total [SWST]: 46
+  Site Wide Series Total [SWST]: 47
