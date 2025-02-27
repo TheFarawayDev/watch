@@ -33,7 +33,7 @@ J ---------------------------------------------
 M ---------------------------------------------
   Medaka Kuroiwa Is Impervious... [INC]
   Misfits Of Demon Academy
-  My Hero Academia [HOLD]
+  My Hero Academia
   My Star
 N ---------------------------------------------
   No Longer Allowed In Another World
@@ -65,4 +65,4 @@ V ---------------------------------------------
 Y ---------------------------------------------
   Yamada-kun And The Seven Witches
 ! ---------------------------------------------  
-  Site Wide Series Total [SWST]: 45
+  Site Wide Series Total [SWST]: 46
