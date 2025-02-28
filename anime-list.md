@@ -3,7 +3,7 @@ A ---------------------------------------------
   Amagi Brilliant Park
   Attack On Titan
 B ---------------------------------------------
-  Berserk Of Gluttony [BRKN]
+  Berserk Of Gluttony
   Black Clover [BRKN]
   Bleach [BRKN]
 C ---------------------------------------------
@@ -31,6 +31,7 @@ I ---------------------------------------------
 J ---------------------------------------------
   Jujutsu Kaisen [BRKN]
 M ---------------------------------------------
+  Magi: Adventure of Sinbad
   Medaka Kuroiwa Is Impervious... [INC]
   Misfits Of Demon Academy
   My Hero Academia
@@ -68,4 +69,4 @@ W ---------------------------------------------
 Y ---------------------------------------------
   Yamada-kun And The Seven Witches [BRKN]
 ! ---------------------------------------------  
-  Site Wide Series Total [SWST]: 35
+  Site Wide Series Total [SWST]: 36
