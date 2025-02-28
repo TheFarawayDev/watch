@@ -58,9 +58,9 @@ T ---------------------------------------------
   The Apothecary Diaries
   The Elusive Samurai
   The Faraway Paladin
-  The Reincarnation Of The... [BRKN]
+  The Reincarnation Of The...
   The Seven Deadly Sins
-  Toradora [BRKN]
+  Toradora
 V ---------------------------------------------
   Vermeil In Gold
 W ---------------------------------------------
@@ -68,4 +68,4 @@ W ---------------------------------------------
 Y ---------------------------------------------
   Yamada-kun And The Seven Witches [BRKN]
 ! ---------------------------------------------  
-  Site Wide Series Total [SWST]: 45
+  Site Wide Series Total [SWST]: 46
