@@ -3,8 +3,9 @@ A ---------------------------------------------
   Amagi Brilliant Park
   Attack On Titan
 B ---------------------------------------------
+  Cowboy Bebop [WIP]
   Berserk Of Gluttony
-  Black Clover [BRKN]
+  Black Clover [WIP]
   Bleach [BRKN]
 C ---------------------------------------------
   Chainsaw Man
@@ -58,6 +59,7 @@ T ---------------------------------------------
   The Apothecary Diaries
   The Elusive Samurai
   The Faraway Paladin
+  The Legend of the Legendary Heroes
   The Reincarnation Of The...
   The Seven Deadly Sins
   Toradora
@@ -68,4 +70,4 @@ W ---------------------------------------------
 Y ---------------------------------------------
   Yamada-kun And The Seven Witches
 ! ---------------------------------------------  
-  Site Wide Series Total [SWST]: 48
+  Site Wide Series Total [SWST]: 49
