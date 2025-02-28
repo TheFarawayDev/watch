@@ -29,7 +29,7 @@ I ---------------------------------------------
   I Parry Everything
   Is This A Zombie
 J ---------------------------------------------
-  Jujutsu Kaisen [BRKN]
+  Jujutsu Kaisen
 M ---------------------------------------------
   Magi: Adventure of Sinbad
   Medaka Kuroiwa Is Impervious... [INC]
@@ -58,7 +58,6 @@ T ---------------------------------------------
   The Apothecary Diaries
   The Elusive Samurai
   The Faraway Paladin
-  The Irregular At Magic High School [BRKN]
   The Reincarnation Of The... [BRKN]
   The Seven Deadly Sins
   Toradora [BRKN]
@@ -69,4 +68,4 @@ W ---------------------------------------------
 Y ---------------------------------------------
   Yamada-kun And The Seven Witches [BRKN]
 ! ---------------------------------------------  
-  Site Wide Series Total [SWST]: 39
+  Site Wide Series Total [SWST]: 40
