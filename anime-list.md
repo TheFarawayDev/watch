@@ -70,4 +70,4 @@ W ---------------------------------------------
 Y ---------------------------------------------
   Yamada-kun And The Seven Witches
 ! ---------------------------------------------  
-  Site Wide Series Total [SWST]: 49
+  Site Wide Series Total [SWST]: 50
