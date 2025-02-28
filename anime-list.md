@@ -24,7 +24,7 @@ F ---------------------------------------------
   Friends Game
   Fruits Basket
 H ---------------------------------------------
-  Higehiro [BRKN]
+  Higehiro
 I ---------------------------------------------
   I Parry Everything
   Is This A Zombie
@@ -69,4 +69,4 @@ W ---------------------------------------------
 Y ---------------------------------------------
   Yamada-kun And The Seven Witches [BRKN]
 ! ---------------------------------------------  
-  Site Wide Series Total [SWST]: 38
+  Site Wide Series Total [SWST]: 39
