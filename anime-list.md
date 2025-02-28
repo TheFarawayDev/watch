@@ -54,7 +54,7 @@ S ---------------------------------------------
 T ---------------------------------------------
   Taboo Tattoo
   Talentless Nana
-  Terror In Resonance [BRKN]
+  Terror In Resonance
   The Apothecary Diaries
   The Elusive Samurai
   The Faraway Paladin
@@ -68,4 +68,4 @@ W ---------------------------------------------
 Y ---------------------------------------------
   Yamada-kun And The Seven Witches [BRKN]
 ! ---------------------------------------------  
-  Site Wide Series Total [SWST]: 44
+  Site Wide Series Total [SWST]: 45
