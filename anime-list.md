@@ -17,7 +17,7 @@ D ---------------------------------------------
   Demon Slayer
   Dr. Stone
 E ---------------------------------------------
-  Erased [BRKN]
+  Erased
 F ---------------------------------------------
   Farming Life In Another World
   Fire Force
@@ -69,4 +69,4 @@ W ---------------------------------------------
 Y ---------------------------------------------
   Yamada-kun And The Seven Witches [BRKN]
 ! ---------------------------------------------  
-  Site Wide Series Total [SWST]: 36
+  Site Wide Series Total [SWST]: 38
