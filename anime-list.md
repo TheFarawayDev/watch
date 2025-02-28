@@ -68,4 +68,4 @@ W ---------------------------------------------
 Y ---------------------------------------------
   Yamada-kun And The Seven Witches [BRKN]
 ! ---------------------------------------------  
-  Site Wide Series Total [SWST]: 41
+  Site Wide Series Total [SWST]: 42
