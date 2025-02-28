@@ -3,12 +3,12 @@ A ---------------------------------------------
   Amagi Brilliant Park
   Attack On Titan
 B ---------------------------------------------
-  Cowboy Bebop
   Berserk Of Gluttony
   Black Clover [WIP]
   Bleach [BRKN]
 C ---------------------------------------------
   Chainsaw Man
+  Cowboy Bebop
   Cyberpunk 2077: Edgerunners
 D ---------------------------------------------
   D-Frag
