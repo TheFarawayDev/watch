@@ -44,7 +44,7 @@ O ---------------------------------------------
 R ---------------------------------------------
   Ragna Crimson
   Reincarnated As The Seventh Prince
-  ReLIFE [BRKN]
+  ReLIFE
 S ---------------------------------------------
   Sakamoto Days [INC]
   Shikimori's Not Just A Cutie
@@ -68,4 +68,4 @@ W ---------------------------------------------
 Y ---------------------------------------------
   Yamada-kun And The Seven Witches [BRKN]
 ! ---------------------------------------------  
-  Site Wide Series Total [SWST]: 40
+  Site Wide Series Total [SWST]: 41
