@@ -40,7 +40,7 @@ N ---------------------------------------------
   No Longer Allowed In Another World
 O ---------------------------------------------
   One Punch Man
-  Overlord [INC]
+  Overlord
 R ---------------------------------------------
   Ragna Crimson
   Reincarnated As The Seventh Prince
