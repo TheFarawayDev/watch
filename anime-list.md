@@ -52,7 +52,7 @@ S ---------------------------------------------
   Spy X Family
   Sword Art Online [HOLD]
 T ---------------------------------------------
-  Taboo Tattoo [BRKN]
+  Taboo Tattoo
   Talentless Nana
   Terror In Resonance [BRKN]
   The Apothecary Diaries
@@ -68,4 +68,4 @@ W ---------------------------------------------
 Y ---------------------------------------------
   Yamada-kun And The Seven Witches [BRKN]
 ! ---------------------------------------------  
-  Site Wide Series Total [SWST]: 43
+  Site Wide Series Total [SWST]: 44
