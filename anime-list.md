@@ -66,6 +66,6 @@ V ---------------------------------------------
 W ---------------------------------------------
   Wind Breaker
 Y ---------------------------------------------
-  Yamada-kun And The Seven Witches [BRKN]
+  Yamada-kun And The Seven Witches
 ! ---------------------------------------------  
-  Site Wide Series Total [SWST]: 46
+  Site Wide Series Total [SWST]: 47
