@@ -3,9 +3,9 @@ A ---------------------------------------------
   Amagi Brilliant Park
   Attack On Titan
 B ---------------------------------------------
-  Berserk Of Gluttony
-  Black Clover [INC]
-  Bleach [HOLD]
+  Berserk Of Gluttony [BRKN]
+  Black Clover [BRKN]
+  Bleach [BRKN]
 C ---------------------------------------------
   Chainsaw Man
   Cyberpunk 2077: Edgerunners
@@ -17,19 +17,19 @@ D ---------------------------------------------
   Demon Slayer
   Dr. Stone
 E ---------------------------------------------
-  Erased
+  Erased [BRKN]
 F ---------------------------------------------
   Farming Life In Another World
   Fire Force
   Friends Game
   Fruits Basket
 H ---------------------------------------------
-  Higehiro
+  Higehiro [BRKN]
 I ---------------------------------------------
   I Parry Everything
   Is This A Zombie
 J ---------------------------------------------
-  Jujutsu Kaisen
+  Jujutsu Kaisen [BRKN]
 M ---------------------------------------------
   Medaka Kuroiwa Is Impervious... [INC]
   Misfits Of Demon Academy
@@ -43,27 +43,29 @@ O ---------------------------------------------
 R ---------------------------------------------
   Ragna Crimson
   Reincarnated As The Seventh Prince
-  ReLIFE
+  ReLIFE [BRKN]
 S ---------------------------------------------
   Sakamoto Days [INC]
-  The Seven Deadly Sins
   Shikimori's Not Just A Cutie
   Solo Leveling [INC]
-  Spy X Family
+  Spy X Family [BRKN]
   Sword Art Online [HOLD]
 T ---------------------------------------------
-  Taboo Tattoo
+  Taboo Tattoo [BRKN]
   Talentless Nana
-  Terror In Resonance
+  Terror In Resonance [BRKN]
   The Apothecary Diaries
   The Elusive Samurai
   The Faraway Paladin
-  The Irregular At Magic High School
-  The Reincarnation Of The Strongest Exorcist
-  Toradora
+  The Irregular At Magic High School [BRKN]
+  The Reincarnation Of The... [BRKN]
+  The Seven Deadly Sins
+  Toradora [BRKN]
 V ---------------------------------------------
   Vermeil In Gold
+W ---------------------------------------------
+  Wind Breaker
 Y ---------------------------------------------
-  Yamada-kun And The Seven Witches
+  Yamada-kun And The Seven Witches [BRKN]
 ! ---------------------------------------------  
-  Site Wide Series Total [SWST]: 47
+  Site Wide Series Total [SWST]: 35
