@@ -49,7 +49,7 @@ S ---------------------------------------------
   Sakamoto Days [INC]
   Shikimori's Not Just A Cutie
   Solo Leveling [INC]
-  Spy X Family [BRKN]
+  Spy X Family
   Sword Art Online [HOLD]
 T ---------------------------------------------
   Taboo Tattoo [BRKN]
@@ -68,4 +68,4 @@ W ---------------------------------------------
 Y ---------------------------------------------
   Yamada-kun And The Seven Witches [BRKN]
 ! ---------------------------------------------  
-  Site Wide Series Total [SWST]: 42
+  Site Wide Series Total [SWST]: 43
