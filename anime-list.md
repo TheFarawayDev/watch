@@ -4,8 +4,8 @@ A ---------------------------------------------
   Attack On Titan
 B ---------------------------------------------
   Berserk Of Gluttony
-  Black Clover [WIP]
-  Bleach [BRKN]
+  Black Clover [WIP][1]
+  Bleach [WIP][2]
 C ---------------------------------------------
   Chainsaw Man
   Cowboy Bebop
@@ -48,15 +48,17 @@ R ---------------------------------------------
   ReLIFE
 S ---------------------------------------------
   Sakamoto Days [INC]
+  Saki
   Shikimori's Not Just A Cutie
   Solo Leveling [INC]
   Spy X Family
-  Sword Art Online [HOLD]
+  Sword Art Online
 T ---------------------------------------------
   Taboo Tattoo
   Talentless Nana
   Terror In Resonance
   The Apothecary Diaries
+  The Disastrous Life of Saiki K.
   The Elusive Samurai
   The Faraway Paladin
   The Legend of the Legendary Heroes
@@ -70,4 +72,4 @@ W ---------------------------------------------
 Y ---------------------------------------------
   Yamada-kun And The Seven Witches
 ! ---------------------------------------------  
-  Site Wide Series Total [SWST]: 50
+  Site Wide Series Total [SWST]: 51
