@@ -63,6 +63,7 @@ T ---------------------------------------------
   The Faraway Paladin
   The Legend of the Legendary Heroes
   The Reincarnation Of The...
+  The Seraph of The End
   The Seven Deadly Sins
   Toradora
 V ---------------------------------------------
@@ -72,4 +73,4 @@ W ---------------------------------------------
 Y ---------------------------------------------
   Yamada-kun And The Seven Witches
 ! ---------------------------------------------  
-  Site Wide Series Total [SWST]: 54
+  Site Wide Series Total [SWST]: 55
