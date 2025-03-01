@@ -4,8 +4,8 @@ A ---------------------------------------------
   Attack On Titan
 B ---------------------------------------------
   Berserk Of Gluttony
-  Black Clover [WIP][1]
-  Bleach [WIP][2]
+  Black Clover
+  Bleach [WIP][1]
 C ---------------------------------------------
   Chainsaw Man
   Cowboy Bebop
@@ -72,4 +72,4 @@ W ---------------------------------------------
 Y ---------------------------------------------
   Yamada-kun And The Seven Witches
 ! ---------------------------------------------  
-  Site Wide Series Total [SWST]: 51
+  Site Wide Series Total [SWST]: 54
