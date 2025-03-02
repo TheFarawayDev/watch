@@ -1,61 +1,49 @@
-(() => {
-    if (typeof videojs === "undefined") {
-        console.warn("vjsdownload videojs not detected");
-    }
+import "./videojs-vjsdownload.css";
 
-    var Plugin = videojs.getPlugin("plugin");
+if (typeof videojs === "undefined") {
+  console.warn("vjsdownload videojs not detected");
+}
 
-    class VjsDownload extends Plugin {
-        defaultOptions = {
-            beforeElement: "fullscreenToggle",
-            textControl: "Download video",
-            name: "downloadButton",
-            downloadURL: null
-        };
+const Plugin = videojs.getPlugin("plugin");
 
-        options;
+class VjsDownload extends Plugin {
+  // Default options for the plugin.
+  defaultOptions = {
+    beforeElement: "fullscreenToggle",
+    textControl: "Download video",
+    name: "downloadButton",
+    downloadURL: null,
+  };
 
-        constructor(player, options) {
-            super(player, options);
-            this.options = { ...this.defaultOptions, ...options };
-            player.addClass("vjs-download");
+  options;
 
-            this.on(player, "ready", () => {
-                let Button = videojs.getComponent("Button");
-                let downloadButton = new Button(player, {
-                    className: "vjs-download",
-                    controlText: "Download",
-                    clickHandler: this.handleClick.bind(this)
-                });
+  constructor(player, options) {
+    super(player, options);
+    this.options = { ...this.defaultOptions, ...options };
 
-                player.getChild("ControlBar").el().insertBefore(
-                    downloadButton.el(),
-                    player.controlBar.getChild(this.options.beforeElement).el()
-                );
-            });
-        }
+    player.addClass("vjs-download");
 
-        handleClick() {
-            let downloadURL = this.player().vjsdownload()?.options.downloadURL || this.player().currentSource().src;
-            window.open(downloadURL, "Download");
-            this.player().trigger("downloadvideo");
-        }
-    }
+    this.on(player, "ready", function () {
+      const Button = videojs.getComponent("Button");
+      let button = new Button(player, {
+        className: "vjs-download",
+        controlText: "Download",
+        clickHandler: this.handleClick,
+      });
 
-    videojs.registerPlugin("vjsdownload", VjsDownload);
-})();
+      player.getChild("ControlBar").el().insertBefore(
+        button.el(),
+        player.controlBar.getChild(this.options.beforeElement).el()
+      );
 
-var player = videojs(document.querySelector('.video-js'), {
-    plugins: {
-        vjsdownload: {
-            beforeElement: 'fullscreenToggle', // default fullscreenMenuToggle
-            textControl: 'Download video', // default "Download video"
-            name: 'downloadButton' // default "downloadButton"
-        }
-    }
-}, function() {
-    console.log('Callback video-js initiated');
-    this.on('downloadvideo', function() {
-        console.log('downloadvideo triggered');
     });
-});
+  }
+
+  handleClick(e) {
+    let currentDownload = this.player().vjsdownload()?.options.downloadURL || this.player().currentSource().src;
+    window.open(currentDownload, "Download");
+    this.player().trigger("downloadvideo");
+  }
+}
+
+videojs.registerPlugin("vjsdownload", VjsDownload);
