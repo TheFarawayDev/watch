@@ -1,4 +1,4 @@
-import "./videojs-vjsdownload.css";
+import "https://thefarawaydev.github.io/watch/videojs-vjsdownload.css";
 
 if (typeof videojs === "undefined") {
   console.warn("vjsdownload videojs not detected");
