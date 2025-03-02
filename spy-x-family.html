@@ -7,6 +7,7 @@
     <link href="https://vjs.zencdn.net/8.16.1/video-js.css" rel="stylesheet" />
     <link href="https://thefarawaydev.github.io/watch/styles.css" rel="stylesheet" />
     <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/thefarawaydev/Watch/refs/heads/main/BA.png">
+    <link href="https://thefarawaydev.github.io/watch/videojs-vjsdownload.css" rel="stylesheet" />
 </head>
 <body>
     <div class="container">
@@ -51,6 +52,24 @@
     </div>
     
     <script src="https://vjs.zencdn.net/8.16.1/video.min.js"></script>
+    <script src="https://thefarawaydev.github.io/watch/videojs-vjsdownload.js"></script>
+
+    <script type="text/javascript">
+        var player = videojs(document.querySelector('.video-js'), {
+          plugins: {
+            vjsdownload:{
+              beforeElement: 'fullscreenToggle', // default fullscreenMenuToggle
+              textControl: 'Download video', // default "Download video"
+              name: 'downloadButton' // default "downloadButton"
+            }
+          }
+        } , function() {
+          console.log('Callback video-js initiated');
+          this.on('downloadvideo', function(){
+            console.log('downloadvideo triggered');
+          });
+        });
+    </script>
 
     <script>
         const episodes = {
