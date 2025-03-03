@@ -3,6 +3,9 @@ document.addEventListener("DOMContentLoaded", function () {
     let seriesTitle = urlParams.get('series') || 'default_series';  // default if no query parameter
     let jsonFile = `./series/${seriesTitle}.json`;
 
+    console.log(urlParams); // Log the parameters to ensure they are being captured
+    console.log(data[title][season]); // Check if the correct episodes are being accessed    
+
     fetch(jsonFile)
         .then(response => {
             if (!response.ok) throw new Error(`Failed to load ${jsonFile}`);
