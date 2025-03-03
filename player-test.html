@@ -86,13 +86,35 @@
     <script>
         videojs.addLanguage('en', {"The media could not be loaded, either because the server or network failed or because the format is not supported.": "Please select an episode to watch!"});
 
-        fetch('https://raw.githubusercontent.com/thefarawaydev/Watch/main/test-main-script.js')
-            .then(response => response.text())
-            .then(scriptContent => {
-                const script = document.createElement('script');
-                script.textContent = scriptContent;
-                document.body.appendChild(script);
+        document.addEventListener("DOMContentLoaded", function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const seriesTitle = urlParams.get('series');  // Get series name from the URL query parameter
+
+        if (!seriesTitle) {
+            console.error("Series parameter not found in the URL.");
+            return;
+        }
+
+        const jsonFile = `./series/${seriesTitle}.json`;
+
+        fetch(jsonFile)
+            .then(response => {
+                if (!response.ok) throw new Error(`Failed to load ${jsonFile}`);
+                return response.json();
             })
+            .then(data => {
+                episodes = data;
+                if (data.title) document.title = data.title; // Dynamically change the page title
+                if (data.poster) {
+                    document.getElementById('my-video').setAttribute('poster', data.poster);
+                }
+
+                initializePlayer();
+                loadEpisodes();
+            })
+            .catch(error => console.error("Error loading episodes:", error));
+        });
+
     </script>
     
 </body>

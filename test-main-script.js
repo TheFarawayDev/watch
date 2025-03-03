@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
-    let seriesTitle = document.title.toLowerCase().replace(/[^a-z0-9]/g, "_");
+    const urlParams = new URLSearchParams(window.location.search);
+    let seriesTitle = urlParams.get('series') || 'default_series';  // default if no query parameter
     let jsonFile = `./series/${seriesTitle}.json`;
 
     fetch(jsonFile)
@@ -46,6 +47,18 @@ function toggleLanguage(lang) {
     }
     updateButtonStyles('toggle-options', currentLanguage);
     loadEpisodes();
+}
+
+function populateSeasons() {
+    const seasonsContainer = document.querySelector('.season-selector');
+    const availableSeasons = Object.keys(episodes[sub]);
+
+    availableSeasons.forEach(season => {
+        const button = document.createElement('button');
+        button.textContent = `Season ${season.replace('season', '')}`;
+        button.onclick = () => selectSeason(season);
+        seasonsContainer.appendChild(button);
+    });
 }
 
 function selectSeason(seasonNumber) {
