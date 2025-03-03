@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taboo Tattoo</title>
+    <link href="https://vjs.zencdn.net/8.16.1/video-js.css" rel="stylesheet" />
+    <link href="https://thefarawaydev.github.io/watch/styles.css" rel="stylesheet" />
+    <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/thefarawaydev/Watch/refs/heads/main/BA.png">
+    <link href="https://thefarawaydev.github.io/watch/videojs-vjsdownload.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <a href="https://thefarawaydev.github.io/home/"><strong>Better Anime</strong></a>
+            </div>
+        </div>
+
+        <div class="content">
+            <!-- Video Player -->
+            <video id="my-video" class="video-js vjs-default-skin" controls preload="none" poster="https://m.media-amazon.com/images/M/MV5BYTU0ZjlmZTctYTk2YS00OTUwLTljODAtMGQ1NjA3ODI4YzU5XkEyXkFqcGc@._V1_.jpg" data-setup="{}">
+                <source id="video-source" src="https://example.mp4" type="video/mp4" />
+            </video>
+
+            <!-- Button Container -->
+            <div class="button-container">
+                <div class="toggle-options">
+                    <button onclick="toggleLanguage('sub')" id="subButton" class="active">Subbed</button>
+                    <button onclick="toggleLanguage('dub')" id="dubButton">Dubbed</button>
+                </div>
+
+                <div class="setting-options">
+                    <button id="previousButton" onclick="playPreviousEpisode()">Previous</button>
+                    <button id="autonextButton" onclick="toggleAutoNext()">Auto Next</button>
+                    <button id="nextButton" onclick="playNextEpisode()">Next</button>
+                </div>
+
+                <!-- Season Selector -->
+                <div class="season-selector">
+                    <button onclick="selectSeason(1)" id="season1Button" class="active">Season 1</button>
+                </div>
+            </div>
+
+            <!-- Episode List -->
+            <div class="episode-container">
+                <div class="episode-list" id="episode-list">
+                    <!-- Episodes will be dynamically added here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://vjs.zencdn.net/8.16.1/video.min.js"></script>
+    <script src="https://thefarawaydev.github.io/watch/videojs-vjsdownload.js"></script>
+
+    <script type="text/javascript">
+        // Video.js Setup with Download Button
+        var player = videojs(document.querySelector('.video-js'), {
+            plugins: {
+                vjsdownload: {
+                    beforeElement: 'fullscreenToggle', // default fullscreenMenuToggle
+                    textControl: 'Download video', // default "Download video"
+                    name: 'downloadButton' // default "downloadButton"
+                }
+            }
+        }, function () {
+            console.log('Callback video-js initiated');
+            this.on('downloadvideo', function () {
+                console.log('downloadvideo triggered');
+            });
+        });
+    </script>
+
+    <script>
+        // Episode Data for Subbed and Dubbed Versions
+        const episodes = {
+            sub: {
+                season1: [
+                    // Populate with actual episode data
+                    { title: 'Episode 1', url: 'episode1.mp4' },
+                    { title: 'Episode 2', url: 'episode2.mp4' }
+                ]
+            },
+            dub: {
+                season1: [
+                    // Populate with actual episode data
+                    { title: 'Episode 1', url: 'episode1-dub.mp4' },
+                    { title: 'Episode 2', url: 'episode2-dub.mp4' }
+                ]
+            }
+        };
+
+        let currentSeason = 1;
+        let currentLanguage = 'sub';
+        let currentEpisodeIndex = 0;
+        let autoNext = false;
+
+        // Function to toggle between subbed and dubbed
+        function toggleLanguage(language) {
+            currentLanguage = language;
+            document.getElementById('subButton').classList.remove('active');
+            document.getElementById('dubButton').classList.remove('active');
+            document.getElementById(`${language}Button`).classList.add('active');
+            loadEpisodes();
+        }
+
+        // Function to load episodes for the selected language
+        function loadEpisodes() {
+            const episodeList = episodes[currentLanguage].season1;
+            const episodeListContainer = document.getElementById('episode-list');
+            episodeListContainer.innerHTML = '';
+
+            episodeList.forEach((episode, index) => {
+                const episodeButton = document.createElement('button');
+                episodeButton.textContent = episode.title;
+                episodeButton.onclick = () => playEpisode(index);
+                episodeListContainer.appendChild(episodeButton);
+            });
+
+            // Load the first episode by default
+            if (episodeList.length > 0) {
+                playEpisode(0);
+            }
+        }
+
+        // Function to play a specific episode
+        function playEpisode(index) {
+            const episode = episodes[currentLanguage].season1[index];
+            const videoSource = document.getElementById('video-source');
+            videoSource.src = episode.url;
+            player.load();
+            player.play();
+            currentEpisodeIndex = index;
+        }
+
+        // Function to play the next episode
+        function playNextEpisode() {
+            const episodeList = episodes[currentLanguage].season1;
+            currentEpisodeIndex = (currentEpisodeIndex + 1) % episodeList.length;
+            playEpisode(currentEpisodeIndex);
+        }
+
+        // Function to play the previous episode
+        function playPreviousEpisode() {
+            const episodeList = episodes[currentLanguage].season1;
+            currentEpisodeIndex = (currentEpisodeIndex - 1 + episodeList.length) % episodeList.length;
+            playEpisode(currentEpisodeIndex);
+        }
+
+        // Toggle Auto Next
+        function toggleAutoNext() {
+            autoNext = !autoNext;
+            document.getElementById('autonextButton').textContent = autoNext ? 'Auto Next: ON' : 'Auto Next: OFF';
+        }
+
+        // Select Season (currently only season 1)
+        function selectSeason(season) {
+            currentSeason = season;
+            loadEpisodes();
+        }
+
+        // Initial episode load
+        loadEpisodes();
+    </script>
+
+    <script>
+        // Add language support to Video.js
+        videojs.addLanguage('en', {
+            "The media could not be loaded, either because the server or network failed or because the format is not supported.": "Please select an episode to watch!"
+        });
+
+        // Fetch main script dynamically
+        fetch('https://raw.githubusercontent.com/thefarawaydev/Watch/main/test-main-script.js')
+            .then(response => response.text())
+            .then(scriptContent => {
+                const script = document.createElement('script');
+                script.textContent = scriptContent;
+                document.body.appendChild(script);
+            });
+    </script>
+
+</body>
+
+</html>

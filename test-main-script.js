@@ -70,8 +70,13 @@ function selectSeason(seasonNumber) {
 
 function loadEpisodes() {
     const episodeContainer = document.getElementById('episode-list');
-    episodeContainer.innerHTML = '';
-    const currentEpisodes = episodes[currentLanguage][currentSeason];
+    episodeContainer.innerHTML = ''; // Clear the episode list
+    const currentEpisodes = episodes[currentLanguage] && episodes[currentLanguage][currentSeason];
+
+    if (!currentEpisodes) {
+        console.error("No episodes found for the current language and season.");
+        return;
+    }
 
     currentEpisodes.forEach(ep => {
         const button = document.createElement('button');
@@ -89,6 +94,7 @@ function loadEpisodes() {
 
     updateNavigationButtons();
 }
+
 
 function changeVideo(videoUrl, button) {
     const player = videojs('my-video');
