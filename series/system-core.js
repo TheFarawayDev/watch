@@ -168,36 +168,6 @@ function updateNavigationButtons() {
     document.getElementById('nextButton').disabled = currentIndex >= currentEpisodes.length - 1;
 }
 
-// Load episodes initially
-const urlParams = new URLSearchParams(window.location.search);
-const seriesName = urlParams.get('series');
-const episodes = { sub: {}, dub: {} };
-
-if (seriesName) {
-    fetch(`../json/${seriesName}.json`)
-        .then(response => response.json())
-        .then(data => {
-            document.querySelector('#my-video').poster = data.img;
-            episodes.sub = data.series.sub;
-            episodes.dub = data.series.dub;
-            generateSeasonButtons(data.seasons);
-            loadEpisodes();
-            updateButtonStyles('toggle-options', currentLanguage);
-        });
-}
-
-function generateSeasonButtons(seasons) {
-    const seasonSelector = document.getElementById('season-selector');
-    for (let i = 1; i <= seasons; i++) {
-        const button = document.createElement('button');
-        button.textContent = `Season ${i}`;
-        button.onclick = () => selectSeason(i);
-        button.id = `season${i}Button`;
-        if (i === 1) button.classList.add('active');
-        seasonSelector.appendChild(button);
-    }
-}
-
 let seasonNumber = currentSeason.replace('season', '') || '1';
 if (!episodes[currentLanguage]['season' + seasonNumber]) {
     seasonNumber = '1';
