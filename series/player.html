@@ -76,7 +76,7 @@
         const episodes = { sub: {}, dub: {} };
 
         if (seriesName) {
-            fetch(`../json/${seriesName}.json`)
+            fetch(`./json/${seriesName}.json`)
                 .then(response => response.json())
                 .then(data => {
                     document.querySelector('#my-video').poster = data.img;
@@ -119,6 +119,24 @@
             });
 
             updateNavigationButtons();
+        }
+
+        function toggleLanguage(lang) {
+            if (episodes[lang] && episodes[lang][currentSeason]) {
+                currentLanguage = lang;
+                localStorage.setItem('preferredLanguage', lang);
+            } else {
+                currentLanguage = lang === 'sub' ? 'dub' : 'sub';
+                localStorage.setItem('preferredLanguage', currentLanguage);
+            }
+            updateButtonStyles('toggle-options', currentLanguage);
+            loadEpisodes();
+        }
+
+        function toggleAutoNext() {
+            autoNext = !autoNext;
+            localStorage.setItem('autoNext', JSON.stringify(autoNext));
+            document.getElementById('autonextButton').classList.toggle('active', autoNext);
         }
     </script>
 
