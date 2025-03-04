@@ -1,0 +1,15 @@
+{
+    "title": "Taboo Tattoo",
+    "img": "taboo_tattoo.jpg",
+    "seasons": 1,
+    "series": {
+        "sub": {
+            "season1": [
+                {
+                    "title": "Episode 1",
+                    "url": "https://tt57.jonextugundu.net/_v7/81b1d2a7e1eb29e3c42465194e8d8b12450fc02fae57006e36935024d4ece47123b089cc1e38740dbfd527f74df8f096680aceaca222c964d0593baf227b1bfb3575b36ebc894919936b20d485a4d505f92791f63c446970f9bfb60eb5a66e93543ea3c446a6a9abab39aabbf94a3ad98755956cdf2869e08c8188da805f464f/master.m3u8?faststream-headers=%7B%22sec-gpc%22%3A%221%22%2C%22origin%22%3A%22https%3A%2F%2Fmegacloud.club%22%2C%22referer%22%3A%22https%3A%2F%2Fmegacloud.club%2F%22%7D&faststream-mode=accelerated_hls"
+                }
+            ]
+        }
+    }
+}
