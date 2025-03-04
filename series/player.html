@@ -20,7 +20,7 @@
         <div class="content"></div>
             <video id="my-video" class="video-js" controls preload="none" playsinline
                    poster="../BA.png"
-                   data-setup="{}">
+                   data-setup='{"controlBar": {"subsCapsButton": false}}'></video>
                 <source id="video-source" src="https://example.mp4" type="video/mp4" />
             </video>
 
@@ -118,12 +118,6 @@
                 }
             });
 
-            if (localStorage.getItem('currentEpisodeUrl')) {
-                const currentEpisodeUrl = localStorage.getItem('currentEpisodeUrl');
-                const button = document.querySelector(`#episode-list button[data-url="${currentEpisodeUrl}"]`);
-                if (button) changeVideo(currentEpisodeUrl, button);
-            }
-
             updateNavigationButtons();
         }
 
@@ -134,6 +128,7 @@
             if (currentEpisodeButton) {
                 currentEpisodeButton.classList.remove('active');
             }
+
             button.classList.add('active');
             currentEpisodeButton = button;
             
@@ -293,8 +288,15 @@
             currentSeason = 'season1';
             localStorage.setItem('currentSeason', currentSeason);
         }
+
         selectSeason(seasonNumber);
         toggleLanguage(currentLanguage);
+        
+        if (localStorage.getItem('currentEpisodeUrl')) {
+                const currentEpisodeUrl = localStorage.getItem('currentEpisodeUrl');
+                const button = document.querySelector(`#episode-list button[data-url="${currentEpisodeUrl}"]`);
+                if (button) changeVideo(currentEpisodeUrl, button);
+        }
 
         updateButtonStyles('toggle-options', currentLanguage);
         videojs.addLanguage('en', {"The media could not be loaded, either because the server or network failed or because the format is not supported.": "Please select an episode to watch!"});
