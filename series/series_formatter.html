@@ -28,6 +28,7 @@
             border: none;
             border-radius: 4px;
             cursor: pointer;
+            width: 100%;
         }
         #jsonOutput {
             width: 100%;
@@ -74,7 +75,7 @@
                 } else if (line.includes('season')) {
                     // Extract the season number and format the key
                     const seasonNumber = line.match(/season(\d+)/)[1];
-                    currentSeason = `season ${seasonNumber}`;
+                    currentSeason = `season${seasonNumber}`;
                     seriesData[currentLanguage][currentSeason] = [];
                 } else if (line.startsWith('{ title:')) {
                     const titleMatch = line.match(/title: "(.*?)"/);

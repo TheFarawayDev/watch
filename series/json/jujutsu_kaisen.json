@@ -3,7 +3,7 @@
     "seasons": 3,
     "series": {
         "sub": {
-            "season 1": [
+            "season1": [
                 {
                     "title": "Episode 1",
                     "url": "https://gg3.jonextugundu.net/_v7/97d61118206bb19859ccff8dd2317be358178cb002a5091e5d385ab79512acae03a3ffb61b6f980b3654d6686c6aef47a52e289f1e349cbd48f0ed79b2d7e760ce10831fcab5dd28a4fbf45427ada27e3c0278fa952eef7f2a885989b608f9fede998efa566c72080be8ea62888ea0b583748e83dc85050d5424ce3e7cc5054d/master.m3u8?faststream-headers=%7B%22sec-gpc%22%3A%221%22%2C%22origin%22%3A%22https%3A%2F%2Fmegacloud.club%22%2C%22referer%22%3A%22https%3A%2F%2Fmegacloud.club%2F%22%7D&faststream-mode=accelerated_hls"
@@ -101,7 +101,7 @@
                     "url": "https://vd2.jonextugundu.net/_v7/2391cc297c2a0000f1f0da1b1c9f258d9aaecdbee9ea1e88297b7e4da9b2b4833ad7c8fff2f2df27bdfb36de47316952b4c528747b52b1d0cf6cf9caac9dcd62c183008cc752290c03c11d07e710b1d9c4ded6fd80a915c06af95d530cfb057b000372e9c3935e7a45915e84b3e149d2f034fb0b0acffc16e75528e51423c307/master.m3u8?faststream-headers=%7B%22sec-gpc%22%3A%221%22%2C%22origin%22%3A%22https%3A%2F%2Fmegacloud.club%22%2C%22referer%22%3A%22https%3A%2F%2Fmegacloud.club%2F%22%7D&faststream-mode=accelerated_hls"
                 }
             ],
-            "season 2": [
+            "season2": [
                 {
                     "title": "Episode 1",
                     "url": "https://fgh5.jonextugundu.net/_v7/c81e0320ba619de237ee247b52d3bdb125d2e6f8f49bde94765ddd259c441a7b92faaefc4917c4cbabf53cd36a63cfbec26505f439fcd2525310c275b3d7942932d3fcd5136d9a931f75ab667445d747e83a25d5a0d2dc0b98cb173c2015d2a62fe269a51444cf298e96fd54102abaf736138682fa5dbdfbd4ff5712f296e2a3/master.m3u8?faststream-headers=%7B%22sec-gpc%22%3A%221%22%2C%22origin%22%3A%22https%3A%2F%2Fmegacloud.club%22%2C%22referer%22%3A%22https%3A%2F%2Fmegacloud.club%2F%22%7D&faststream-mode=accelerated_hls"
@@ -195,7 +195,7 @@
                     "url": "https://fgh5.jonextugundu.net/_v7/a7a1b4de7df402671bb71accd197575dd15d9b076f72c161ee2e129fa1468230cb876bf9c66b0b9be5315fdfb52b18c33ba37ae2646344c086af85a9838f9e2c73f493943dd5b3855b46e7a659e573d678dbe85cf11c6c5a9d89e977eb759d4c835a816d7cb9a012685e529b0b25eb1ae289c53937817e2f8138056c92123c5a/master.m3u8?faststream-headers=%7B%22sec-gpc%22%3A%221%22%2C%22origin%22%3A%22https%3A%2F%2Fmegacloud.club%22%2C%22referer%22%3A%22https%3A%2F%2Fmegacloud.club%2F%22%7D&faststream-mode=accelerated_hls"
                 }
             ],
-            "season 3": [
+            "season3": [
                 {
                     "title": "Jujutsu Kaisen 0",
                     "url": "https://gg3.jonextugundu.net/_v7/8f23acacf5eba704e6a39e4e8be9781495ee9a79b7461e7bb7e840ca1b623afe11f92a5f7b9f7b6388186737fc79276886764b8094dacbd40bf56332e472c6c27daed0d71b4d6f935351555fab535d6dcbebd403f85ded9150afdc29b1fc1952c5d1cf7246b3ee7eea6827f476f24428089d6508faa4383f32da6b140dbcdf9a/master.m3u8?faststream-headers=%7B%22sec-gpc%22%3A%221%22%2C%22origin%22%3A%22https%3A%2F%2Fmegacloud.club%22%2C%22referer%22%3A%22https%3A%2F%2Fmegacloud.club%2F%22%7D&faststream-mode=accelerated_hls"
@@ -203,7 +203,7 @@
             ]
         },
         "dub": {
-            "season 1": [
+            "season1": [
                 {
                     "title": "Episode 1",
                     "url": "https://g4fv.jonextugundu.net/_v7/691df2ecbdd8771baf173385d827e40dda83926df0aa04cd3baeb2e896d4eb6693dffbc5b27882bb754f21086687458ee2203b889afe27e41dae7d93183ae89ec3c174d9b422931be010d8e66ab80d92e5f145f543db408983b02d46834e01369768f9bad1f5cc1b0c0837360ef75a668bd147f2d2828ed361f07a2e4517926a/master.m3u8?faststream-headers=%7B%22sec-gpc%22%3A%221%22%2C%22origin%22%3A%22https%3A%2F%2Fmegacloud.club%22%2C%22referer%22%3A%22https%3A%2F%2Fmegacloud.club%2F%22%7D&faststream-mode=accelerated_hls"
@@ -301,7 +301,7 @@
                     "url": "https://mmd.jonextugundu.net/_v7/bd2d31f88f225b841d2d454dbd188256dfef56aa89eecb341be152960f36c749ee98a16db3b24b11a517399764cb314314cb08a3d9a17a45548736a9f80a742d6100047ebff787a7e2ae98610d093eb14cb870ea692d6359eaf2d9801972b3a70c8df66657bd417d102f99894768bfe7a3417b64be486795f3294bf173453dba/master.m3u8?faststream-headers=%7B%22sec-gpc%22%3A%221%22%2C%22origin%22%3A%22https%3A%2F%2Fmegacloud.club%22%2C%22referer%22%3A%22https%3A%2F%2Fmegacloud.club%2F%22%7D&faststream-mode=accelerated_hls"
                 }
             ],
-            "season 2": [
+            "season2": [
                 {
                     "title": "Episode 1",
                     "url": "https://gg3.jonextugundu.net/_v7/e4b7462bd2d95d38a6070bce1e930ef2d91de98a86a27c1258350511b2611ce82602aaf03cad6d5364fb74b7c355e8b29c700915e6deb79ae5629ba0f3ed6cb7072b51075e8499b9a747b92fcb1ab1087316d7aed902239b0b606991eb5e2b4dfc466fffd7e8ef9163092a3e7a2235ded246ad93abf5c3c1434ae92b5c83a49f/master.m3u8?faststream-headers=%7B%22sec-gpc%22%3A%221%22%2C%22origin%22%3A%22https%3A%2F%2Fmegacloud.club%22%2C%22referer%22%3A%22https%3A%2F%2Fmegacloud.club%2F%22%7D&faststream-mode=accelerated_hls"
@@ -395,7 +395,7 @@
                     "url": "https://g4fv.jonextugundu.net/_v7/b8aef2fd7a9d16ddbc10dc506804935eda06ab02735659d9b1ca37195252093409a7d03ec8e35381194ff02831484dabaaa99454b3b66ca916b5359e14bd84c32debf3791ff156852bdd2c7f741c6fb533440d8caf3ddc4f255e4309474e7436070239d6c4da1934bd7dcde6c526ab3721a02c6822b80d75836cfcc332d4445f/master.m3u8?faststream-headers=%7B%22sec-gpc%22%3A%221%22%2C%22origin%22%3A%22https%3A%2F%2Fmegacloud.club%22%2C%22referer%22%3A%22https%3A%2F%2Fmegacloud.club%2F%22%7D&faststream-mode=accelerated_hls"
                 }
             ],
-            "season 3": [
+            "season3": [
                 {
                     "title": "Jujutsu Kaisen 0",
                     "url": "https://fds.jonextugundu.net/_v7/d83b05c1818d3d076de306277a5205f3c086dbfa686ae5a504f1cda37cf4f954b3ebfbfab6429e2126ac89e317a5e9e7ddb2f717252c05ffbd6d37522273e3e7e7cfe6ecef5f3e67c4f194c1537a300ba5fc26ce356cf4b6bb79bd5525f1c9dafd1d423bf5e34c12605b73e220cf85ad11a8889da1fc1c264a517232f8686457/master.m3u8?faststream-headers=%7B%22sec-gpc%22%3A%221%22%2C%22origin%22%3A%22https%3A%2F%2Fmegacloud.club%22%2C%22referer%22%3A%22https%3A%2F%2Fmegacloud.club%2F%22%7D&faststream-mode=accelerated_hls"
