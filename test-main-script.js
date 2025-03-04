@@ -34,7 +34,6 @@ let currentLanguage = localStorage.getItem('preferredLanguage') || 'sub';
 let currentSeason = localStorage.getItem('currentSeason') || 'season1';
 let currentEpisodeButton = null;
 let autoNext = JSON.parse(localStorage.getItem('autoNext')) || false;
-let skipIntroEnabled = JSON.parse(localStorage.getItem('skipIntroEnabled')) || false;
 let isIntroPlaying = false;
 
 function getVideoType(url) {
@@ -140,16 +139,6 @@ function setupVideoListeners(player, videoUrl) {
         }
         const currentEpisodes = episodes[currentLanguage][currentSeason];
         const currentEpisode = currentEpisodes.find(ep => ep.url === videoUrl);
-        if (skipIntroEnabled && currentEpisode) {
-            const currentTime = player.currentTime();
-            const { introBeginning, introEnd, outroBeginning, outroEnd } = currentEpisode;
-            if (typeof introBeginning === 'number' && typeof introEnd === 'number' && currentTime >= introBeginning && currentTime < introEnd) {
-                player.currentTime(introEnd);
-            }
-            if (typeof outroBeginning === 'number' && typeof outroEnd === 'number' && currentTime >= outroBeginning && currentTime < outroEnd) {
-                player.currentTime(outroEnd);
-            }
-        }
     });
     
     player.on('error', function() {
@@ -244,4 +233,3 @@ if (localStorage.getItem('currentEpisodeUrl')) {
     if (button) changeVideo(currentEpisodeUrl, button);
 }
 document.getElementById('autonextButton').classList.toggle('active', autoNext);
-document.getElementById('skipintroButton').classList.toggle('active', skipIntroEnabled);
