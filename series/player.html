@@ -118,6 +118,12 @@
                 }
             });
 
+            if (localStorage.getItem('currentEpisodeUrl')) {
+                const currentEpisodeUrl = localStorage.getItem('currentEpisodeUrl');
+                const button = document.querySelector(`#episode-list button[data-url="${currentEpisodeUrl}"]`);
+                if (button) changeVideo(currentEpisodeUrl, button);
+            }
+
             updateNavigationButtons();
         }
 
@@ -255,7 +261,8 @@
                 .then(response => response.json())
                 .then(data => {
                     document.title = data.title;
-                    document.getElementById('my-video').setAttribute('poster', data.img);
+                    document.getElementById('my-video').poster = data.img;
+                    console.log(data.img);
                     episodes.sub = data.series.sub;
                     episodes.dub = data.series.dub;
                     generateSeasonButtons(data.seasons);
@@ -285,11 +292,7 @@
         }
         selectSeason(seasonNumber);
         toggleLanguage(currentLanguage);
-        if (localStorage.getItem('currentEpisodeUrl')) {
-            const currentEpisodeUrl = localStorage.getItem('currentEpisodeUrl');
-            const button = document.querySelector(`#episode-list button[data-url="${currentEpisodeUrl}"]`);
-            if (button) changeVideo(currentEpisodeUrl, button);
-        }
+
         updateButtonStyles('toggle-options', currentLanguage);
         videojs.addLanguage('en', {"The media could not be loaded, either because the server or network failed or because the format is not supported.": "Please select an episode to watch!"});
     </script>
