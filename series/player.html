@@ -261,8 +261,8 @@
                 .then(response => response.json())
                 .then(data => {
                     document.title = data.title;
-                    document.getElementById('my-video').poster = data.img;
-                    console.log(data.img);
+                    player.poster(data.img);
+                    player.reset();
                     episodes.sub = data.series.sub;
                     episodes.dub = data.series.dub;
                     generateSeasonButtons(data.seasons);
