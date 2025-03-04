@@ -88,8 +88,8 @@
             loadEpisodes();
         }
 
-        function selectSeason(seasonNumber) {
-            currentSeason = 'season' + seasonNumber;
+        function selectSeason(seasonName) {
+            currentSeason = seasonName;
             localStorage.setItem('currentSeason', currentSeason);
             updateButtonStyles('season-selector', currentSeason);
             loadEpisodes();
@@ -271,7 +271,7 @@
                     document.title = data.title;
                     episodes.sub = data.series.sub;
                     episodes.dub = data.series.dub;
-                    generateSeasonButtons(data.seasons);
+                    generateSeasonButtons(data); // Pass the entire data object
 
                     // Load the last watched episode and season if they exist
                     const currentEpisodeUrlKey = `currentEpisodeUrl_${seriesName}`;
@@ -304,15 +304,23 @@
                 });
         }
 
-        function generateSeasonButtons(seasons) {
+        function generateSeasonButtons(data) {
             const seasonSelector = document.getElementById('season-selector');
-            for (let i = 1; i <= seasons; i++) {
+            for (let i = 1; i <= data.seasons; i++) {
                 const button = document.createElement('button');
                 button.textContent = `Season ${i}`;
-                button.onclick = () => selectSeason(i);
+                button.onclick = () => selectSeason(`season${i}`);
                 button.id = `season${i}Button`;
-                if (i === 1) button.classList.add('active');
                 seasonSelector.appendChild(button);
+            }
+
+            // Check if 'movies' property exists in either sub or dub
+            if (data.series.sub.movies || data.series.dub.movies) {
+                const moviesButton = document.createElement('button');
+                moviesButton.textContent = 'Movies';
+                moviesButton.onclick = () => selectSeason('movies');
+                moviesButton.id = 'moviesButton';
+                seasonSelector.appendChild(moviesButton);
             }
         }
 
