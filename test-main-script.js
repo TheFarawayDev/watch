@@ -12,7 +12,10 @@ document.addEventListener("DOMContentLoaded", function () {
             return response.json();
         })
         .then(data => {
-            episodes = data;
+            let episodes = {
+                sub: data.sub,
+                dub: data.dub
+            };
 
             // Update page title
             if (data.title) document.title = data.title;

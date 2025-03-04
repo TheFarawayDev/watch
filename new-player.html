@@ -71,7 +71,7 @@
     </script>
     
     <script>
-        const episodes = {
+        let episodes = {
             sub: {
                 season1: [
                 ]
@@ -85,15 +85,9 @@
 
     <script>
         videojs.addLanguage('en', {"The media could not be loaded, either because the server or network failed or because the format is not supported.": "Please select an episode to watch!"});
-
-        fetch('https://raw.githubusercontent.com/thefarawaydev/Watch/main/test-main-script.js')
-            .then(response => response.text())
-            .then(scriptContent => {
-                const script = document.createElement('script');
-                script.textContent = scriptContent;
-                document.body.appendChild(script);
-            })
     </script>
+
+    <script src="https://thefarawaydev.github.io/watch/test-main-script.js"></script>
     
 </body>
 </html>
