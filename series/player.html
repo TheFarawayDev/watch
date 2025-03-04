@@ -133,7 +133,9 @@
             currentEpisodeButton = button;
             
             localStorage.setItem('currentSeason', currentSeason);
-            localStorage.setItem('currentEpisodeUrl', videoUrl);
+            const seriesName = urlParams.get('series');
+            const currentEpisodeUrlKey = `currentEpisodeUrl_${seriesName}`;
+            localStorage.setItem(currentEpisodeUrlKey, videoUrl);
             
             isIntroPlaying = true;
             player.src({ type: 'video/mp4', src: 'https://thefarawaydev.github.io/watch/BA.mp4' });
@@ -267,6 +269,15 @@
                     loadEpisodes();
                     updateButtonStyles('toggle-options', currentLanguage);
                     document.getElementById('autonextButton').classList.toggle('active', autoNext);
+
+                    const currentEpisodeUrlKey = `currentEpisodeUrl_${seriesName}`;
+                    if (localStorage.getItem(currentEpisodeUrlKey)) {
+                        const currentEpisodeUrl = localStorage.getItem(currentEpisodeUrlKey);
+                        const button = document.querySelector(`#episode-list button[data-url="${currentEpisodeUrl}"]`);
+                        if (button) {
+                            changeVideo(currentEpisodeUrl, button);
+                        }
+                    }
                 });
         }
 
