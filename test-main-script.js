@@ -10,10 +10,8 @@ document.addEventListener("DOMContentLoaded", function () {
             console.log(data[title]);
         })
         .then(data => {
-            let episodes = {
-                sub: data.sub,
-                dub: data.dub
-            };
+            let episodes = data.series
+            console.log(episodes);
 
             // Update page title
             if (data.title) document.title = data.title;
