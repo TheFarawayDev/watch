@@ -118,6 +118,12 @@
                 }
             });
 
+            if (localStorage.getItem('currentEpisodeUrl')) {
+                const currentEpisodeUrl = localStorage.getItem('currentEpisodeUrl');
+                const button = document.querySelector(`#episode-list button[data-url="${currentEpisodeUrl}"]`);
+                if (button) changeVideo(currentEpisodeUrl, button);
+            }
+
             updateNavigationButtons();
         }
 
@@ -269,19 +275,30 @@
 
                     // Load the last watched episode and season if they exist
                     const currentEpisodeUrlKey = `currentEpisodeUrl_${seriesName}`;
-                    const savedSeason = localStorage.getItem('currentSeason') || 'season1';
-                    currentSeason = savedSeason;
-                    updateButtonStyles('season-selector', currentSeason);
+                    const savedEpisodeUrl = localStorage.getItem(currentEpisodeUrlKey);
 
-                    loadEpisodes();
+                    // Determine the season from the saved episode URL, if available
+                    if (savedEpisodeUrl) {
+                        for (const lang in episodes) {
+                            for (const season in episodes[lang]) {
+                                if (episodes[lang][season].some(ep => ep.url === savedEpisodeUrl)) {
+                                    currentSeason = season;
+                                    localStorage.setItem('currentSeason', currentSeason);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+
+                    updateButtonStyles('season-selector', currentSeason);
+                    loadEpisodes(); // Load episodes after setting the correct season
                     updateButtonStyles('toggle-options', currentLanguage);
                     document.getElementById('autonextButton').classList.toggle('active', autoNext);
 
-                    if (localStorage.getItem(currentEpisodeUrlKey)) {
-                        const currentEpisodeUrl = localStorage.getItem(currentEpisodeUrlKey);
-                        const button = document.querySelector(`#episode-list button[data-url="${currentEpisodeUrl}"]`);
+                    if (savedEpisodeUrl) {
+                        const button = document.querySelector(`#episode-list button[data-url="${savedEpisodeUrl}"]`);
                         if (button) {
-                            changeVideo(currentEpisodeUrl, button);
+                            changeVideo(savedEpisodeUrl, button);
                         }
                     }
                 });
@@ -308,12 +325,6 @@
 
         selectSeason(seasonNumber);
         toggleLanguage(currentLanguage);
-        
-        if (localStorage.getItem('currentEpisodeUrl')) {
-                const currentEpisodeUrl = localStorage.getItem('currentEpisodeUrl');
-                const button = document.querySelector(`#episode-list button[data-url="${currentEpisodeUrl}"]`);
-                if (button) changeVideo(currentEpisodeUrl, button);
-        }
 
         updateButtonStyles('toggle-options', currentLanguage);
         videojs.addLanguage('en', {"The media could not be loaded, either because the server or network failed or because the format is not supported.": "Please select an episode to watch!"});
