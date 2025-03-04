@@ -218,7 +218,10 @@
         }
 
         function saveProgress(videoUrl, currentTime) {
-            let progressData = JSON.parse(localStorage.getItem('progressData')) || {};
+            const seriesName = urlParams.get('series');
+            const progressKey = `progressData_${seriesName}`;
+            let progressData = JSON.parse(localStorage.getItem(progressKey)) || {};
+
             if (!progressData[currentLanguage]) {
                 progressData[currentLanguage] = {};
             }
@@ -226,11 +229,13 @@
                 progressData[currentLanguage][currentSeason] = {};
             }
             progressData[currentLanguage][currentSeason][videoUrl] = currentTime;
-            localStorage.setItem('progressData', JSON.stringify(progressData));
+            localStorage.setItem(progressKey, JSON.stringify(progressData));
         }
 
         function loadProgress(videoUrl) {
-            let progressData = JSON.parse(localStorage.getItem('progressData')) || {};
+            const seriesName = urlParams.get('series');
+            const progressKey = `progressData_${seriesName}`;
+            let progressData = JSON.parse(localStorage.getItem(progressKey)) || {};
             return progressData[currentLanguage]?.[currentSeason]?.[videoUrl] || 0;
         }
 
