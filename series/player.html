@@ -33,7 +33,6 @@
                 <div class="setting-options">
                     <button id="previousButton" onclick="playPreviousEpisode()">Previous</button>
                     <button id="autonextButton" onclick="toggleAutoNext()" id="autonextButton">Auto Next</button>
-                    <!-- <button id="skipintroButton" onclick="skipIntro()">Skip Intro</button> -->
                     <button id="nextButton" onclick="playNextEpisode()">Next</button>
                 </div>
 
@@ -256,7 +255,7 @@
                 .then(response => response.json())
                 .then(data => {
                     document.title = data.title;
-                    player.poster = data.img;
+                    document.getElementById('my-video').setAttribute('poster', data.img);
                     episodes.sub = data.series.sub;
                     episodes.dub = data.series.dub;
                     generateSeasonButtons(data.seasons);
