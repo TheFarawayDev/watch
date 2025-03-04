@@ -24,7 +24,6 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
             // Initialize player and load the episodes
-            initializePlayer();
             loadEpisodes();
         })
         .catch(error => console.error("Error loading episodes:", error));
@@ -34,6 +33,7 @@ let currentLanguage = localStorage.getItem('preferredLanguage') || 'sub';
 let currentSeason = localStorage.getItem('currentSeason') || 'season1';
 let currentEpisodeButton = null;
 let autoNext = JSON.parse(localStorage.getItem('autoNext')) || false;
+let skipIntroEnabled = JSON.parse(localStorage.getItem('skipIntroEnabled')) || false;
 let isIntroPlaying = false;
 
 function getVideoType(url) {
