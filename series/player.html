@@ -76,7 +76,7 @@
         const episodes = { sub: {}, dub: {} };
 
         if (seriesName) {
-            fetch(`../json/${seriesName}.json`)
+            fetch(`./json/${seriesName}.json`)
                 .then(response => response.json())
                 .then(data => {
                     document.querySelector('#my-video').poster = data.img;
