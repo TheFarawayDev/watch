@@ -7,10 +7,9 @@ document.addEventListener("DOMContentLoaded", function () {
         .then(response => {
             if (!response.ok) throw new Error(`Failed to load ${jsonFile}`);
             return response.json();
-            console.log(data[title]);
         })
         .then(data => {
-            let episodes = data.series
+            let episodes = data.series;
             console.log(episodes);
 
             // Update page title
@@ -52,14 +51,23 @@ function toggleLanguage(lang) {
 
 function populateSeasons() {
     const seasonsContainer = document.querySelector('.season-selector');
-    const availableSeasons = Object.keys(episodes[sub]);
+    seasonsContainer.innerHTML = ''; // Clear any existing season buttons
+
+    const availableSeasons = Object.keys(episodes[currentLanguage]);
 
     availableSeasons.forEach(season => {
         const button = document.createElement('button');
         button.textContent = `Season ${season.replace('season', '')}`;
+        button.id = `season${season.replace('season', '')}Button`; // Ensure the button has a unique ID
         button.onclick = () => selectSeason(season);
         seasonsContainer.appendChild(button);
     });
+
+    // If the current season button doesn't exist yet, set the default active button
+    const activeSeasonButton = document.getElementById(currentSeason.replace('season', '') + 'Button');
+    if (activeSeasonButton) {
+        activeSeasonButton.classList.add('active');
+    }
 }
 
 function selectSeason(seasonNumber) {
@@ -95,7 +103,6 @@ function loadEpisodes() {
 
     updateNavigationButtons();
 }
-
 
 function changeVideo(videoUrl, button) {
     const player = videojs('my-video');
@@ -135,8 +142,6 @@ function setupVideoListeners(player, videoUrl) {
         if (!isIntroPlaying) {
             saveProgress(videoUrl, player.currentTime());
         }
-        const currentEpisodes = episodes[currentLanguage][currentSeason];
-        const currentEpisode = currentEpisodes.find(ep => ep.url === videoUrl);
     });
     
     player.on('error', function() {
