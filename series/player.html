@@ -18,10 +18,10 @@
         </div>
 
         <div class="content"></div>
-            <video id="my-video" class="video-js" controls preload="auto"
+            <video id="my-video" class="video-js" controls preload="none" playsinline
                    poster=""
                    data-setup="{}">
-                <source id="video-source" src="" type="application/x-mpegURL" />
+                <source id="video-source" src="https://example.mp4" type="video/mp4" />
             </video>
 
             <div class="button-container">
@@ -256,39 +256,13 @@
                 .then(response => response.json())
                 .then(data => {
                     document.title = data.title;
-                    document.querySelector('#my-video').poster = data.img;
+                    player.poster = data.img;
                     episodes.sub = data.series.sub;
                     episodes.dub = data.series.dub;
                     generateSeasonButtons(data.seasons);
                     loadEpisodes();
                     updateButtonStyles('toggle-options', currentLanguage);
                     document.getElementById('autonextButton').classList.toggle('active', autoNext);
-
-                    // Load the last watched episode if it exists
-                    if (localStorage.getItem('currentEpisodeUrl')) {
-                        const currentEpisodeUrl = localStorage.getItem('currentEpisodeUrl');
-                        const button = document.querySelector(`#episode-list button[data-url="${currentEpisodeUrl}"]`);
-                        if (button) {
-                            button.classList.add('active');
-                            currentEpisodeButton = button;
-                            // Autoload the video
-                            const player = videojs('my-video');
-                            player.src({ type: getVideoType(currentEpisodeUrl), src: currentEpisodeUrl });
-                            player.load();
-                        } else {
-                            // If the episode is not found, display a message
-                            const player = videojs('my-video');
-                            player.src({ type: 'video/mp4', src: '' });
-                            player.poster(data.img);
-                            player.error({ code: 4, message: 'Please select an episode to watch!' });
-                        }
-                    } else {
-                        // If no episode is saved, display a message
-                        const player = videojs('my-video');
-                        player.src({ type: 'video/mp4', src: '' });
-                        player.poster(data.img);
-                        player.error({ code: 4, message: 'Please select an episode to watch!' });
-                    }
                 });
         }
 
@@ -312,6 +286,11 @@
         }
         selectSeason(seasonNumber);
         toggleLanguage(currentLanguage);
+        if (localStorage.getItem('currentEpisodeUrl')) {
+            const currentEpisodeUrl = localStorage.getItem('currentEpisodeUrl');
+            const button = document.querySelector(`#episode-list button[data-url="${currentEpisodeUrl}"]`);
+            if (button) changeVideo(currentEpisodeUrl, button);
+        }
         updateButtonStyles('toggle-options', currentLanguage);
         videojs.addLanguage('en', {"The media could not be loaded, either because the server or network failed or because the format is not supported.": "Please select an episode to watch!"});
     </script>
