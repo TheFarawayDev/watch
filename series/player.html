@@ -266,11 +266,17 @@
                     episodes.sub = data.series.sub;
                     episodes.dub = data.series.dub;
                     generateSeasonButtons(data.seasons);
+
+                    // Load the last watched episode and season if they exist
+                    const currentEpisodeUrlKey = `currentEpisodeUrl_${seriesName}`;
+                    const savedSeason = localStorage.getItem('currentSeason') || 'season1';
+                    currentSeason = savedSeason;
+                    updateButtonStyles('season-selector', currentSeason);
+
                     loadEpisodes();
                     updateButtonStyles('toggle-options', currentLanguage);
                     document.getElementById('autonextButton').classList.toggle('active', autoNext);
 
-                    const currentEpisodeUrlKey = `currentEpisodeUrl_${seriesName}`;
                     if (localStorage.getItem(currentEpisodeUrlKey)) {
                         const currentEpisodeUrl = localStorage.getItem(currentEpisodeUrlKey);
                         const button = document.querySelector(`#episode-list button[data-url="${currentEpisodeUrl}"]`);
