@@ -32,7 +32,7 @@
 
                 <div class="setting-options">
                     <button id="previousButton" onclick="playPreviousEpisode()">Previous</button>
-                    <button id="autonextButton" onclick="toggleAutoNext()">Auto Next</button>
+                    <button id="autonextButton" onclick="toggleAutoNext()" id="autonextButton">Auto Next</button>
                     <!-- <button id="skipintroButton" onclick="skipIntro()">Skip Intro</button> -->
                     <button id="nextButton" onclick="playNextEpisode()">Next</button>
                 </div>
@@ -76,19 +76,15 @@
         let currentEpisodeButton = null;
         let autoNext = JSON.parse(localStorage.getItem('autoNext')) || false;
         let isIntroPlaying = false;
+        let episodes = { sub: {}, dub: {} };
 
         function getVideoType(url) {
             return url.endsWith('.m3u8') ? 'application/x-mpegURL' : 'video/mp4';
         }
 
         function toggleLanguage(lang) {
-            if (episodes[lang] && episodes[lang][currentSeason]) {
-                currentLanguage = lang;
-                localStorage.setItem('preferredLanguage', lang);
-            } else {
-                currentLanguage = lang === 'sub' ? 'dub' : 'sub';
-                localStorage.setItem('preferredLanguage', currentLanguage);
-            }
+            currentLanguage = lang;
+            localStorage.setItem('preferredLanguage', lang);
             updateButtonStyles('toggle-options', currentLanguage);
             loadEpisodes();
         }
@@ -105,6 +101,11 @@
             episodeContainer.innerHTML = '';
             const currentEpisodes = episodes[currentLanguage][currentSeason];
 
+            if (!currentEpisodes) {
+                console.warn(`No episodes found for ${currentLanguage} ${currentSeason}`);
+                return;
+            }
+
             currentEpisodes.forEach(ep => {
                 const button = document.createElement('button');
                 button.textContent = ep.title;
@@ -112,7 +113,6 @@
                 button.onclick = () => changeVideo(ep.url, button);
                 episodeContainer.appendChild(button);
 
-                // Set active button if it matches the saved episode
                 if (ep.url === localStorage.getItem('currentEpisodeUrl')) {
                     button.classList.add('active');
                     currentEpisodeButton = button;
@@ -132,11 +132,9 @@
             button.classList.add('active');
             currentEpisodeButton = button;
             
-            // Save current season and episode
             localStorage.setItem('currentSeason', currentSeason);
             localStorage.setItem('currentEpisodeUrl', videoUrl);
             
-            // Play the site intro first
             isIntroPlaying = true;
             player.src({ type: 'video/mp4', src: 'https://thefarawaydev.github.io/watch/BA.mp4' });
             player.currentTime(0);
@@ -145,7 +143,7 @@
             player.on('ended', function () {
                 isIntroPlaying = false;
                 player.src({ type: getVideoType(videoUrl), src: videoUrl });
-                player.currentTime(savedTime); // Set the saved time here
+                player.currentTime(savedTime);
                 player.play();
                 setupVideoListeners(player, videoUrl);
             });
@@ -160,8 +158,6 @@
                 if (!isIntroPlaying) {
                     saveProgress(videoUrl, player.currentTime());
                 }
-                const currentEpisodes = episodes[currentLanguage][currentSeason];
-                const currentEpisode = currentEpisodes.find(ep => ep.url === videoUrl);
             });
             
             player.on('error', function() {
@@ -180,25 +176,31 @@
 
         function playNextEpisode() {
             const currentEpisodes = episodes[currentLanguage][currentSeason];
+            if (!currentEpisodeButton) return;
             const currentIndex = currentEpisodes.findIndex(ep => ep.url === currentEpisodeButton.dataset.url);
             const nextIndex = currentIndex + 1;
 
             if (nextIndex < currentEpisodes.length) {
                 const nextEpisode = currentEpisodes[nextIndex];
-                const nextButton = document.querySelector(`button[data-url="${nextEpisode.url}"]`);
-                changeVideo(nextEpisode.url, nextButton);
+                const nextButton = document.querySelector(`#episode-list button[data-url="${nextEpisode.url}"]`);
+                if (nextButton) {
+                    changeVideo(nextEpisode.url, nextButton);
+                }
             }
         }
 
         function playPreviousEpisode() {
             const currentEpisodes = episodes[currentLanguage][currentSeason];
+            if (!currentEpisodeButton) return;
             const currentIndex = currentEpisodes.findIndex(ep => ep.url === currentEpisodeButton.dataset.url);
             const prevIndex = currentIndex - 1;
 
             if (prevIndex >= 0) {
                 const prevEpisode = currentEpisodes[prevIndex];
-                const prevButton = document.querySelector(`button[data-url="${prevEpisode.url}"]`);
-                changeVideo(prevEpisode.url, prevButton);
+                const prevButton = document.querySelector(`#episode-list button[data-url="${prevEpisode.url}"]`);
+                 if (prevButton) {
+                    changeVideo(prevEpisode.url, prevButton);
+                }
             }
         }
 
@@ -230,11 +232,16 @@
         function toggleAutoNext() {
             autoNext = !autoNext;
             localStorage.setItem('autoNext', JSON.stringify(autoNext));
-            document.getElementById('autonextButton').classList.toggle('active', autoNext);
+            const autonextButton = document.getElementById('autonextButton');
+            if (autonextButton) {
+                autonextButton.classList.toggle('active', autoNext);
+            }
         }
 
         function updateNavigationButtons() {
+            if (!episodes[currentLanguage] || !episodes[currentLanguage][currentSeason]) return;
             const currentEpisodes = episodes[currentLanguage][currentSeason];
+            if (!currentEpisodeButton) return;
             const currentIndex = currentEpisodes.findIndex(ep => ep.url === currentEpisodeButton?.dataset.url);
 
             document.getElementById('previousButton').disabled = currentIndex <= 0;
@@ -243,18 +250,19 @@
 
         const urlParams = new URLSearchParams(window.location.search);
         const seriesName = urlParams.get('series');
-        const episodes = { sub: {}, dub: {} };
 
         if (seriesName) {
             fetch(`./json/${seriesName}.json`)
                 .then(response => response.json())
                 .then(data => {
+                    document.title = data.title;
                     document.querySelector('#my-video').poster = data.img;
                     episodes.sub = data.series.sub;
                     episodes.dub = data.series.dub;
                     generateSeasonButtons(data.seasons);
                     loadEpisodes();
                     updateButtonStyles('toggle-options', currentLanguage);
+                    document.getElementById('autonextButton').classList.toggle('active', autoNext);
                 });
         }
 
@@ -277,13 +285,13 @@
             localStorage.setItem('currentSeason', currentSeason);
         }
         selectSeason(seasonNumber);
-        toggleLanguage(currentLanguage); // Ensure the preferred language is set and buttons are updated
+        toggleLanguage(currentLanguage);
         if (localStorage.getItem('currentEpisodeUrl')) {
             const currentEpisodeUrl = localStorage.getItem('currentEpisodeUrl');
-            const button = document.querySelector(`button[data-url="${currentEpisodeUrl}"]`);
+            const button = document.querySelector(`#episode-list button[data-url="${currentEpisodeUrl}"]`);
             if (button) changeVideo(currentEpisodeUrl, button);
         }
-        document.getElementById('autonextButton').classList.toggle('active', autoNext);
+        updateButtonStyles('toggle-options', currentLanguage);
     </script>
     
     <!-- Example URL: player.html?series=taboo_tattoo -->
