@@ -11,10 +11,6 @@
             background-color: #2b3e50;
             scrollbar-width: none; /* For Firefox */
         }
-        
-        body::-webkit-scrollbar {
-            display: none; /* For Chrome, Safari, and Opera */
-        }
 
         .container {
             display: flex;
@@ -26,6 +22,7 @@
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
             overflow: hidden;
             padding-bottom: 20px;
+            scrollbar-width: none;
         }
 
         .header {
