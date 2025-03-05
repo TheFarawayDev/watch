@@ -90,6 +90,7 @@
         display: flex;
         justify-content: center;
         margin: 2px 0;
+        flex-wrap: wrap;
     }
 
     .toggle-options button, .season-selector button, .setting-options button {
@@ -102,6 +103,7 @@
         font-size: 16px;
         flex: 1;
         transition: background-color 0.3s, transform 0.2s;
+        flex: 1 1 calc(33.33% - 10px);
     }
 
     .toggle-options button:hover, .season-selector button:hover, .setting-options button:hover {
@@ -153,6 +155,8 @@
         background-color: #5a6b7c;
         color: #2b3e50;
     }
+
+    
 
     @media screen and (max-width: 768px) {
         .video-js {
@@ -362,6 +366,20 @@
                 if (nextButton) {
                     changeVideo(nextEpisode.url, nextButton);
                 }
+            } else {
+                // Attempt to go to the next season
+                const currentSeasonNumber = parseInt(currentSeason.replace('season', '')) || 0;
+                const nextSeasonNumber = currentSeasonNumber + 1;
+                const nextSeason = `season${nextSeasonNumber}`;
+
+                if (episodes[currentLanguage][nextSeason]) {
+                    selectSeason(nextSeason);
+                    const nextEpisode = episodes[currentLanguage][nextSeason][0];
+                    const nextButton = document.querySelector(`#episode-list button[data-url="${nextEpisode.url}"]`);
+                    if (nextButton) {
+                        changeVideo(nextEpisode.url, nextButton);
+                    }
+                }
             }
         }
 
@@ -376,6 +394,21 @@
                 const prevButton = document.querySelector(`#episode-list button[data-url="${prevEpisode.url}"]`);
                  if (prevButton) {
                     changeVideo(prevEpisode.url, prevButton);
+                }
+            } else {
+                // Attempt to go to the previous season
+                const currentSeasonNumber = parseInt(currentSeason.replace('season', '')) || 0;
+                const prevSeasonNumber = currentSeasonNumber - 1;
+                const prevSeason = `season${prevSeasonNumber}`;
+
+                if (prevSeasonNumber > 0 && episodes[currentLanguage][prevSeason]) {
+                    selectSeason(prevSeason);
+                    const lastEpisodeIndex = episodes[currentLanguage][prevSeason].length - 1;
+                    const prevEpisode = episodes[currentLanguage][prevSeason][lastEpisodeIndex];
+                    const prevButton = document.querySelector(`#episode-list button[data-url="${prevEpisode.url}"]`);
+                    if (prevButton) {
+                        changeVideo(prevEpisode.url, prevButton);
+                    }
                 }
             }
         }
