@@ -290,6 +290,13 @@
                         }
                     }
 
+                    // Default to Season 1, Episode 1 if no saved episode or season
+                    if (!savedEpisodeUrl) {
+                        currentSeason = 'season1';
+                        localStorage.setItem('currentSeason', currentSeason);
+                        localStorage.setItem(currentEpisodeUrlKey, episodes[currentLanguage][currentSeason][0].url);
+                    }
+
                     updateButtonStyles('season-selector', currentSeason);
                     loadEpisodes(); // Load episodes after setting the correct season
                     updateButtonStyles('toggle-options', currentLanguage);
@@ -299,6 +306,12 @@
                         const button = document.querySelector(`#episode-list button[data-url="${savedEpisodeUrl}"]`);
                         if (button) {
                             changeVideo(savedEpisodeUrl, button);
+                        }
+                    } else {
+                        const firstEpisodeUrl = episodes[currentLanguage][currentSeason][0].url;
+                        const button = document.querySelector(`#episode-list button[data-url="${firstEpisodeUrl}"]`);
+                        if (button) {
+                            changeVideo(firstEpisodeUrl, button);
                         }
                     }
                 });
