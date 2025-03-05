@@ -8,7 +8,7 @@ B ---------------------------------------------
   Black Clover
   Bleach [WIP][1]
 C ---------------------------------------------
-  Cautious Hero [WIP][2]
+  Cautious Hero
   Chainsaw Man
   Cowboy Bebop
   Cyberpunk 2077: Edgerunners
@@ -66,7 +66,7 @@ T ---------------------------------------------
   The Faraway Paladin
   The Legend of the Legendary Heroes
   The Reincarnation Of The...
-  The Rising of The Shield Hero [WIP][3]
+  The Rising of The Shield Hero [WIP][2]
   The Seraph of The End
   The Seven Deadly Sins
   Toradora
@@ -77,4 +77,4 @@ W ---------------------------------------------
 Y ---------------------------------------------
   Yamada-kun And The Seven Witches
 ! ---------------------------------------------  
-  Site Wide Series Total [SWST]: 57
+  Site Wide Series Total [SWST]: 58

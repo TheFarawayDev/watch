@@ -651,7 +651,9 @@
                 {
                     "title": "Episode 21",
                     "url": "https://fgh5.jonextugundu.net/_v7/7baf932b91c161933ae4bdb74f09abc0ab70e085aaad039e1e098099ad66000055f760daa326d4b9f691b84bf76449ea66a1291c8172481cc4bed1887f664af104ab56dd1187a5f5d4dcdb3a6ad3c792efb5798b844fb60be3fe6c9cfdf13908a7066ab6de006040b577e42eed2e9e04e49badec682f5ba906dfeecc47883de4/master.m3u8?faststream-headers=%7B%22origin%22%3A%22https%3A%2F%2Fmegacloud.club%22%2C%22referer%22%3A%22https%3A%2F%2Fmegacloud.club%2F%22%7D&faststream-mode=accelerated_hls"
-                },
+                }
+            ],
+            "movies": [
                 {
                     "title": "Two Heroes",
                     "url": "https://fgh5.jonextugundu.net/_v7/370cb3183f24197813d3e2588a59cb86e75072fdd44037e9bf9fa8902ffcb500932c5d169a08ff9d86e12b4121bb178891125145b2a0ee14a25f8f050a192e9511bd5826c9c9909da30a5e24a5f19cb02e9f11f833f865e66f61ed548ad134bc45e5b4a20c9fa6209c7e32cab2d08c7d74ca9b8b70437533b80a77771468809c/master.m3u8?faststream-headers=%7B%22sec-gpc%22%3A%221%22%2C%22origin%22%3A%22https%3A%2F%2Fmegacloud.club%22%2C%22referer%22%3A%22https%3A%2F%2Fmegacloud.club%2F%22%7D&faststream-mode=accelerated_hls"
@@ -1315,7 +1317,9 @@
                 {
                     "title": "Episode 21",
                     "url": "https://mmd.jonextugundu.net/_v7/4d6366e24e11731b708f062fc7a5d432cd37bb0947c9658a5c46783b30f52af91481e0d6cd5e22ae6c0fea5c61f3fcccc5f4f5fe109777278fb2e1c430233fedf06f18006a29f2fa0c2b26fe63f1a9a23ccf781905f17ca819eb0eec30183d745edebea9a04cd9d8aa84892c63138e9304217b54c908d66d9731833cee6be52f/master.m3u8?faststream-headers=%7B%22sec-gpc%22%3A%221%22%2C%22origin%22%3A%22https%3A%2F%2Fmegacloud.club%22%2C%22referer%22%3A%22https%3A%2F%2Fmegacloud.club%2F%22%7D&faststream-mode=accelerated_hls"
-                },
+                }
+            ],
+            "movies": [
                 {
                     "title": "Two Heroes",
                     "url": "https://g4fv.jonextugundu.net/_v7/9ed59f902ec39241f68c4374a5fbae6971766436e450fc76066b3b613188c1b8efcd032b5144590c44268d736f35ab8bfaabef9e19847405a820e79b062359b223c0c55b7ce6cedf6f83e92f146cb2f757450b0f08fb3972f8752ad01e779029406751d25a1bb50ce2f093f28ceb6d9d47ecdd4b17fb77a945e54f6ff542f350/master.m3u8?faststream-headers=%7B%22sec-gpc%22%3A%221%22%2C%22origin%22%3A%22https%3A%2F%2Fmegacloud.club%22%2C%22referer%22%3A%22https%3A%2F%2Fmegacloud.club%2F%22%7D&faststream-mode=accelerated_hls"
@@ -1328,6 +1332,7 @@
                     "title": "World Heroes Mission",
                     "url": "https://g4fv.jonextugundu.net/_v7/fd39051f4ae76f190921d78fbd93bf8b9ecac20e79bd429e754fcfe1dc84052a55487798d378f7512d999eaa0fb3acbc0e4a48cf237f883ffeb3f3003d0e059bca45679328f632fd7f8c110ce303f70d7cbb525ec19e983610918e2c717a8085cde1fab728a89c9a8bf0b461e73323966146b04d4ce5b53e59adaee728f24ba9/master.m3u8?faststream-headers=%7B%22sec-gpc%22%3A%221%22%2C%22origin%22%3A%22https%3A%2F%2Fmegacloud.club%22%2C%22referer%22%3A%22https%3A%2F%2Fmegacloud.club%2F%22%7D&faststream-mode=accelerated_hls"
                 }
+                
             ]
         }
     }
