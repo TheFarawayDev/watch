@@ -29,7 +29,7 @@ F ---------------------------------------------
 H ---------------------------------------------
   Higehiro
 I ---------------------------------------------
-  In Another World With My Smartphone [WIP][3]
+  In Another World With My Smartphone
   I Parry Everything
   Is This A Zombie
 J ---------------------------------------------
@@ -66,7 +66,7 @@ T ---------------------------------------------
   The Faraway Paladin
   The Legend of the Legendary Heroes
   The Reincarnation Of The...
-  The Rising of The Shield Hero [WIP][4]
+  The Rising of The Shield Hero [WIP][3]
   The Seraph of The End
   The Seven Deadly Sins
   Toradora
@@ -77,4 +77,4 @@ W ---------------------------------------------
 Y ---------------------------------------------
   Yamada-kun And The Seven Witches
 ! ---------------------------------------------  
-  Site Wide Series Total [SWST]: 56
+  Site Wide Series Total [SWST]: 57
