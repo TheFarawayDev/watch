@@ -2,6 +2,7 @@ A ---------------------------------------------
   Akashic Records Of Bastard Magic Instructor
   Aldermin On The Sky
   Amagi Brilliant Park
+  A Silent Voice
   Attack On Titan
 B ---------------------------------------------
   Berserk Of Gluttony
@@ -10,6 +11,7 @@ B ---------------------------------------------
 C ---------------------------------------------
   Cautious Hero
   Chainsaw Man
+  Classroom Of The Elite [WIP][4]
   Cowboy Bebop
   Cyberpunk 2077: Edgerunners
 D ---------------------------------------------
@@ -60,6 +62,7 @@ T ---------------------------------------------
   Taboo Tattoo
   Talentless Nana
   Terror In Resonance
+  That Time I Was Reincarnated As... [WIP][5]
   The Apothecary Diaries
   The Disastrous Life of Saiki K.
   The Elusive Samurai
@@ -69,6 +72,7 @@ T ---------------------------------------------
   The Rising of The Shield Hero [WIP][2]
   The Seraph of The End
   The Seven Deadly Sins
+  Tonikawa: Over The Moon For You [WIP][3]
   Toradora
 V ---------------------------------------------
   Vermeil In Gold
@@ -77,4 +81,4 @@ W ---------------------------------------------
 Y ---------------------------------------------
   Yamada-kun And The Seven Witches
 ! ---------------------------------------------  
-  Site Wide Series Total [SWST]: 58
+  Site Wide Series & Movies Total [SWST]: 59
