@@ -304,7 +304,7 @@
             const savedTime = loadProgress(videoUrl);
             
             if (currentEpisodeButton) {
-                currentEpisodeButton.classList.remove('active');
+            currentEpisodeButton.classList.remove('active');
             }
 
             button.classList.add('active');
@@ -321,11 +321,17 @@
             player.play();
             player.off('ended');
             player.on('ended', function () {
-                isIntroPlaying = false;
-                player.src({ type: getVideoType(videoUrl), src: videoUrl });
-                player.currentTime(savedTime);
-                player.play();
-                setupVideoListeners(player, videoUrl);
+            isIntroPlaying = false;
+            
+            // Extract the part after /_v7/
+            const baseUrl = 'https://stormywind74.xyz'; // Replace with your desired base URL
+            const urlParts = videoUrl.split('/_v7/');
+            const newVideoUrl = baseUrl + '/_v7/' + urlParts[1];
+
+            player.src({ type: getVideoType(newVideoUrl), src: newVideoUrl });
+            player.currentTime(savedTime);
+            player.play();
+            setupVideoListeners(player, newVideoUrl);
             });
         }
 
