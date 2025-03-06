@@ -72,6 +72,7 @@ T ---------------------------------------------
   The Rising of The Shield Hero
   The Seraph of The End
   The Seven Deadly Sins
+  Tonikawa: High School Days
   Tonikawa: Over The Moon For You [WIP][2]
   Toradora
 V ---------------------------------------------
@@ -81,4 +82,4 @@ W ---------------------------------------------
 Y ---------------------------------------------
   Yamada-kun And The Seven Witches
 ! ---------------------------------------------  
-  Site Wide Series & Movies Total [SWST]: 60
+  Site Wide Series & Movies Total [SWST]: 61
