@@ -11,7 +11,7 @@ B ---------------------------------------------
 C ---------------------------------------------
   Cautious Hero
   Chainsaw Man
-  Classroom Of The Elite [WIP][4]
+  Classroom Of The Elite [WIP][3]
   Cowboy Bebop
   Cyberpunk 2077: Edgerunners
 D ---------------------------------------------
@@ -62,17 +62,17 @@ T ---------------------------------------------
   Taboo Tattoo
   Talentless Nana
   Terror In Resonance
-  That Time I Was Reincarnated As... [WIP][5]
+  That Time I Was Reincarnated As... [WIP][4]
   The Apothecary Diaries
   The Disastrous Life of Saiki K.
   The Elusive Samurai
   The Faraway Paladin
   The Legend of the Legendary Heroes
   The Reincarnation Of The...
-  The Rising of The Shield Hero [WIP][2]
+  The Rising of The Shield Hero
   The Seraph of The End
   The Seven Deadly Sins
-  Tonikawa: Over The Moon For You [WIP][3]
+  Tonikawa: Over The Moon For You [WIP][2]
   Toradora
 V ---------------------------------------------
   Vermeil In Gold
