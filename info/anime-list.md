@@ -12,7 +12,7 @@ B ---------------------------------------------
 C ---------------------------------------------
   Cautious Hero
   Chainsaw Man
-  Classroom Of The Elite [WIP][2]
+  Classroom Of The Elite [WIP][1]
   Cowboy Bebop
   Cyberpunk 2077: Edgerunners
 D ---------------------------------------------
@@ -63,7 +63,7 @@ T ---------------------------------------------
   Taboo Tattoo
   Talentless Nana
   Terror In Resonance
-  That Time I Was Reincarnated As... [WIP][3]
+  That Time I Was Reincarnated As... [WIP][2]
   The Apothecary Diaries
   The Disastrous Life of Saiki K.
   The Elusive Samurai
@@ -74,7 +74,7 @@ T ---------------------------------------------
   The Seraph of The End
   The Seven Deadly Sins
   Tonikawa: High School Days
-  Tonikawa: Over The Moon For You [WIP][1]
+  Tonikawa: Over The Moon For You
   Toradora
 V ---------------------------------------------
   Vermeil In Gold
@@ -83,4 +83,4 @@ W ---------------------------------------------
 Y ---------------------------------------------
   Yamada-kun And The Seven Witches
 ! ---------------------------------------------  
-  Site Wide Series & Movies Total [SWST]: 62
+  Site Wide Series & Movies Total [SWST]: 64
