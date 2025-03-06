@@ -12,7 +12,7 @@ B ---------------------------------------------
 C ---------------------------------------------
   Cautious Hero
   Chainsaw Man
-  Classroom Of The Elite [WIP][1]
+  Classroom Of The Elite
   Cowboy Bebop
   Cyberpunk 2077: Edgerunners
 D ---------------------------------------------
@@ -83,4 +83,4 @@ W ---------------------------------------------
 Y ---------------------------------------------
   Yamada-kun And The Seven Witches
 ! ---------------------------------------------  
-  Site Wide Series & Movies Total [SWST]: 64
+  Site Wide Series & Movies Total [SWST]: 65
