@@ -7,12 +7,12 @@ A ---------------------------------------------
 B ---------------------------------------------
   Berserk Of Gluttony
   Black Clover
-  Bleach [WIP][1]
+  Bleach
   Bleach: Thousand Year Blood War
 C ---------------------------------------------
   Cautious Hero
   Chainsaw Man
-  Classroom Of The Elite [WIP][3]
+  Classroom Of The Elite [WIP][2]
   Cowboy Bebop
   Cyberpunk 2077: Edgerunners
 D ---------------------------------------------
@@ -63,7 +63,7 @@ T ---------------------------------------------
   Taboo Tattoo
   Talentless Nana
   Terror In Resonance
-  That Time I Was Reincarnated As... [WIP][4]
+  That Time I Was Reincarnated As... [WIP][3]
   The Apothecary Diaries
   The Disastrous Life of Saiki K.
   The Elusive Samurai
@@ -74,7 +74,7 @@ T ---------------------------------------------
   The Seraph of The End
   The Seven Deadly Sins
   Tonikawa: High School Days
-  Tonikawa: Over The Moon For You [WIP][2]
+  Tonikawa: Over The Moon For You [WIP][1]
   Toradora
 V ---------------------------------------------
   Vermeil In Gold
