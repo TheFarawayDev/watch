@@ -63,7 +63,7 @@ T ---------------------------------------------
   Taboo Tattoo
   Talentless Nana
   Terror In Resonance
-  That Time I Was Reincarnated As... [WIP][2]
+  That Time I Was Reincarnated As... [WIP][1]
   The Apothecary Diaries
   The Disastrous Life of Saiki K.
   The Elusive Samurai
