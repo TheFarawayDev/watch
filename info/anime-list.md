@@ -8,6 +8,7 @@ B ---------------------------------------------
   Berserk Of Gluttony
   Black Clover
   Bleach [WIP][1]
+  Bleach: Thousand Year Blood War
 C ---------------------------------------------
   Cautious Hero
   Chainsaw Man
@@ -82,4 +83,4 @@ W ---------------------------------------------
 Y ---------------------------------------------
   Yamada-kun And The Seven Witches
 ! ---------------------------------------------  
-  Site Wide Series & Movies Total [SWST]: 61
+  Site Wide Series & Movies Total [SWST]: 62
