@@ -50,6 +50,7 @@ O ---------------------------------------------
   Overlord
 R ---------------------------------------------
   Ragna Crimson
+  Redo Of Healer
   Reincarnated As The Seventh Prince
   ReLIFE
 S ---------------------------------------------
@@ -84,4 +85,4 @@ Y ---------------------------------------------
   Yamada-kun And The Seven Witches
   Your Name
 ! ---------------------------------------------  
-  Site Wide Series & Movies Total [SWST]: 67
+  Site Wide Series & Movies Total [SWST]: 68
