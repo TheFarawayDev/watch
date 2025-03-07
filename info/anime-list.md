@@ -26,6 +26,7 @@ D ---------------------------------------------
 E ---------------------------------------------
   Erased
 F ---------------------------------------------
+  Fate/Apocrypha [WIP][1]
   Farming Life In Another World
   Fire Force
   Friends Game
