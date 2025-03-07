@@ -26,7 +26,7 @@ D ---------------------------------------------
 E ---------------------------------------------
   Erased
 F ---------------------------------------------
-  Fate/Apocrypha [WIP][1]
+  Fate/Apocrypha 
   Farming Life In Another World
   Fire Force
   Friends Game
@@ -87,4 +87,4 @@ Y ---------------------------------------------
   Yamada-kun And The Seven Witches
   Your Name
 ! ---------------------------------------------  
-  Site Wide Series & Movies Total [SWST]: 69
+  Site Wide Series & Movies Total [SWST]: 70
