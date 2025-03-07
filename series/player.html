@@ -321,19 +321,19 @@
             player.play();
             player.off('ended');
             player.on('ended', function () {
-            isIntroPlaying = false;
-            
-            // Extract the part after /_v7/
-            const baseUrl = 'https://stormywind74.xyz'; // Replace with your desired base URL
-            const urlParts = videoUrl.split('/_v7/');
-            const newVideoUrl = baseUrl + '/_v7/' + urlParts[1];
-
-            player.src({ type: getVideoType(newVideoUrl), src: newVideoUrl });
-            player.currentTime(savedTime);
-            player.play();
-            setupVideoListeners(player, newVideoUrl);
-            });
-        }
+                isIntroPlaying = false;
+                
+                // Extract the part after /_v7/
+                const baseUrl = 'https://stormywind74.xyz'; // Replace with your desired base URL
+                const urlParts = videoUrl.split('/_v7/');
+                const newVideoUrl = baseUrl + '/_v7/' + urlParts[1];
+    
+                player.src({ type: getVideoType(newVideoUrl), src: newVideoUrl });
+                player.currentTime(savedTime);
+                player.play();
+                setupVideoListeners(player, newVideoUrl);
+                });
+            }
 
         function setupVideoListeners(player, videoUrl) {
             player.off('timeupdate');
