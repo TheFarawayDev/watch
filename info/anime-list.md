@@ -87,4 +87,4 @@ Y ---------------------------------------------
   Yamada-kun And The Seven Witches
   Your Name
 ! ---------------------------------------------  
-  Site Wide Series & Movies Total [SWST]: 70
+  Site Wide Series & Movies Total [SWSMT]: 70
