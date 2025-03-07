@@ -301,7 +301,6 @@
 
         function changeVideo(videoUrl, button) {
             const player = videojs('my-video');
-            const savedTime = loadProgress(videoUrl);
             
             if (currentEpisodeButton) {
             currentEpisodeButton.classList.remove('active');
@@ -321,18 +320,19 @@
             player.play();
             player.off('ended');
             player.on('ended', function () {
-                isIntroPlaying = false;
-                
-                // Extract the part after /_v7/
-                const baseUrl = 'https://stormywind74.xyz'; // Replace with your desired base URL
-                const urlParts = videoUrl.split('/_v7/');
-                const newVideoUrl = baseUrl + '/_v7/' + urlParts[1];
-    
-                player.src({ type: getVideoType(newVideoUrl), src: newVideoUrl });
-                player.currentTime(savedTime);
-                player.play();
-                setupVideoListeners(player, newVideoUrl);
-                });
+            isIntroPlaying = false;
+            
+            // Extract the part after /_v7/
+            const baseUrl = 'https://stormywind74.xyz'; // Replace with your desired base URL
+            const urlParts = videoUrl.split('/_v7/');
+            const newVideoUrl = baseUrl + '/_v7/' + urlParts[1];
+        
+            player.src({ type: getVideoType(newVideoUrl), src: newVideoUrl });
+            const savedTime = loadProgress(newVideoUrl);
+            player.currentTime(savedTime);
+            player.play();
+            setupVideoListeners(player, newVideoUrl);
+            });
             }
 
         function setupVideoListeners(player, videoUrl) {
@@ -341,20 +341,20 @@
             player.off('ended');
             
             player.on('timeupdate', function () {
-                if (!isIntroPlaying) {
-                    saveProgress(videoUrl, player.currentTime());
-                }
+            if (!isIntroPlaying) {
+                saveProgress(videoUrl, player.currentTime());
+            }
             });
             
             player.on('error', function() {
-                player.src({ type: 'application/x-mpegURL', src: videoUrl });
-                player.play();
+            player.src({ type: 'application/x-mpegURL', src: videoUrl });
+            player.play();
             });
             
             player.on('ended', function() {
-                if (autoNext) {
-                    playNextEpisode();
-                }
+            if (autoNext) {
+                playNextEpisode();
+            }
             });
 
             updateNavigationButtons();
