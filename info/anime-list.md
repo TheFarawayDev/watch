@@ -82,9 +82,10 @@ T ---------------------------------------------
 V ---------------------------------------------
   Vermeil In Gold
 W ---------------------------------------------
+  Weathering with You
   Wind Breaker
 Y ---------------------------------------------
   Yamada-kun And The Seven Witches
   Your Name
 ! ---------------------------------------------  
-  Site Wide Series & Movies Total [SWSMT]: 70
+  Site Wide Series & Movies Total [SWSMT]: 71
