@@ -2,6 +2,7 @@ A ---------------------------------------------
   Akashic Records Of Bastard Magic Instructor
   Aldermin On The Sky
   Amagi Brilliant Park
+  Arifureta [WIP][1]
   A Silent Voice
   Attack On Titan
 B ---------------------------------------------
