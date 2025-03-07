@@ -54,7 +54,6 @@ R ---------------------------------------------
   ReLIFE
 S ---------------------------------------------
   Sakamoto Days [INC]
-  Saki
   Shikimori's Not Just A Cutie
   Solo Leveling [INC]
   Spy X Family
@@ -63,7 +62,7 @@ T ---------------------------------------------
   Taboo Tattoo
   Talentless Nana
   Terror In Resonance
-  That Time I Was Reincarnated As... [WIP][1]
+  That Time I Was Reincarnated As A Slime
   The Apothecary Diaries
   The Disastrous Life of Saiki K.
   The Elusive Samurai
@@ -73,6 +72,7 @@ T ---------------------------------------------
   The Rising of The Shield Hero
   The Seraph of The End
   The Seven Deadly Sins
+  The Slime Daries: That Time I Was...
   Tonikawa: High School Days
   Tonikawa: Over The Moon For You
   Toradora
@@ -84,4 +84,4 @@ Y ---------------------------------------------
   Yamada-kun And The Seven Witches
   Your Name
 ! ---------------------------------------------  
-  Site Wide Series & Movies Total [SWST]: 66
+  Site Wide Series & Movies Total [SWST]: 67
