@@ -2,7 +2,7 @@ A ---------------------------------------------
   Akashic Records Of Bastard Magic Instructor
   Aldermin On The Sky
   Amagi Brilliant Park
-  Arifureta [WIP][1]
+  Arifureta 
   A Silent Voice
   Attack On Titan
 B ---------------------------------------------
@@ -86,4 +86,4 @@ Y ---------------------------------------------
   Yamada-kun And The Seven Witches
   Your Name
 ! ---------------------------------------------  
-  Site Wide Series & Movies Total [SWST]: 68
+  Site Wide Series & Movies Total [SWST]: 69
