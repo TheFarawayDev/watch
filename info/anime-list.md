@@ -4,13 +4,16 @@ A ---------------------------------------------
   Amagi Brilliant Park
   Arifureta 
   A Silent Voice
+  Assassination Classroom [WIP][3]
   Attack On Titan
 B ---------------------------------------------
   Berserk Of Gluttony
   Black Clover
   Bleach
   Bleach: Thousand Year Blood War
+  Bungo Stray Dogs [WIP][2]
 C ---------------------------------------------
+  Call of The Night [WIP][5]
   Cautious Hero
   Chainsaw Man
   Classroom Of The Elite
@@ -34,6 +37,7 @@ F ---------------------------------------------
 G ---------------------------------------------
   Golden Time
 H ---------------------------------------------
+  Hell's Paradise
   Higehiro
 I ---------------------------------------------
   In Another World With My Smartphone
@@ -41,8 +45,11 @@ I ---------------------------------------------
   Is This A Zombie
 J ---------------------------------------------
   Jujutsu Kaisen
+L ---------------------------------------------
+  Loving Yamada At Lv. 999 [WIP][4]
 M ---------------------------------------------
   Magi: Adventure of Sinbad
+  Mashle: Magic And Muscles [WIP][1]
   Medaka Kuroiwa Is Impervious... [INC]
   Misfits Of Demon Academy
   More Than A Married Couple But Not Lovers
@@ -95,4 +102,4 @@ Y ---------------------------------------------
   Yamada-kun And The Seven Witches
   Your Name
 ! ---------------------------------------------  
-  Site Wide Series & Movies Total [SWSMT]: 77
+  Site Wide Series & Movies Total [SWSMT]: 78
