@@ -7,7 +7,6 @@
     <link href="https://vjs.zencdn.net/8.16.1/video-js.css" rel="stylesheet" />
     <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/thefarawaydev/Watch/refs/heads/main/other/BA.png">
     <link href="../video-js-plugins/hls-quality-select/styles.css" rel="stylesheet" />
-    <link href="../video-js-plugins/seek-buttons/styles.css" rel="stylesheet" />
 </head>
 
 <style>
@@ -205,7 +204,7 @@
         <div class="content"></div>
             <video id="my-video" class="video-js" controls preload="metadata"
                    poster="../other/BA.png"
-                   data-setup='controlBar: { subtitlesButton: false }' playsinline>
+                   data-setup='controlBar: { subtitlesButton: false }'>
                 <source id="video-source" src="https://example.mp4" type="video/mp4" />
             </video>
 
@@ -236,15 +235,10 @@
 
     <script src="https://vjs.zencdn.net/8.16.1/video.min.js"></script>
     <script src="../video-js-plugins/hls-quality-select/script.js"></script>
-    <script src="../video-js-plugins/seek-buttons/script.js"></script>
     <script>
-    var player = videojs('my-video');
+        var player = videojs('my-video');
 
-    player.hlsQualitySelector();
-    player.seekButtons({
-    forward: 10,
-    back: 10
-  });
+        player.hlsQualitySelector();
     </script>
     
     <script>
