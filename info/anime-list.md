@@ -45,6 +45,8 @@ M ---------------------------------------------
   Magi: Adventure of Sinbad
   Medaka Kuroiwa Is Impervious... [INC]
   Misfits Of Demon Academy
+  More Than A Married Couple [WIP][1]
+  My Dress-Up Darling [WIP][2]
   My Hero Academia
   My Star
 N ---------------------------------------------
@@ -59,7 +61,9 @@ R ---------------------------------------------
   ReLIFE
 S ---------------------------------------------
   Sakamoto Days [INC]
+  Say I Love You [WIP][4]
   Shikimori's Not Just A Cutie
+  Snafu [WIP][3]
   Solo Leveling [INC]
   Spy X Family
   Sword Art Online
