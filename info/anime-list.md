@@ -45,8 +45,8 @@ M ---------------------------------------------
   Magi: Adventure of Sinbad
   Medaka Kuroiwa Is Impervious... [INC]
   Misfits Of Demon Academy
-  More Than A Married Couple [WIP][1]
-  My Dress-Up Darling [WIP][2]
+  More Than A Married Couple But Not Lovers
+  My Dress-Up Darling
   My Hero Academia
   My Star
 N ---------------------------------------------
@@ -61,9 +61,9 @@ R ---------------------------------------------
   ReLIFE
 S ---------------------------------------------
   Sakamoto Days [INC]
-  Say I Love You [WIP][4]
+  Say I Love You [WIP][2]
   Shikimori's Not Just A Cutie
-  Snafu [WIP][3]
+  Snafu [WIP][1]
   Solo Leveling [INC]
   Spy X Family
   Sword Art Online
@@ -78,7 +78,7 @@ T ---------------------------------------------
   The Faraway Paladin
   The Foolish Angel Dances With The Devil
   The Legend of the Legendary Heroes
-  The Reincarnation Of The...
+  The Reincarnation Of The Strongest Exorcist
   The Rising of The Shield Hero
   The Seraph of The End
   The Seven Deadly Sins
@@ -95,4 +95,4 @@ Y ---------------------------------------------
   Yamada-kun And The Seven Witches
   Your Name
 ! ---------------------------------------------  
-  Site Wide Series & Movies Total [SWSMT]: 73
+  Site Wide Series & Movies Total [SWSMT]: 75
