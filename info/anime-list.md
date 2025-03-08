@@ -49,6 +49,7 @@ M ---------------------------------------------
   My Dress-Up Darling
   My Hero Academia
   My Star
+  My Teen Romantic Comedy: SNAFU
 N ---------------------------------------------
   No Longer Allowed In Another World
 O ---------------------------------------------
@@ -61,9 +62,8 @@ R ---------------------------------------------
   ReLIFE
 S ---------------------------------------------
   Sakamoto Days [INC]
-  Say I Love You [WIP][2]
+  Say I Love You
   Shikimori's Not Just A Cutie
-  Snafu [WIP][1]
   Solo Leveling [INC]
   Spy X Family
   Sword Art Online
@@ -95,4 +95,4 @@ Y ---------------------------------------------
   Yamada-kun And The Seven Witches
   Your Name
 ! ---------------------------------------------  
-  Site Wide Series & Movies Total [SWSMT]: 75
+  Site Wide Series & Movies Total [SWSMT]: 77
