@@ -6,6 +6,7 @@
     <title></title>
     <link href="https://vjs.zencdn.net/8.16.1/video-js.css" rel="stylesheet" />
     <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/thefarawaydev/Watch/refs/heads/main/other/BA.png">
+    <link rel="stylesheet" href="../video-js-plugins/hls-quality-select/styles.css">
 </head>
 
 <style>
@@ -233,6 +234,7 @@
     </div>
 
     <script src="https://vjs.zencdn.net/8.16.1/video.min.js"></script>
+    <script src="../video-js-plugins/hls-quality-select/script.js"></script>
 
     <script>
         var player = videojs('my-video', {
@@ -248,6 +250,9 @@
                     'fullscreenToggle'
                 ]
             }
+        });
+        player.hlsQualitySelector({
+            placementIndex: 7,
         });
     </script>
     
