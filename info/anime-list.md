@@ -49,7 +49,7 @@ L ---------------------------------------------
   Loving Yamada At Lv. 999 [WIP][4]
 M ---------------------------------------------
   Magi: Adventure of Sinbad
-  Mashle: Magic And Muscles [WIP][1]
+  Mashle: Magic And Muscles
   Medaka Kuroiwa Is Impervious... [INC]
   Misfits Of Demon Academy
   More Than A Married Couple But Not Lovers
@@ -102,4 +102,4 @@ Y ---------------------------------------------
   Yamada-kun And The Seven Witches
   Your Name
 ! ---------------------------------------------  
-  Site Wide Series & Movies Total [SWSMT]: 78
+  Site Wide Series & Movies Total [SWSMT]: 79
