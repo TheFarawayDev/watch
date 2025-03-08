@@ -31,6 +31,8 @@ F ---------------------------------------------
   Fire Force
   Friends Game
   Fruits Basket
+G ---------------------------------------------
+  Golden Time
 H ---------------------------------------------
   Higehiro
 I ---------------------------------------------
@@ -89,4 +91,4 @@ Y ---------------------------------------------
   Yamada-kun And The Seven Witches
   Your Name
 ! ---------------------------------------------  
-  Site Wide Series & Movies Total [SWSMT]: 72
+  Site Wide Series & Movies Total [SWSMT]: 73
