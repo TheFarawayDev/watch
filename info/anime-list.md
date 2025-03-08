@@ -70,6 +70,7 @@ T ---------------------------------------------
   The Disastrous Life of Saiki K.
   The Elusive Samurai
   The Faraway Paladin
+  The Foolish Angel Dances With The Devil
   The Legend of the Legendary Heroes
   The Reincarnation Of The...
   The Rising of The Shield Hero
@@ -88,4 +89,4 @@ Y ---------------------------------------------
   Yamada-kun And The Seven Witches
   Your Name
 ! ---------------------------------------------  
-  Site Wide Series & Movies Total [SWSMT]: 71
+  Site Wide Series & Movies Total [SWSMT]: 72
