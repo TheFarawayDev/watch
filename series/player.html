@@ -155,9 +155,7 @@
         color: #2b3e50;
     }
 
-    .vjs-captions-button {
-        display: none;
-    }
+    
 
     @media screen and (max-width: 768px) {
         .video-js {
@@ -238,7 +236,18 @@
 
     <script>
         var player = videojs('my-video', {
-          textTrackSettings: false
+            controlBar: {
+                children: [
+                    'playToggle',
+                    'volumePanel',
+                    'currentTimeDisplay',
+                    'timeDivider',
+                    'durationDisplay',
+                    'progressControl',
+                    'remainingTimeDisplay',
+                    'fullscreenToggle'
+                ]
+            }
         });
     </script>
     
