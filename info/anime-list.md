@@ -4,16 +4,16 @@ A ---------------------------------------------
   Amagi Brilliant Park
   Arifureta 
   A Silent Voice
-  Assassination Classroom [WIP][3]
+  Assassination Classroom [WIP][2]
   Attack On Titan
 B ---------------------------------------------
   Berserk Of Gluttony
   Black Clover
   Bleach
   Bleach: Thousand Year Blood War
-  Bungo Stray Dogs [WIP][2]
+  Bungo Stray Dogs [WIP][1]
 C ---------------------------------------------
-  Call of The Night [WIP][5]
+  Call of The Night [WIP][4]
   Cautious Hero
   Chainsaw Man
   Classroom Of The Elite
@@ -46,7 +46,7 @@ I ---------------------------------------------
 J ---------------------------------------------
   Jujutsu Kaisen
 L ---------------------------------------------
-  Loving Yamada At Lv. 999 [WIP][4]
+  Loving Yamada At Lv. 999 [WIP][3]
 M ---------------------------------------------
   Magi: Adventure of Sinbad
   Mashle: Magic And Muscles
