@@ -237,19 +237,21 @@
     <script src="../video-js-plugins/hls-quality-select/script.js"></script>
 
     <script>
-        var player = videojs('my-video', {
-            controlBar: {
-                children: [
-                    'playToggle',
-                    'volumePanel',
-                    'currentTimeDisplay',
-                    'timeDivider',
-                    'durationDisplay',
-                    'progressControl',
-                    'remainingTimeDisplay',
-                    'fullscreenToggle'
-                ]
-            }
+        document.addEventListener('DOMContentLoaded', function() {
+            var player = videojs('my-video', {
+                controlBar: {
+                    children: [
+                        'playToggle',
+                        'volumePanel',
+                        'currentTimeDisplay',
+                        'timeDivider',
+                        'durationDisplay',
+                        'progressControl',
+                        'remainingTimeDisplay',
+                        'fullscreenToggle'
+                    ]
+                }
+            });
         });
         player.hlsQualitySelector({
             placementIndex: 7,
