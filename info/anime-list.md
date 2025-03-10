@@ -46,7 +46,7 @@ I ---------------------------------------------
 J ---------------------------------------------
   Jujutsu Kaisen
 K ---------------------------------------------
-  Kaguya-Sama: Love Is War [WIP][4]
+  Kaguya-Sama: Love Is War [WIP][3]
 L ---------------------------------------------
   Loving Yamada At Lv. 999
 M ---------------------------------------------
@@ -75,7 +75,7 @@ S ---------------------------------------------
   Shikimori's Not Just A Cutie
   Solo Leveling [INC]
   Spy X Family
-  Summer Wars [WIP] [1]
+  Summer Wars
   Sword Art Online
 T ---------------------------------------------
   Taboo Tattoo
@@ -106,4 +106,4 @@ Y ---------------------------------------------
   Yamada-kun And The Seven Witches
   Your Name
 ! ---------------------------------------------  
-  Site Wide Series & Movies Total [SWSMT]: 82
+  Site Wide Series & Movies Total [SWSMT]: 83
