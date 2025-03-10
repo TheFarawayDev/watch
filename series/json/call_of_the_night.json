@@ -1,0 +1,40 @@
+{
+    "title": "Call Of The Night",
+    "seasons": 1,
+    "series": {
+        "sub": {
+            "season1": [
+                { "title": "Episode 1", "url": ""},
+                { "title": "Episode 2", "url": ""},
+                { "title": "Episode 3", "url": ""},
+                { "title": "Episode 4", "url": ""},
+                { "title": "Episode 5", "url": ""},
+                { "title": "Episode 6", "url": ""},
+                { "title": "Episode 7", "url": ""},
+                { "title": "Episode 8", "url": ""},
+                { "title": "Episode 9", "url": ""},
+                { "title": "Episode 10", "url": ""},
+                { "title": "Episode 11", "url": ""},
+                { "title": "Episode 12", "url": ""},
+                { "title": "Episode 13", "url": ""}
+            ]
+        },
+        "dub": {
+            "season1": [
+                { "title": "Episode 1", "url": ""},
+                { "title": "Episode 2", "url": ""},
+                { "title": "Episode 3", "url": ""},
+                { "title": "Episode 4", "url": ""},
+                { "title": "Episode 5", "url": ""},
+                { "title": "Episode 6", "url": ""},
+                { "title": "Episode 7", "url": ""},
+                { "title": "Episode 8", "url": ""},
+                { "title": "Episode 9", "url": ""},
+                { "title": "Episode 10", "url": ""},
+                { "title": "Episode 11", "url": ""},
+                { "title": "Episode 12", "url": ""},
+                { "title": "Episode 13", "url": ""}
+            ]
+        }
+    }
+}
