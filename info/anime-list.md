@@ -73,6 +73,7 @@ S ---------------------------------------------
   Shikimori's Not Just A Cutie
   Solo Leveling [INC]
   Spy X Family
+  Summer War [WIP] [1]
   Sword Art Online
 T ---------------------------------------------
   Taboo Tattoo
