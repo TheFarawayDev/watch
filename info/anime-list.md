@@ -4,7 +4,7 @@ A ---------------------------------------------
   Amagi Brilliant Park
   Arifureta 
   A Silent Voice
-  Assassination Classroom [WIP][1]
+  Assassination Classroom
   Attack On Titan
 B ---------------------------------------------
   Berserk Of Gluttony
@@ -13,7 +13,7 @@ B ---------------------------------------------
   Bleach: Thousand Year Blood War
   Bungo Stray Dogs
 C ---------------------------------------------
-  Call of The Night [WIP][3]
+  Call of The Night [WIP][1]
   Cautious Hero
   Chainsaw Man
   Classroom Of The Elite
@@ -46,7 +46,7 @@ I ---------------------------------------------
 J ---------------------------------------------
   Jujutsu Kaisen
 L ---------------------------------------------
-  Loving Yamada At Lv. 999 [WIP][2]
+  Loving Yamada At Lv. 999
 M ---------------------------------------------
   Magi: Adventure of Sinbad
   Mashle: Magic And Muscles
@@ -90,7 +90,7 @@ T ---------------------------------------------
   The Seraph of The End
   The Seven Deadly Sins
   The Slime Daries: That Time I Was...
-  Toilet-Bound Hanako-kun [WIP][4]
+  Toilet-Bound Hanako-kun [WIP][2]
   Tonikawa: High School Days
   Tonikawa: Over The Moon For You
   Toradora
@@ -103,4 +103,4 @@ Y ---------------------------------------------
   Yamada-kun And The Seven Witches
   Your Name
 ! ---------------------------------------------  
-  Site Wide Series & Movies Total [SWSMT]: 80
+  Site Wide Series & Movies Total [SWSMT]: 82
